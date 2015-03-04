@@ -1,0 +1,32 @@
+{
+    "name": "heimrichhannot/contao-member_plus",
+    "description":"A collection of enhancements for contao members.",
+    "keywords":["contao", "member", "membercontent", "memberlist"],
+    "type": "contao-module",
+    "homepage":"https://github.com/heimrichhannot/contao-member_plus",
+    "license":"LGPL-3.0+",
+    "authors":[
+        {
+            "name":"Heimrich & Hannot",
+            "email":"digitales@heimrich-hannot.de",
+            "homepage":"http://www.heimrich-hannot.de",
+            "role":"Developer"
+        }
+    ],
+    "support":{
+        "issues":"https://github.com/heimrichhannot/contao-member_plus/issues"
+    },
+    "require": {
+        "contao/core": ">=3.3,<4-dev"
+    },
+    "autoload": {
+        "classmap": [""]
+    },
+    "extra": {
+        "contao": {
+            "sources": {
+                "": "system/modules/member_plus"
+            }
+        }
+    }
+}
