@@ -83,7 +83,7 @@ class ModuleMemberReader extends \Module
 
 			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
-			$this->Template->articles = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], \Input::get('items')) . '</p>';
+			$this->Template->members = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], \Input::get('items')) . '</p>';
 			return;
 		}
 
