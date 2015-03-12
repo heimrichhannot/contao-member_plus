@@ -12,6 +12,24 @@ namespace HeimrichHannot\MemberPlus;
 
 class MemberPlusMemberModel extends \MemberModel
 {
+	/**
+	 * Find inactive member item by username
+	 *
+	 * @param mixed $varName      The username
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model|null The MemberModel or null if there are no news
+	 */
+	public static function findInactiveByUsername($strUsername, array $arrOptions=array())
+	{
+		$t = static::$strTable;
+		$arrColumns = array("($t.username = ?)");
+
+		$arrColumns[] = "$t.disable=1";
+
+		return static::findBy($arrColumns, array($strUsername), $arrOptions);;
+	}
+
 
 	/**
 	 * Find active member item by ID or alias

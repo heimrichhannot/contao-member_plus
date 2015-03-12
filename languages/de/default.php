@@ -19,3 +19,11 @@ $GLOBALS['TL_LANG']['CTE']['memberlist'] = array('Mitgliederliste', 'Zeigt Mitgl
 $GLOBALS['TL_LANG']['MSC']['emptyMemberlist'] = 'Es wurden keine Einträge gefunden.';
 $GLOBALS['TL_LANG']['MSC']['memberlist']['websiteTitle'] = 'Webseite besuchen';
 $GLOBALS['TL_LANG']['MSC']['openMember'] = 'Mehr Informationen zu "%s" anzeigen';
+
+/**
+ * LoginRegistration
+ */
+
+$GLOBALS['TL_LANG']['MSC']['invalidDomain'] = 'Der Login mit Ihrer E-Mail ist nicht erlaubt.';
+$GLOBALS['TL_LANG']['MSC']['usernameTaken'] = 'Der angegebene Benutzername ist bereits vergeben.';
+$GLOBALS['TL_LANG']['MSC']['activationEmailSent'] = 'Eine E-Mail mit dem Aktivierungslink wurde an <br /><strong>%s</strong> gesendet.';
