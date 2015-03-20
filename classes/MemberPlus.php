@@ -1,7 +1,7 @@
 <?php
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2015 Heimrich & Hannot GmbH
  * @package member_plus
  * @author Rico Kaltofen <r.kaltofen@heimrich-hannot.de>
@@ -31,7 +31,10 @@ class MemberPlus extends \Frontend
 	 */
 	private static $arrUrlCache = array();
 
-	public function __construct($objModel)
+    protected $strDummyMaleImageSRC = '/system/modules/member_plus/assets/img/dummy_male.png';
+    protected $strDummyFemaleImageSRC = '/system/modules/member_plus/assets/img/dummy_female.png';
+
+    public function __construct($objModel)
 	{
 		if ($objModel instanceof \Model)
 		{
@@ -106,6 +109,66 @@ class MemberPlus extends \Frontend
 				\Controller::addImageToTemplate($objT, $arrMember);
 			}
 		}
+        else if(!$this->mlDisableDummyImages)
+        {
+            $strDummyImage = null;
+
+            switch($objMember->gender)
+            {
+                case 'female':
+                    $strDummyImage = $this->strDummyFemaleImageSRC;
+                break;
+                case 'male' :
+                    $strDummyImage = $this->strDummyMaleImageSRC;
+                break;
+            }
+
+            if($this->mlAddCustomDummyImages)
+            {
+                switch($objMember->gender)
+                {
+                    case 'female':
+                        $strDummyImage = $this->mlDummyImageFemale;
+                        break;
+                    case 'male' :
+                        $strDummyImage = $this->mlDummyImageMale;
+                        break;
+                }
+
+                $objModel = \FilesModel::findByUuid($strDummyImage);
+
+                if ($objModel === null)
+                {
+                    if (!\Validator::isUuid($strDummyImage))
+                    {
+                        $objMember->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+                    }
+                }else{
+                    $strDummyImage = $objModel->path;
+                }
+            }
+
+            if (is_file(TL_ROOT . '/' . $strDummyImage))
+            {
+                // Do not override the field now that we have a model registry (see #6303)
+                $arrMember = $objMember->row();
+
+                // Override the default image size
+                if ($this->size != '')
+                {
+                    $size = deserialize($this->size);
+
+                    if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
+                    {
+                        $arrMember['size'] = $this->size;
+                    }
+                }
+
+                $arrMember['singleSRC'] = $strDummyImage;
+                \Controller::addImageToTemplate($objT, $arrMember);
+            }
+
+        }
 
 		$objT->titleCombined = $this->getCombinedTitle($objMember);
 

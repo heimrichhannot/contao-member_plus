@@ -39,6 +39,18 @@ $GLOBALS['TL_LANG']['tl_content']['mlTarget'][1] = 'Den Link in einem neuen Brow
 $GLOBALS['TL_LANG']['tl_content']['mlLoadContent'][0] = 'Mitglieder-Inhaltselemente laden/anzeigen';
 $GLOBALS['TL_LANG']['tl_content']['mlLoadContent'][1] = 'Hier können Sie auswählen, ob die Inhaltselemente zu einem Mitglied geladen werden sollen. In eine Listendarstellung empfiehlt es sich aus Performancegründen darauf zu verzichten.';
 
+$GLOBALS['TL_LANG']['tl_content']['mlDisableDummyImages'][0] = 'Platzhalterbilder deaktivieren';
+$GLOBALS['TL_LANG']['tl_content']['mlDisableDummyImages'][1] = 'Deaktivieren Sie die Verwendung von Platzhalterbildern, wenn kein Bild für das Mitglied hinterlegt wurde.';
+
+$GLOBALS['TL_LANG']['tl_content']['mlAddCustomDummyImages'][0] = 'Eigene Platzhalterbilder';
+$GLOBALS['TL_LANG']['tl_content']['mlAddCustomDummyImages'][1] = 'Überschreiben Sie die Platzhalterbilder.';
+
+$GLOBALS['TL_LANG']['tl_content']['mlDummyImageMale'][0] = 'Platzhalterbild für Männer';
+$GLOBALS['TL_LANG']['tl_content']['mlDummyImageMale'][1] = 'Bitte wählen Sie eine Datei oder einen Ordner aus der Dateiübersicht.';
+
+$GLOBALS['TL_LANG']['tl_content']['mlDummyImageFemale'][0] = 'Platzhalterbild für Frauen';
+$GLOBALS['TL_LANG']['tl_content']['mlDummyImageFemale'][1] = 'Bitte wählen Sie eine Datei oder einen Ordner aus der Dateiübersicht.';
+
 /**
  * Legends
  */
