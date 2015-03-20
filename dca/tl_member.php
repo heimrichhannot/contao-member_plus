@@ -232,25 +232,25 @@ class tl_member_plus extends \Backend
 		if ($varValue == '')
 		{
 			$autoAlias = true;
-			$arrTitle = array($dc->activeRecord->academicTitle, $dc->activeRecord->firstname, $dc->activeRecord->lastname);
-			$varValue = standardize(String::restoreBasicEntities(implode(' ', $arrTitle)));
+            $arrTitle = \HeimrichHannot\MemberPlus\MemberPlus::getCombinedTitle($dc->activeRecord);
+			$varValue = standardize(String::restoreBasicEntities($arrTitle));
 		}
 
-		$objAlias = $this->Database->prepare("SELECT id FROM tl_member WHERE alias=?")
-			->execute($varValue);
+        $objAlias = $this->Database->prepare("SELECT id FROM tl_member WHERE alias=?")
+            ->execute($varValue);
 
-		// Check whether the news alias exists
-		if ($objAlias->numRows > 1 && !$autoAlias)
-		{
-			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
-		}
+        // Check whether the news alias exists
+        if ($objAlias->numRows > 1 && !$autoAlias)
+        {
+            throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+        }
 
-		// Add ID to alias
-		if ($objAlias->numRows && $autoAlias)
-		{
-			$varValue .= '-' . $dc->id;
-		}
+        // Add ID to alias
+        if ($objAlias->numRows > 0 && $autoAlias)
+        {
+            $varValue .= '-' . $dc->id;
+        }
 
-		return $varValue;
+        return $varValue;
 	}
 }

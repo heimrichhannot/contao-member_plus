@@ -146,7 +146,7 @@ class MemberPlus extends \Frontend
 	public static function getCombinedTitle($objMember)
 	{
 		$arrTitle = array($objMember->academicTitle, $objMember->firstname, $objMember->lastname);
-		return empty($arrTitle) ? '' : implode(' ', $arrTitle);
+		return empty($arrTitle) ? '' : trim(implode(' ', $arrTitle));
 	}
 
 	/**

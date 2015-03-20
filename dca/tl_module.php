@@ -15,16 +15,9 @@ $dc = &$GLOBALS['TL_DCA']['tl_module'];
  */
 $dc['palettes']['memberreader'] = '{title_legend},name,headline,type;{config_legend},mlGroups,mlTemplate,mlLoadContent;{image_legend:hide},imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
-$dc['palettes']['loginregistration'] = '{title_legend},name,headline,type;{config_legend},autologin,allowedMailDomains,showAllowedDomains;{register_legend},reg_groups,reg_allowLogin,reg_assignDir,reg_activate;{redirect_legend},jumpTo,redirectBack,redirectPermanent;{template_legend:hide},cols;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-
-/**
- * Subpalettes
- */
-$dc['subpalettes']['reg_activate'] = str_replace('reg_jumpTo', 'reg_activate_login,reg_jumpTo', $dc['subpalettes']['reg_activate']);
-
 $arrFields = array
 (
-	'mlGroups'           => array
+	'mlGroups'      => array
 	(
 		'label'      => &$GLOBALS['TL_LANG']['tl_module']['mlGroups'],
 		'exclude'    => true,
@@ -34,7 +27,7 @@ $arrFields = array
 		'sql'        => "blob NULL",
 		'relation'   => array('type' => 'hasMany', 'load' => 'lazy')
 	),
-	'mlTemplate'         => array
+	'mlTemplate'    => array
 	(
 		'label'            => &$GLOBALS['TL_LANG']['tl_module']['mlTemplate'],
 		'default'          => 'memberlist_full',
@@ -44,65 +37,14 @@ $arrFields = array
 		'eval'             => array('tl_class' => 'w50'),
 		'sql'              => "varchar(64) NOT NULL default ''"
 	),
-	'mlLoadContent'      => array
+	'mlLoadContent' => array
 	(
 		'label'     => &$GLOBALS['TL_LANG']['tl_module']['mlLoadContent'],
 		'exclude'   => true,
 		'inputType' => 'checkbox',
 		'eval'      => array('tl_class' => 'w50 m12'),
 		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'allowedMailDomains' => array
-	(
-		'label'     => &$GLOBALS['TL_LANG']['tl_module']['allowedMailDomains'],
-		'exclude'   => true,
-		'inputType' => 'multiColumnWizard',
-		'eval'      => array(
-			'columnFields' => array(
-				'domain' => array
-				(
-					'label'     => &$GLOBALS['TL_LANG']['tl_module']['allowedMailDomains']['domain'],
-					'exclude'   => true,
-					'inputType' => 'text',
-					'eval'      => array('style' => 'width: 600px'),
-				),
-				'hide'   => array
-				(
-					'label'     => &$GLOBALS['TL_LANG']['tl_module']['allowedMailDomains']['hide'],
-					'exclude'   => true,
-					'inputType' => 'checkbox',
-					'eval'      => array('style' => 'width: 100px;'),
-				)
-			)
-		),
-		'sql'       => "blob NULL"
-	),
-	'showAllowedDomains' => array
-	(
-		'label'     => &$GLOBALS['TL_LANG']['tl_module']['showAllowedDomains'],
-		'exclude'   => true,
-		'default'   => true,
-		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'long'),
-		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'reg_activate_login' => array
-	(
-		'label'     => &$GLOBALS['TL_LANG']['tl_module']['reg_activate_login'],
-		'exclude'   => true,
-		'default'   => true,
-		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'long'),
-		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'redirectPermanent'  => array
-	(
-		'label'     => &$GLOBALS['TL_LANG']['tl_module']['redirectPermanent'],
-		'exclude'   => true,
-		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'long'),
-		'sql'       => "char(1) NOT NULL default ''"
-	),
+	)
 );
 
 $dc['fields'] = array_merge($dc['fields'], $arrFields);

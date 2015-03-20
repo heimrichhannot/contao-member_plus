@@ -47,7 +47,7 @@ $arrFields = array
 		'exclude'          => true,
 		'inputType'        => 'checkboxWizard',
 		'options_callback' => array('tl_content_member_plus', 'getMembers'),
-		'eval'             => array('mandatory' => true, 'multiple' => true),
+		'eval'             => array('multiple' => true),
 		'sql'              => "blob NULL",
 	),
 	'mlSource'    => array

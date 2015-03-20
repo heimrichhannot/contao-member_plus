@@ -52,6 +52,7 @@ class ContentMemberlist extends \ContentElement
 		if($this->objMembers === null)
 		{
 			$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyMemberlist'];
+            return;
 		}
 
 		$arrMembers = array();

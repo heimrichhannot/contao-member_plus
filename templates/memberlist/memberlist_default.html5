@@ -46,6 +46,9 @@
 			<?php if($this->addressText): ?>
 				<span class="address-add"><?php echo strip_tags($this->addressText, '<br>'); ?></span><br />
 			<?php endif; ?>
+            <?php if($this->phone): ?>
+                <?php echo $this->phone; ?><br />
+            <?php endif; ?>
 			<?php if($this->email): ?>
 				{{email::<?php echo $this->email; ?>}}<br />
 			<?php endif; ?>
