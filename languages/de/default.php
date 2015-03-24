@@ -19,3 +19,7 @@ $GLOBALS['TL_LANG']['CTE']['memberlist'] = array('Mitgliederliste', 'Zeigt Mitgl
 $GLOBALS['TL_LANG']['MSC']['emptyMemberlist'] = 'Es wurden keine Einträge gefunden.';
 $GLOBALS['TL_LANG']['MSC']['memberlist']['websiteTitle'] = 'Webseite besuchen';
 $GLOBALS['TL_LANG']['MSC']['openMember'] = 'Mehr Informationen zu "%s" anzeigen';
+$GLOBALS['TL_LANG']['MSC']['phoneTitle'] = 'Telefon';
+$GLOBALS['TL_LANG']['MSC']['faxTitle'] = 'Telefax';
+$GLOBALS['TL_LANG']['MSC']['emailTitle'] = 'E-Mail';
+$GLOBALS['TL_LANG']['MSC']['websiteTitle'] = 'Webseite';

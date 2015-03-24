@@ -94,6 +94,8 @@ class MemberPlus extends \Frontend
 				// Do not override the field now that we have a model registry (see #6303)
 				$arrMember = $objMember->row();
 
+                $this->size = $this->imgSize ? $this->imgSize : $this->size;
+
 				// Override the default image size
 				if ($this->size != '')
 				{
@@ -172,7 +174,8 @@ class MemberPlus extends \Frontend
 
 		$objT->titleCombined = $this->getCombinedTitle($objMember);
 
-		$arrLocation = array($objMember->postal, $objMember->city);
+		$arrLocation = array_filter(array($objMember->postal, $objMember->city));
+
 		$objT->locationCombined = empty($arrLocation) ? '' : implode(' ', $arrLocation);
 
 		$objT->websiteLink = $objMember->website;

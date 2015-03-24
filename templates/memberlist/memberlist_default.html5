@@ -47,14 +47,17 @@
 				<span class="address-add"><?php echo strip_tags($this->addressText, '<br>'); ?></span><br />
 			<?php endif; ?>
             <?php if($this->phone): ?>
-                <?php echo $this->phone; ?><br />
+                <i class="fa fa-phone" title="<?php echo $GLOBALS['TL_LANG']['MSC']['phoneTitle']; ?>"></i> <?php echo $this->phone; ?><br />
             <?php endif; ?>
-			<?php if($this->email): ?>
-				{{email::<?php echo $this->email; ?>}}<br />
-			<?php endif; ?>
-			<?php if($this->websiteLink): ?>
-				<span class="website"><a title="<?php echo $this->websiteTitle; ?>" href="<?php echo $this->websiteLink; ?>" target="_blank"><?php echo $this->website; ?></a></span>
-			<?php endif; ?>
+            <?php if($this->fax): ?>
+                <i class="fa fa-fax" title="<?php echo $GLOBALS['TL_LANG']['MSC']['faxTitle']; ?>"></i> <?php echo $this->fax; ?><br />
+            <?php endif; ?>
+            <?php if($this->email): ?>
+                <i class="fa fa-envelope" title="<?php echo $GLOBALS['TL_LANG']['MSC']['emailTitle']; ?>"></i> {{email::<?php echo $this->email; ?>}}<br />
+            <?php endif; ?>
+            <?php if($this->websiteLink): ?>
+                <i class="fa fa-globe" title="<?php echo $GLOBALS['TL_LANG']['MSC']['websiteTitle']; ?>"></i> <span class="website"><a title="<?php echo $this->websiteTitle; ?>" href="<?php echo $this->websiteLink; ?>" target="_blank"><?php echo $this->website; ?></a></span>
+            <?php endif; ?>
 		</address>
 
 	</div>
