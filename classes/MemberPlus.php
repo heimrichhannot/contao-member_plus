@@ -138,8 +138,11 @@ class MemberPlus extends \Frontend
 				// Do not override the field now that we have a model registry (see #6303)
 				$arrMember = $objMember->row();
 
-				$this->size = $this->imgSize ? $this->imgSize : $this->size; // tl_module = imgSize, tl_content = size
-
+				if($this->objModel instanceof \ModuleModel)
+				{
+					$this->size = $this->imgSize; // tl_module = imgSize, tl_content = size
+				}
+				
 				// Override the default image size
 				if ($this->size != '')
 				{
