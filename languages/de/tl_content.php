@@ -39,6 +39,9 @@ $GLOBALS['TL_LANG']['tl_content']['mlTarget'][1] = 'Den Link in einem neuen Brow
 $GLOBALS['TL_LANG']['tl_content']['mlLoadContent'][0] = 'Mitglieder-Inhaltselemente laden/anzeigen';
 $GLOBALS['TL_LANG']['tl_content']['mlLoadContent'][1] = 'Hier können Sie auswählen, ob die Inhaltselemente zu einem Mitglied geladen werden sollen. In eine Listendarstellung empfiehlt es sich aus Performancegründen darauf zu verzichten.';
 
+$GLOBALS['TL_LANG']['tl_content']['mlDisableImages'][0] = 'Mitgliederbilder deaktivieren';
+$GLOBALS['TL_LANG']['tl_content']['mlDisableImages'][1] = 'Deaktivieren Sie die Anzeige von Mitgliederbildern (Platzhalterbilder werden ebenfalls ausgeblendet).';
+
 $GLOBALS['TL_LANG']['tl_content']['mlDisableDummyImages'][0] = 'Platzhalterbilder deaktivieren';
 $GLOBALS['TL_LANG']['tl_content']['mlDisableDummyImages'][1] = 'Deaktivieren Sie die Verwendung von Platzhalterbildern, wenn kein Bild für das Mitglied hinterlegt wurde.';
 

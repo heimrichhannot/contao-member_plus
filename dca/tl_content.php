@@ -21,7 +21,7 @@ array_insert($dc['palettes']['__selector__'], 0, array('mlSource', 'mlAddCustomD
 
 // memberlist
 $dc['palettes']['memberlist'] =
-    '{type_legend},type,headline;{ml_config_legend},mlGroups,mlSort,mlSource,mlTemplate,mlLoadContent,size,mlDisableDummyImages,mlAddCustomDummyImages;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
+    '{type_legend},type,headline;{ml_config_legend},mlGroups,mlSort,mlSource,mlTemplate,mlLoadContent,size,mlDisableImages,mlDisableDummyImages,mlAddCustomDummyImages;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 
 /**
  * Subpalettes
@@ -120,6 +120,14 @@ $arrFields = array
         'eval'      => array('tl_class' => 'w50 m12'),
         'sql'       => "char(1) NOT NULL default ''"
     ),
+	'mlDisableImages'   => array
+	(
+		'label'     => &$GLOBALS['TL_LANG']['tl_content']['mlDisableImages'],
+		'exclude'   => true,
+		'inputType' => 'checkbox',
+		'eval'      => array('tl_class' => 'w50 m12'),
+		'sql'       => "char(1) NOT NULL default ''"
+	),
     'mlDisableDummyImages'   => array
     (
         'label'     => &$GLOBALS['TL_LANG']['tl_content']['mlDisableDummyImages'],

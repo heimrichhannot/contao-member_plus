@@ -13,7 +13,18 @@ $dc = &$GLOBALS['TL_DCA']['tl_module'];
 /**
  * Palettes
  */
-$dc['palettes']['memberreader'] = '{title_legend},name,headline,type;{config_legend},mlGroups,mlTemplate,mlLoadContent;{image_legend:hide},imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+
+// selector
+array_insert($dc['palettes']['__selector__'], 0, array('mlAddCustomDummyImages')); // bug? mustn't be inserted after type selector
+
+
+$dc['palettes']['memberreader'] = '{title_legend},name,headline,type;{config_legend},mlGroups,mlTemplate,mlLoadContent;{image_legend:hide},imgSize,mlDisableImages,mlDisableDummyImages,mlAddCustomDummyImages;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+
+
+/**
+ * Subpalettes
+ */
+$dc['subpalettes']['mlAddCustomDummyImages']  = 'mlDummyImageMale,mlDummyImageFemale';
 
 $arrFields = array
 (
@@ -44,7 +55,47 @@ $arrFields = array
 		'inputType' => 'checkbox',
 		'eval'      => array('tl_class' => 'w50 m12'),
 		'sql'       => "char(1) NOT NULL default ''"
-	)
+	),
+	'mlDisableImages'   => array
+	(
+		'label'     => &$GLOBALS['TL_LANG']['tl_module']['mlDisableImages'],
+		'exclude'   => true,
+		'inputType' => 'checkbox',
+		'eval'      => array('tl_class' => 'w50 m12'),
+		'sql'       => "char(1) NOT NULL default ''"
+	),
+	'mlDisableDummyImages'   => array
+	(
+		'label'     => &$GLOBALS['TL_LANG']['tl_module']['mlDisableDummyImages'],
+		'exclude'   => true,
+		'inputType' => 'checkbox',
+		'eval'      => array('tl_class' => 'w50 m12'),
+		'sql'       => "char(1) NOT NULL default ''"
+	),
+	'mlAddCustomDummyImages' => array
+	(
+		'label'     => &$GLOBALS['TL_LANG']['tl_module']['mlAddCustomDummyImages'],
+		'exclude'   => true,
+		'inputType' => 'checkbox',
+		'eval'      => array('tl_class' => 'w50 m12', 'submitOnChange' => true),
+		'sql'       => "char(1) NOT NULL default ''"
+	),
+	'mlDummyImageMale' => array
+	(
+		'label'     => &$GLOBALS['TL_LANG']['tl_module']['mlDummyImageMale'],
+		'exclude'   => true,
+		'inputType' => 'fileTree',
+		'eval'      => array('filesOnly' => true, 'fieldType' => 'radio', 'tl_class' => 'clr w50'),
+		'sql'       => "binary(16) NULL"
+	),
+	'mlDummyImageFemale' => array
+	(
+		'label'     => &$GLOBALS['TL_LANG']['tl_module']['mlDummyImageFemale'],
+		'exclude'   => true,
+		'inputType' => 'fileTree',
+		'eval'      => array('filesOnly' => true, 'fieldType' => 'radio', 'tl_class' => 'w50'),
+		'sql'       => "binary(16) NULL"
+	),
 );
 
 $dc['fields'] = array_merge($dc['fields'], $arrFields);

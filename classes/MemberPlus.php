@@ -77,100 +77,10 @@ class MemberPlus extends \Frontend
 
 		$objT->addImage = false;
 
-		// Add an image
-		if ($objMember->addImage && $objMember->singleSRC != '')
+		if(!$this->mlDisableImages)
 		{
-			$objModel = \FilesModel::findByUuid($objMember->singleSRC);
-
-			if ($objModel === null)
-			{
-				if (!\Validator::isUuid($objMember->singleSRC))
-				{
-					$objMember->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-				}
-			}
-			elseif (is_file(TL_ROOT . '/' . $objModel->path))
-			{
-				// Do not override the field now that we have a model registry (see #6303)
-				$arrMember = $objMember->row();
-
-                $this->size = $this->imgSize ? $this->imgSize : $this->size;
-
-				// Override the default image size
-				if ($this->size != '')
-				{
-					$size = deserialize($this->size);
-
-					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
-					{
-						$arrMember['size'] = $this->size;
-					}
-				}
-
-				$arrMember['singleSRC'] = $objModel->path;
-				\Controller::addImageToTemplate($objT, $arrMember);
-			}
+			$this->addMemberImageToTemplate($objT, $objMember);
 		}
-        else if(!$this->mlDisableDummyImages)
-        {
-            $strDummyImage = null;
-
-            switch($objMember->gender)
-            {
-                case 'female':
-                    $strDummyImage = $this->strDummyFemaleImageSRC;
-                break;
-                case 'male' :
-                    $strDummyImage = $this->strDummyMaleImageSRC;
-                break;
-            }
-
-            if($this->mlAddCustomDummyImages)
-            {
-                switch($objMember->gender)
-                {
-                    case 'female':
-                        $strDummyImage = $this->mlDummyImageFemale;
-                        break;
-                    case 'male' :
-                        $strDummyImage = $this->mlDummyImageMale;
-                        break;
-                }
-
-                $objModel = \FilesModel::findByUuid($strDummyImage);
-
-                if ($objModel === null)
-                {
-                    if (!\Validator::isUuid($strDummyImage))
-                    {
-                        $objMember->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-                    }
-                }else{
-                    $strDummyImage = $objModel->path;
-                }
-            }
-
-            if (is_file(TL_ROOT . '/' . $strDummyImage))
-            {
-                // Do not override the field now that we have a model registry (see #6303)
-                $arrMember = $objMember->row();
-
-                // Override the default image size
-                if ($this->size != '')
-                {
-                    $size = deserialize($this->size);
-
-                    if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
-                    {
-                        $arrMember['size'] = $this->size;
-                    }
-                }
-
-                $arrMember['singleSRC'] = $strDummyImage;
-                \Controller::addImageToTemplate($objT, $arrMember);
-            }
-
-        }
 
 		$objT->titleCombined = $this->getCombinedTitle($objMember);
 
@@ -207,6 +117,103 @@ class MemberPlus extends \Frontend
 		$objT->linkTitle = specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['openMember'], $objT->titleCombined));
 
 		return $objT->parse();
+	}
+
+	protected function addMemberImageToTemplate($objTemplate, $objMember)
+	{
+		// Add an image
+		if ($objMember->addImage && $objMember->singleSRC != '')
+		{
+			$objModel = \FilesModel::findByUuid($objMember->singleSRC);
+
+			if ($objModel === null)
+			{
+				if (!\Validator::isUuid($objMember->singleSRC))
+				{
+					$objMember->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+				}
+			}
+			elseif (is_file(TL_ROOT . '/' . $objModel->path))
+			{
+				// Do not override the field now that we have a model registry (see #6303)
+				$arrMember = $objMember->row();
+
+				$this->size = $this->imgSize ? $this->imgSize : $this->size; // tl_module = imgSize, tl_content = size
+
+				// Override the default image size
+				if ($this->size != '')
+				{
+					$size = deserialize($this->size);
+
+					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
+					{
+						$arrMember['size'] = $this->size;
+					}
+				}
+
+				$arrMember['singleSRC'] = $objModel->path;
+				\Controller::addImageToTemplate($objTemplate, $arrMember);
+			}
+		}
+		else if(!$this->mlDisableDummyImages)
+		{
+			$strDummyImage = null;
+
+			switch($objMember->gender)
+			{
+				case 'female':
+					$strDummyImage = $this->strDummyFemaleImageSRC;
+					break;
+				case 'male' :
+					$strDummyImage = $this->strDummyMaleImageSRC;
+					break;
+			}
+
+			if($this->mlAddCustomDummyImages)
+			{
+				switch($objMember->gender)
+				{
+					case 'female':
+						$strDummyImage = $this->mlDummyImageFemale;
+						break;
+					case 'male' :
+						$strDummyImage = $this->mlDummyImageMale;
+						break;
+				}
+
+				$objModel = \FilesModel::findByUuid($strDummyImage);
+
+				if ($objModel === null)
+				{
+					if (!\Validator::isUuid($strDummyImage))
+					{
+						$objMember->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+					}
+				}else{
+					$strDummyImage = $objModel->path;
+				}
+			}
+
+			if (is_file(TL_ROOT . '/' . $strDummyImage))
+			{
+				// Do not override the field now that we have a model registry (see #6303)
+				$arrMember = $objMember->row();
+
+				// Override the default image size
+				if ($this->size != '')
+				{
+					$size = deserialize($this->size);
+
+					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
+					{
+						$arrMember['size'] = $this->size;
+					}
+				}
+
+				$arrMember['singleSRC'] = $strDummyImage;
+				\Controller::addImageToTemplate($objTemplate, $arrMember);
+			}
+		}
 	}
 
 	public static function getCombinedTitle($objMember)
