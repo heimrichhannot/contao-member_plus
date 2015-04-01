@@ -23,3 +23,11 @@ $GLOBALS['TL_LANG']['MSC']['phoneTitle'] = 'Telefon';
 $GLOBALS['TL_LANG']['MSC']['faxTitle'] = 'Telefax';
 $GLOBALS['TL_LANG']['MSC']['emailTitle'] = 'E-Mail';
 $GLOBALS['TL_LANG']['MSC']['websiteTitle'] = 'Webseite';
+
+/**
+ * LoginRegistration
+ */
+
+$GLOBALS['TL_LANG']['MSC']['invalidDomain'] = 'Der Login mit Ihrer E-Mail ist nicht erlaubt.';
+$GLOBALS['TL_LANG']['MSC']['usernameTaken'] = 'Der angegebene Benutzername ist bereits vergeben.';
+$GLOBALS['TL_LANG']['MSC']['activationEmailSent'] = 'Eine E-Mail mit dem Aktivierungslink wurde an <br /><strong>%s</strong> gesendet.';

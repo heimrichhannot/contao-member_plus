@@ -53,4 +53,37 @@ class Hooks extends \System
 		return array_values($arrFragments);
 	}
 
+
+	public function activateAccountHook($objMember, $objModule)
+	{
+		if(!$objModule->reg_activate_login) return;
+
+		global $objPage;
+
+		$objRootPage = \PageModel::findByPk($objPage->rootId);
+
+		if ($objRootPage === null) return;
+
+		$time = time();
+
+		// Generate the cookie hash
+		$strHash = sha1(session_id() . (!\Config::get('disableIpCheck') ? \Environment::get('ip') : '') . 'FE_USER_AUTH');
+
+		// Clean up old sessions
+		\Database::getInstance()->prepare("DELETE FROM tl_session WHERE tstamp<? OR hash=?")
+			->execute(($time - \Config::get('sessionTimeout')), $strHash);
+
+		// Save the session in the database
+		\Database::getInstance()->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
+			->execute($objMember->id, $time, 'FE_USER_AUTH', session_id(), \Environment::get('ip'), $strHash);
+
+		// Set the authentication cookie
+		$this->setCookie('FE_USER_AUTH', $strHash, ($time + \Config::get('sessionTimeout')), $GLOBALS['TL_CONFIG']['websitePath']);
+
+		// Save the login status
+		$_SESSION['TL_USER_LOGGED_IN'] = true;
+
+		$this->log('User "' . $objMember->username . '" was logged in automatically', get_class($objModule) . ' activateAccount()', TL_ACCESS);
+	}
+
 }

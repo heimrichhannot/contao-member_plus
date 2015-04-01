@@ -29,7 +29,8 @@ ClassLoader::addClasses(array
 	'HeimrichHannot\MemberPlus\MemberPlusMemberModel' => 'system/modules/member_plus/models/MemberPlusMemberModel.php',
 
 	// Modules
-	'HeimrichHannot\MemberPlus\ModuleMemberReader'    => 'system/modules/member_plus/modules/ModuleMemberReader.php',
+	'HeimrichHannot\MemberPlus\ModuleMemberReader'      => 'system/modules/member_plus/modules/ModuleMemberReader.php',
+	'HeimrichHannot\MemberPlus\ModuleLoginRegistration' => 'system/modules/member_plus/modules/ModuleLoginRegistration.php',
 
 	// Elements
 	'HeimrichHannot\MemberPlus\ContentMemberlist'     => 'system/modules/member_plus/elements/ContentMemberlist.php',
@@ -45,8 +46,9 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'memberlist_full'    => 'system/modules/member_plus/templates/memberlist',
-	'memberlist_default' => 'system/modules/member_plus/templates/memberlist',
-	'mod_memberreader'   => 'system/modules/member_plus/templates/modules',
-	'ce_memberlist'      => 'system/modules/member_plus/templates/elements',
+	'memberlist_full'       => 'system/modules/member_plus/templates/memberlist',
+	'memberlist_default'    => 'system/modules/member_plus/templates/memberlist',
+	'mod_loginregistration' => 'system/modules/member_plus/templates/modules',
+	'mod_memberreader'      => 'system/modules/member_plus/templates/modules',
+	'ce_memberlist'         => 'system/modules/member_plus/templates/elements',
 ));

@@ -12,3 +12,4 @@
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['memberreader'] = array('Mitgliederleser', 'Zeigt Detailinformationen zu einem Mitglied an.');
+$GLOBALS['TL_LANG']['FMD']['loginregistration'] = array('Login & Registrierung', 'Zeigt ein Loginformular an, dass einen Login per E-Mail ermöglicht und bei nicht vorhandenen Mitglied eine Registrierung einleitet.');

@@ -19,7 +19,7 @@ array_insert($dc['palettes']['__selector__'], 0, array('mlAddCustomDummyImages')
 
 
 $dc['palettes']['memberreader'] = '{title_legend},name,headline,type;{config_legend},mlGroups,mlTemplate,mlLoadContent;{image_legend:hide},imgSize,mlDisableImages,mlDisableDummyImages,mlAddCustomDummyImages;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-
+$dc['palettes']['loginregistration'] = '{title_legend},name,headline,type;{config_legend},autologin,allowedMailDomains,showAllowedDomains;{register_legend},reg_groups,reg_allowLogin,reg_assignDir,reg_activate;{redirect_legend},jumpTo,redirectBack,redirectPermanent;{template_legend:hide},cols;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 /**
  * Subpalettes
@@ -95,6 +95,57 @@ $arrFields = array
 		'inputType' => 'fileTree',
 		'eval'      => array('filesOnly' => true, 'fieldType' => 'radio', 'tl_class' => 'w50'),
 		'sql'       => "binary(16) NULL"
+	),
+	'allowedMailDomains' => array
+	(
+		'label'     => &$GLOBALS['TL_LANG']['tl_module']['allowedMailDomains'],
+		'exclude'   => true,
+		'inputType' => 'multiColumnWizard',
+		'eval'      => array(
+			'columnFields' => array(
+				'domain' => array
+				(
+					'label'     => &$GLOBALS['TL_LANG']['tl_module']['allowedMailDomains']['domain'],
+					'exclude'   => true,
+					'inputType' => 'text',
+					'eval'      => array('style' => 'width: 600px'),
+				),
+				'hide'   => array
+				(
+					'label'     => &$GLOBALS['TL_LANG']['tl_module']['allowedMailDomains']['hide'],
+					'exclude'   => true,
+					'inputType' => 'checkbox',
+					'eval'      => array('style' => 'width: 100px;'),
+				)
+			)
+		),
+		'sql'       => "blob NULL"
+	),
+	'showAllowedDomains' => array
+	(
+		'label'     => &$GLOBALS['TL_LANG']['tl_module']['showAllowedDomains'],
+		'exclude'   => true,
+		'default'   => true,
+		'inputType' => 'checkbox',
+		'eval'      => array('tl_class' => 'long'),
+		'sql'       => "char(1) NOT NULL default ''"
+	),
+	'reg_activate_login' => array
+	(
+		'label'     => &$GLOBALS['TL_LANG']['tl_module']['reg_activate_login'],
+		'exclude'   => true,
+		'default'   => true,
+		'inputType' => 'checkbox',
+		'eval'      => array('tl_class' => 'long'),
+		'sql'       => "char(1) NOT NULL default ''"
+	),
+	'redirectPermanent'  => array
+	(
+		'label'     => &$GLOBALS['TL_LANG']['tl_module']['redirectPermanent'],
+		'exclude'   => true,
+		'inputType' => 'checkbox',
+		'eval'      => array('tl_class' => 'long'),
+		'sql'       => "char(1) NOT NULL default ''"
 	),
 );
 

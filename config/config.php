@@ -23,6 +23,7 @@ $GLOBALS['TL_CTE']['includes']['memberlist'] = '\HeimrichHannot\MemberPlus\Conte
  * Front end modules
  */
 $GLOBALS['FE_MOD']['user']['memberreader'] = '\HeimrichHannot\MemberPlus\ModuleMemberReader';
+$GLOBALS['FE_MOD']['user']['loginregistration'] = '\HeimrichHannot\MemberPlus\ModuleLoginRegistration';
 
 /**
  * Hooks
@@ -30,3 +31,4 @@ $GLOBALS['FE_MOD']['user']['memberreader'] = '\HeimrichHannot\MemberPlus\ModuleM
 
 $GLOBALS['TL_HOOKS']['getPageIdFromUrl'][] = array('\HeimrichHannot\MemberPlus\Hooks', 'getPageIdFromUrlHook');
 $GLOBALS['TL_HOOKS']['generateBreadcrumb'][] = array('\HeimrichHannot\MemberPlus\Hooks', 'generateBreadcrumbHook');
+$GLOBALS['TL_HOOKS']['activateAccount'][] = array('\HeimrichHannot\MemberPlus\Hooks', 'activateAccountHook');
