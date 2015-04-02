@@ -31,7 +31,9 @@ $GLOBALS['TL_DCA']['tl_member']['list']['operations']['content'] = array
 $dc['palettes']['__selector__'][] = 'addImage';
 
 // title
-$dc['palettes']['default'] = '{title_legend},headline,alias;' . $dc['palettes']['default'];
+$dc['palettes']['default'] = '{title_legend},headline;' . $dc['palettes']['default'];
+// alias - must be invoked after firstname & title, otherwise not available in save_callback
+$dc['palettes']['default'] = str_replace('lastname', 'lastname,alias', $dc['palettes']['default']);
 // personal
 $dc['palettes']['default'] = str_replace('gender', 'gender,academicTitle,position', $dc['palettes']['default']);
 // address
@@ -236,20 +238,20 @@ class tl_member_plus extends \Backend
 			$varValue = standardize(String::restoreBasicEntities($arrTitle));
 		}
 
-        $objAlias = $this->Database->prepare("SELECT id FROM tl_member WHERE alias=?")
-            ->execute($varValue);
+        $objAlias = $this->Database->prepare("SELECT id FROM tl_member WHERE alias=? AND id!=?")
+            ->execute($varValue, $dc->activeRecord->id);
 
         // Check whether the news alias exists
-        if ($objAlias->numRows > 1 && !$autoAlias)
+		if ($objAlias->numRows > 1 && !$autoAlias)
         {
             throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
         }
 
-        // Add ID to alias
-        if ($objAlias->numRows > 0 && $autoAlias)
-        {
-            $varValue .= '-' . $dc->id;
-        }
+		// Add ID to alias
+		if ($objAlias->numRows && $autoAlias)
+		{
+			$varValue .= '-' . $dc->id;
+		}
 
         return $varValue;
 	}
