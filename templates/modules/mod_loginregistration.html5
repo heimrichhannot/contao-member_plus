@@ -13,7 +13,7 @@
 		<?php endif; ?>
 		<input type="hidden" name="FORM_SUBMIT" value="tl_login">
 		<input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
-		<div class="input-group">
+		<div class="<?php echo (($this->domainCheck && $this->showAllowedDomains) ? 'input-group' : 'form-group'); ?>">
 			<label class="sr-only" for="username"><?php echo $this->username; ?></label>
 			<input type="text" name="username" id="username" class="form-control" value="<?php echo $this->value; ?>" placeholder="<?php echo $this->username; ?>">
 			<?php if($this->domainCheck && $this->showAllowedDomains): ?>
