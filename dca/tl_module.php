@@ -48,6 +48,16 @@ $arrFields = array
 		'eval'             => array('tl_class' => 'w50'),
 		'sql'              => "varchar(64) NOT NULL default ''"
 	),
+	'mlImgSize' => array
+	(
+		'label'                   => &$GLOBALS['TL_LANG']['tl_module']['mlImgSize'],
+		'exclude'                 => true,
+		'inputType'               => 'imageSize',
+		'options'                 => System::getImageSizes(),
+		'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+		'eval'                    => array('rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+		'sql'                     => "varchar(64) NOT NULL default ''"
+	),
 	'mlLoadContent' => array
 	(
 		'label'     => &$GLOBALS['TL_LANG']['tl_module']['mlLoadContent'],

@@ -31,10 +31,10 @@ class MemberPlus extends \Frontend
 	 */
 	private static $arrUrlCache = array();
 
-    protected $strDummyMaleImageSRC = '/system/modules/member_plus/assets/img/dummy_male.png';
-    protected $strDummyFemaleImageSRC = '/system/modules/member_plus/assets/img/dummy_female.png';
+	protected $strDummyMaleImageSRC = '/system/modules/member_plus/assets/img/dummy_male.png';
+	protected $strDummyFemaleImageSRC = '/system/modules/member_plus/assets/img/dummy_female.png';
 
-    public function __construct($objModel)
+	public function __construct($objModel)
 	{
 		if ($objModel instanceof \Model)
 		{
@@ -140,7 +140,7 @@ class MemberPlus extends \Frontend
 
 				if($this->objModel instanceof \ModuleModel)
 				{
-					$this->size = $this->imgSize; // tl_module = imgSize, tl_content = size
+					$this->size = $this->mlImgSize != '' ? $this->mlImgSize : $this->imgSize; // tl_module = imgSize, tl_content = size
 				}
 				
 				// Override the default image size
@@ -201,6 +201,11 @@ class MemberPlus extends \Frontend
 			{
 				// Do not override the field now that we have a model registry (see #6303)
 				$arrMember = $objMember->row();
+
+				if($this->objModel instanceof \ModuleModel)
+				{
+					$this->size = $this->mlImgSize != '' ? $this->mlImgSize : $this->imgSize; // tl_module = imgSize, tl_content = size
+				}
 
 				// Override the default image size
 				if ($this->size != '')

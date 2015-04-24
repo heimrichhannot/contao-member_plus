@@ -18,6 +18,9 @@ $GLOBALS['TL_LANG']['tl_module']['mlGroups'][1] = 'Wählen Sie die anzugeigenden
 $GLOBALS['TL_LANG']['tl_module']['mlTemplate'][0] = 'Mitglieder-Template';
 $GLOBALS['TL_LANG']['tl_module']['mlTemplate'][1] = 'Hier können Sie das Template zur Anzeige des Mitgliedes auswählen.';
 
+$GLOBALS['TL_LANG']['tl_module']['mlImgSize'][0] = 'Bildbreite und Bildhöhe für Mitgliederbilder';
+$GLOBALS['TL_LANG']['tl_module']['mlImgSize'][1] = 'Hier können Sie die Abmessungen des Bildes und den Skalierungsmodus für Mitgliederbilder festlegen.';
+
 $GLOBALS['TL_LANG']['tl_module']['mlLoadContent'][0] = 'Mitglieder-Inhaltselemente laden/anzeigen';
 $GLOBALS['TL_LANG']['tl_module']['mlLoadContent'][1] = 'Hier können Sie auswählen, ob die Inhaltselemente zu einem Mitglied geladen werden sollen. In eine Listendarstellung empfiehlt es sich aus Performancegründen darauf zu verzichten.';
 
