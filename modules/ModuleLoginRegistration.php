@@ -60,37 +60,35 @@ class ModuleLoginRegistration extends \ModuleRegistration
                 $this->reload();
             }
 
-            $username = $_POST['username'];
+			$strRedirect = $this->getJumpTo();
+			$this->import('FrontendUser', 'User');
 
-            // if domaincheck is enabled, get the valid domain username
-            if ($this->domainCheck) {
-                if (($username = $this->getValidDomainUsername()) === null) {
-                    $this->reload();
-                }
+			// Auto login is not allowed
+			if (isset($_POST['autologin']) && !$this->autologin) {
+				unset($_POST['autologin']);
+				\Input::setPost('autologin', null);
+			}
 
-                // overwrite the username
-                $_POST['username'] = $username;
-            }
+			if($this->User->login())
+			{
+				$this->redirect($strRedirect);
+			}
+			else
+			{
+				$username = $_POST['username'];
 
-            $this->import('FrontendUser', 'User');
-            $strRedirect = $this->getJumpTo();
+				if ($this->domainCheck || \Validator::isEmail($username))
+				{
+					if (($username = $this->getValidDomainUsername()) === null)
+					{
+						$this->reload();
+					}
+					// overwrite the username
+					$_POST['username'] = $username;
 
-
-            // Auto login is not allowed
-            if (isset($_POST['autologin']) && !$this->autologin) {
-                unset($_POST['autologin']);
-                \Input::setPost('autologin', null);
-            }
-
-            // Login and redirect
-            if ($this->User->login()) {
-                $this->redirect($strRedirect);
-            } // Register Valid Domain User
-            else {
-                if ($this->domainCheck || \Validator::isEmail($username)) {
-                    $this->registerUser($username);
-                }
-            }
+					$this->registerUser($username);
+				}
+			}
 
             $this->reload();
         }
@@ -240,7 +238,6 @@ class ModuleLoginRegistration extends \ModuleRegistration
 
         if ($domain === null) {
             $_SESSION['LOGIN_ERROR'] = $GLOBALS['TL_LANG']['MSC']['invalidDomain'];
-
             return null;
         }
 
