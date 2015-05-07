@@ -69,6 +69,7 @@ class ModuleLoginRegistration extends \ModuleRegistration
 				\Input::setPost('autologin', null);
 			}
 
+            // Login existing user, or try to get username-domain-combination or register
 			if($this->User->login())
 			{
 				$this->redirect($strRedirect);
@@ -83,8 +84,14 @@ class ModuleLoginRegistration extends \ModuleRegistration
 					{
 						$this->reload();
 					}
-					// overwrite the username
-					$_POST['username'] = $username;
+                    // overwrite the username
+                    $_POST['username'] = $username;
+                    \Input::setPost('username', $username);
+
+                    if($this->User->login())
+                    {
+                        $this->redirect($strRedirect);
+                    }
 
 					$this->registerUser($username);
 				}
