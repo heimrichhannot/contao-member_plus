@@ -57,6 +57,13 @@ class MemberPlus extends \Frontend
 		$objT = new \FrontendTemplate($this->mlTemplate);
 		$objT->setData($objMember->row());
 
+		$arrSkipFields = deserialize($this->mlFields, true);
+
+		if($this->mlSkipFields)
+		{
+			$this->dropFieldsFromTemplate($objT, $arrSkipFields);
+		}
+
 		$strUrl = $this->generateMemberUrl($objMember);
 
 		$objT->hasContent = false;
@@ -82,7 +89,7 @@ class MemberPlus extends \Frontend
 			$this->addMemberImageToTemplate($objT, $objMember);
 		}
 
-		$objT->titleCombined = $this->getCombinedTitle($objMember);
+		$objT->titleCombined = $this->getCombinedTitle($objMember, $arrSkipFields);
 
 		$arrLocation = array_filter(array($objMember->postal, $objMember->city));
 
@@ -117,6 +124,16 @@ class MemberPlus extends \Frontend
 		$objT->linkTitle = specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['openMember'], $objT->titleCombined));
 
 		return $objT->parse();
+	}
+
+	protected function dropFieldsFromTemplate($objT, array $arrFields = array())
+	{
+		if(empty($arrFields)) return $objT;
+
+		foreach($arrFields as $strName)
+		{
+			$objT->{$strName} = null;
+		}
 	}
 
 	protected function addMemberImageToTemplate($objTemplate, $objMember)
@@ -224,9 +241,18 @@ class MemberPlus extends \Frontend
 		}
 	}
 
-	public static function getCombinedTitle($objMember)
+	public static function getCombinedTitle($objMember, $arrSkipFields = array())
 	{
-		$arrTitle = array($objMember->academicTitle, $objMember->firstname, $objMember->lastname);
+		$arrTitle = array('academicTitle' => $objMember->academicTitle, 'firstname' => $objMember->firstname, 'lastname'  => $objMember->lastname);
+
+		if(is_array($arrSkipFields) && !empty($arrSkipFields))
+		{
+			foreach($arrSkipFields as $strName)
+			{
+				unset($arrTitle[$strName]);
+			}
+		}
+
 		return empty($arrTitle) ? '' : trim(implode(' ', $arrTitle));
 	}
 

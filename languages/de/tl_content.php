@@ -54,6 +54,12 @@ $GLOBALS['TL_LANG']['tl_content']['mlDummyImageMale'][1] = 'Bitte wählen Sie ei
 $GLOBALS['TL_LANG']['tl_content']['mlDummyImageFemale'][0] = 'Platzhalterbild für Frauen';
 $GLOBALS['TL_LANG']['tl_content']['mlDummyImageFemale'][1] = 'Bitte wählen Sie eine Datei oder einen Ordner aus der Dateiübersicht.';
 
+$GLOBALS['TL_LANG']['tl_content']['mlSkipFields'][0] = 'Felder ausschließen';
+$GLOBALS['TL_LANG']['tl_content']['mlSkipFields'][1] = 'Felder von der Ausgabe ausschließen';
+
+$GLOBALS['TL_LANG']['tl_content']['mlFields'][0] = 'Folgende Felder ausschließen';
+$GLOBALS['TL_LANG']['tl_content']['mlFields'][1] = 'Folgende Felder von der Ausgabe ausschließen';
+
 /**
  * Legends
  */

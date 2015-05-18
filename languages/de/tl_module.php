@@ -39,6 +39,12 @@ $GLOBALS['TL_LANG']['tl_module']['mlDummyImageMale'][1] = 'Bitte wählen Sie ein
 $GLOBALS['TL_LANG']['tl_module']['mlDummyImageFemale'][0] = 'Platzhalterbild für Frauen';
 $GLOBALS['TL_LANG']['tl_module']['mlDummyImageFemale'][1] = 'Bitte wählen Sie eine Datei oder einen Ordner aus der Dateiübersicht.';
 
+$GLOBALS['TL_LANG']['tl_content']['mlSkipFields'][0] = 'Felder ausschließen';
+$GLOBALS['TL_LANG']['tl_content']['mlSkipFields'][1] = 'Felder von der Ausgabe ausschließen';
+
+$GLOBALS['TL_LANG']['tl_content']['mlFields'][0] = 'Folgende Felder ausschließen';
+$GLOBALS['TL_LANG']['tl_content']['mlFields'][1] = 'Folgende Felder von der Ausgabe ausschließen';
+
 $GLOBALS['TL_LANG']['tl_module']['allowedMailDomains'][0] = 'Erlaubte E-Mail Domains';
 $GLOBALS['TL_LANG']['tl_module']['allowedMailDomains'][1] = 'Tragen Sie hier die erlaubten Domains ein, mit denen sich die Nutzer registrieren und anmelden können, wenn keine Domains hinterlegt sind, ist die Registrierung mit jeder gültigen E-Mail möglich.';
 
