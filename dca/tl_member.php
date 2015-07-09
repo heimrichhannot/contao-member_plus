@@ -208,6 +208,12 @@ $arrFields = array
 		'reference' => &$GLOBALS['TL_LANG']['MSC'],
 		'sql'       => "varchar(32) NOT NULL default ''"
 	),
+	'captcha' => array
+	(
+		'label'     => &$GLOBALS['TL_LANG']['MSC']['securityQuestion'],
+		'exclude'   => true,
+		'inputType' => 'captcha',
+	)
 );
 
 $dc['fields'] = array_merge($dc['fields'], $arrFields);

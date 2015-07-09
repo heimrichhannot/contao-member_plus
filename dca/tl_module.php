@@ -16,19 +16,23 @@ $dc = &$GLOBALS['TL_DCA']['tl_module'];
  */
 
 // selector
-array_insert($dc['palettes']['__selector__'], 0, array('mlAddCustomDummyImages', 'mlSkipFields')); // bug? mustn't be inserted after type selector
+array_insert($dc['palettes']['__selector__'], 0, array('mlAddCustomDummyImages', 'mlSkipFields', 'reg_activate_plus')); // bug? mustn't be inserted after type selector
 
 
 $dc['palettes']['memberreader']      =
 	'{title_legend},name,headline,type;{config_legend},mlGroups,mlTemplate,mlLoadContent;{image_legend:hide},imgSize,mlDisableImages,mlDisableDummyImages,mlAddCustomDummyImages,mlSkipFields;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $dc['palettes']['loginregistration'] =
 	'{title_legend},name,headline,type;{config_legend},autologin,allowedMailDomains,showAllowedDomains;{register_legend},reg_groups,reg_allowLogin,reg_assignDir,reg_activate;{redirect_legend},jumpTo,redirectBack,redirectPermanent;{template_legend:hide},cols;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$dc['palettes']['registration_plus'] =
+	'{title_legend},name,headline,type;{config_legend},formHybridDataContainer,formHybridPalette,formHybridEditable,formHybridTemplate,formHybridAddDefaultValues;{account_legend},reg_groups,reg_allowLogin;{email_legend:hide},reg_activate_plus,formHybridSendSubmissionViaEmail;{template_legend:hide},customTpl;{redirect_legend},jumpTo,{protected_legend:hide},protected;{expert_legend:hide},guests';
 
 /**
  * Subpalettes
  */
 $dc['subpalettes']['mlAddCustomDummyImages'] = 'mlDummyImageMale,mlDummyImageFemale';
 $dc['subpalettes']['mlSkipFields']           = 'mlFields';
+$dc['subpalettes']['reg_activate_plus']           = 'reg_jumpTo,formHybridConfirmationMailRecipientField,formHybridConfirmationMailSender,formHybridConfirmationMailSubject,formHybridConfirmationMailText,formHybridConfirmationMailTemplate,formHybridConfirmationMailAttachment';
+
 
 $arrFields = array
 (
@@ -178,6 +182,14 @@ $arrFields = array
 		'eval'      => array('tl_class' => 'long'),
 		'sql'       => "char(1) NOT NULL default ''"
 	),
+	'reg_activate_plus' => array
+	(
+		'label'     => &$GLOBALS['TL_LANG']['tl_module']['reg_activate'],
+		'exclude'   => true,
+		'inputType' => 'checkbox',
+		'eval'      => array('submitOnChange' => true),
+		'sql'       => "char(1) NOT NULL default ''"
+	)
 );
 
 $dc['fields'] = array_merge($dc['fields'], $arrFields);

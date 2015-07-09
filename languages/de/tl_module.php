@@ -59,6 +59,9 @@ $GLOBALS['TL_LANG']['tl_module']['showAllowedDomains'][1] = 'Anzeige der erlaubt
 $GLOBALS['TL_LANG']['tl_module']['reg_activate_login'][0] = 'Automatische Anmeldung nach Aktivierung';
 $GLOBALS['TL_LANG']['tl_module']['reg_activate_login'][1] = 'Den Nutzer nach erfolgreicher Aktivierung automatisch anmelden und an die Bestätigungsseite weiterleiten.';
 
+$GLOBALS['TL_LANG']['tl_module']['reg_activate_plus'][0] = '';
+$GLOBALS['TL_LANG']['tl_module']['reg_activate_plus'][1] = '';
+
 $GLOBALS['TL_LANG']['tl_module']['redirectPermanent'][0] = 'Permanente Weiterleitung für eingeloggte Mitglieder';
 $GLOBALS['TL_LANG']['tl_module']['redirectPermanent'][1] = 'Sobald ein Mitglied angemeldet ist, wird dieses Seite nicht mehr angezeigt, sondern erfolgt eine permanente Weiterleitung zur Weiterleitungsseite <strong>(Achtung: Das Logout-Formular ist dann nicht mehr erreichbar!)</strong>.';
 

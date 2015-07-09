@@ -1,0 +1,40 @@
+<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?>>
+
+	<form<?php if ($this->action): ?> action="<?php echo $this->action; ?>"<?php endif; ?>
+		id="<?php echo $this->formId; ?>"
+		method="<?php echo $this->method; ?>"
+		enctype="<?php echo $this->enctype; ?>"
+		<?php echo $this->attributes; ?>
+		<?php echo $this->novalidate; ?>
+		<?php if($this->formClass):?> class="<?php echo $this->formClass; ?>"<?php endif;?>>
+		<div class="formbody">
+			<?php if ($this->method == FORMHYBRID_METHOD_POST): ?>
+				<input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formId; ?>">
+				<input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
+			<?php endif; ?>
+			<?php echo $this->hidden; ?>
+			<div class="field-wrapper">
+				<div class="row">
+					<div class="fields-container">
+						<div class="search-wrapper">
+							<?php echo isset($this->fields['firstname']) ? $this->fields['firstname']->parse() : ''; ?>
+							<?php echo isset($this->fields['lastname']) ? $this->fields['lastname']->parse() : ''; ?>
+							<?php echo isset($this->fields['gender']) ? $this->fields['gender']->parse() : ''; ?>
+							<?php echo isset($this->fields['dateOfBirth']) ? $this->fields['dateOfBirth']->parse() : ''; ?>
+							<?php echo isset($this->fields['street']) ? $this->fields['street']->parse() : ''; ?>
+							<?php echo isset($this->fields['postal']) ? $this->fields['postal']->parse() : ''; ?>
+							<?php echo isset($this->fields['city']) ? $this->fields['city']->parse() : ''; ?>
+							<?php echo isset($this->fields['email']) ? $this->fields['email']->parse() : ''; ?>
+							<?php echo isset($this->fields['password']) ? $this->fields['password']->parse() : ''; ?>
+						</div>
+					</div>
+				</div>
+				<?php foreach($this->fields as $name => $objField): ?>
+					<?php if(in_array($name, array('firstname', 'lastname', 'gender', 'dateOfBirth', 'street', 'postal', 'city', 'email', 'password'))) continue; ?>
+					<?php echo $objField->parse(); ?>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</form>
+
+</div>
