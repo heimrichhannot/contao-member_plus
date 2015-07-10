@@ -208,6 +208,12 @@ $arrFields = array
 		'reference' => &$GLOBALS['TL_LANG']['MSC'],
 		'sql'       => "varchar(32) NOT NULL default ''"
 	),
+	'captcha' => array
+	(
+		'label'     => &$GLOBALS['TL_LANG']['MSC']['securityQuestion'],
+		'exclude'   => true,
+		'inputType' => 'captcha',
+	)
 );
 
 $dc['fields'] = array_merge($dc['fields'], $arrFields);
@@ -215,6 +221,12 @@ $dc['fields'] = array_merge($dc['fields'], $arrFields);
 // change fields only in backend
 if (TL_MODE == 'BE') {
 	$dc['fields']['email']['eval']['mandatory'] = false;
+}
+
+if(TL_MODE == 'FE')
+{
+	$dc['fields']['gender']['inputType'] = 'radio';
+	$dc['fields']['gender']['eval']['includeBlankOption'] = false;
 }
 
 class tl_member_plus extends \Backend

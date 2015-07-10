@@ -18,17 +18,22 @@ $GLOBALS['BE_MOD']['accounts']['member']['tables'][] = 'tl_content';
  */
 $GLOBALS['TL_CTE']['includes']['memberlist'] = '\HeimrichHannot\MemberPlus\ContentMemberlist';
 
+/**
+ * Models
+ */
+$GLOBALS['TL_MODELS']['tl_registration_plus'] = '\HeimrichHannot\MemberPlus\MemberRegistrationPlusForm';
 
 /**
  * Front end modules
  */
 $GLOBALS['FE_MOD']['user']['memberreader'] = '\HeimrichHannot\MemberPlus\ModuleMemberReader';
 $GLOBALS['FE_MOD']['user']['loginregistration'] = '\HeimrichHannot\MemberPlus\ModuleLoginRegistration';
+$GLOBALS['FE_MOD']['user']['registration_plus'] = '\HeimrichHannot\MemberPlus\ModuleRegistrationPlus';
+$GLOBALS['FE_MOD']['user']['member_messages'] = '\HeimrichHannot\MemberPlus\ModuleMemberMessages';
 
 /**
  * Hooks
  */
-
 $GLOBALS['TL_HOOKS']['getPageIdFromUrl'][] = array('\HeimrichHannot\MemberPlus\Hooks', 'getPageIdFromUrlHook');
 $GLOBALS['TL_HOOKS']['generateBreadcrumb'][] = array('\HeimrichHannot\MemberPlus\Hooks', 'generateBreadcrumbHook');
 $GLOBALS['TL_HOOKS']['activateAccount'][] = array('\HeimrichHannot\MemberPlus\Hooks', 'activateAccountHook');

@@ -17,3 +17,12 @@ A collection of enhancements for contao members.
 - optionally: show allowed domains in login form, or hide them but still check against them
 - optionally: hide allowed domains list in frontend, but still check against them
 - optionally: permanent redirect to jumpTo page after user was logged
+
+### Registration Plus
+- highly customizeable 
+- custom template support
+- custom editable & required fields
+- default value
+- send confirmation email 
+- send submission email to user
+- formhybrid required
