@@ -29,47 +29,57 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 		parent::__construct($objModule);
 	}
 
+
+	protected function modifyDC()
+	{
+		if(!$this->objModule->disableCaptcha)
+		{
+			$this->addEditableField('captcha', $this->dca['fields']['captcha']);
+		}
+	}
+
 	protected function onSubmitCallback(\DataContainer $dc) {
-		$this->objModel->login = $this->objModule->reg_allowLogin;
-		$this->objModel->activation = md5(uniqid(mt_rand(), true));
-		$this->objModel->dateAdded = $this->objModel->tstamp;
+
+		$objMember = \MemberModel::findByPk($dc->activeRecord->id);
+
+		$objMember->login = $this->objModule->reg_allowLogin;
+		$objMember->activation = md5(uniqid(mt_rand(), true));
+		$objMember->dateAdded = $this->objModel->tstamp;
 
 		// Set default groups
-		if (empty($this->objModel->groups))
+		if (empty($objMember->groups))
 		{
-			$this->objModel->groups = $this->objModule->reg_groups;
+			$objMember->groups = $this->objModule->reg_groups;
 		}
 
 		// Disable account
-		$this->objModel->disable = 1;
+		$objMember->disable = 1;
 
 
 		if (in_array('newsletter', \ModuleLoader::getActive()))
 		{
 			// Make sure newsletter is an array
-			if (empty($this->objModel->newsletter))
+			if (empty($objMember->newsletter))
 			{
-				if ($this->objModel->newsletter != '')
+				if ($objMember->newsletter != '')
 				{
-					$this->objModel->newsletter = array($this->objModel->newsletter);
+					$objMember->newsletter = array($objMember->newsletter);
 				}
 				else
 				{
-					$this->objModel->newsletter = array();
+					$objMember->newsletter = array();
 				}
 			}
 		}
 
-		$this->objModel->save();
-
-		$dc->activeRecord = $this->objModel;
+		$objMember->save();
 
 		if($this->objModule->reg_activate_plus)
 		{
 			$this->formHybridSendConfirmationViaEmail = true;
 		}
 
-		$this->clearInputs();
+//		$this->setReset(false); // debug
 	}
 
 	protected function prepareSubmissionData()
@@ -77,14 +87,14 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 		$arrSubmissionData = parent::prepareSubmissionData();
 
 		$arrSubmissionData['domain'] = \Idna::decode(\Environment::get('host'));
-		$arrSubmissionData['activation'] = \Idna::decode(\Environment::get('base')) . \Environment::get('request') . ((\Config::get('disableAlias') || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $this->objModel->activation;
+		$arrSubmissionData['activation'] = \Idna::decode(\Environment::get('base')) . \Environment::get('request') . ((\Config::get('disableAlias') || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $this->activeRecord->activation;
 
 		if (in_array('newsletter', \ModuleLoader::getActive()))
 		{
 			// Replace the wildcard
 			if (!empty($this->objModel->newsletter))
 			{
-				$objChannels = \NewsletterChannelModel::findByIds($this->objModel->newsletter);
+				$objChannels = \NewsletterChannelModel::findByIds($this->activeRecord->newsletter);
 
 				if ($objChannels !== null)
 				{

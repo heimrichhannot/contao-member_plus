@@ -37,3 +37,8 @@ $GLOBALS['FE_MOD']['user']['member_messages'] = '\HeimrichHannot\MemberPlus\Modu
 $GLOBALS['TL_HOOKS']['getPageIdFromUrl'][] = array('\HeimrichHannot\MemberPlus\Hooks', 'getPageIdFromUrlHook');
 $GLOBALS['TL_HOOKS']['generateBreadcrumb'][] = array('\HeimrichHannot\MemberPlus\Hooks', 'generateBreadcrumbHook');
 $GLOBALS['TL_HOOKS']['activateAccount'][] = array('\HeimrichHannot\MemberPlus\Hooks', 'activateAccountHook');
+
+/**
+ * Constants
+ */
+define('MEMBER_ACTIVATION_ACTIVATED_FIELD_PREFIX', 'ACTIVATED:');

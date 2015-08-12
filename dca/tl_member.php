@@ -229,6 +229,9 @@ if(TL_MODE == 'FE')
 	$dc['fields']['gender']['eval']['includeBlankOption'] = false;
 }
 
+// increase activation field, otherwise MEMBER_ACTIVATION_ACTIVATED_FIELD_PREFIX will not fit in
+$dc['fields']['activation']['sql'] = "varchar(64) NOT NULL default ''";
+
 class tl_member_plus extends \Backend
 {
 	/**

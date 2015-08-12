@@ -44,6 +44,12 @@ class ModuleRegistrationPlus extends \ModuleRegistration
 
 	protected function compile()
 	{
+		// render messages before if existing, otherwise error messages will not be displayed after redirect/reload
+		if(MemberMessage::hasMessages())
+		{
+			$this->Template->message = MemberMessage::generate();
+		}
+
 		// Activate account
 		if (\Input::get('token') != '')
 		{
@@ -59,21 +65,42 @@ class ModuleRegistrationPlus extends \ModuleRegistration
 	 */
 	protected function activateAcount()
 	{
-		/** @var \FrontendTemplate|object $objTemplate */
-		$objTemplate = new \FrontendTemplate($this->strTemplate);
+		$hasError = false;
+		$strReloadUrl = preg_replace('/(&|\?)token=[^&]*/', '', \Environment::get('request')); // remove token from url
+		
+		$objMember = \MemberModel::findByActivation(MEMBER_ACTIVATION_ACTIVATED_FIELD_PREFIX . \Input::get('token'));
 
-		$objMember = \MemberModel::findByActivation(\Input::get('token'));
-
-		if ($objMember === null)
+		// member with this token already activated
+		if ($objMember !== null)
 		{
-			MemberMessage::addDanger($GLOBALS['TL_LANG']['MSC']['accountError']);
-			return;
+			$hasError = true;
+			MemberMessage::addDanger($GLOBALS['TL_LANG']['MSC']['alreadyActivated']);
+		}
+
+		// check for invalid token
+		if(!$hasError)
+		{
+			$objMember = \MemberModel::findByActivation(\Input::get('token'));
+
+			if ($objMember === null)
+			{
+				$hasError = true;
+				MemberMessage::addDanger($GLOBALS['TL_LANG']['MSC']['invalidActivationToken']);
+			}
+		}
+
+		// if has errors, remove token from url and redirect to current page without token parameter
+		if($hasError)
+		{
+			$this->redirect($strReloadUrl);
 		}
 
 		// Update the account
 		$objMember->disable = '';
-		$objMember->activation = '';
+		$objMember->activation = MEMBER_ACTIVATION_ACTIVATED_FIELD_PREFIX . $objMember->activation;
 		$objMember->save();
+
+		$this->accountActivatedMessage = $GLOBALS['TL_LANG']['MSC']['accountActivated'];
 
 		// HOOK: post activation callback
 		if (isset($GLOBALS['TL_HOOKS']['activateAccount']) && is_array($GLOBALS['TL_HOOKS']['activateAccount']))
@@ -88,14 +115,17 @@ class ModuleRegistrationPlus extends \ModuleRegistration
 		// Log activity
 		$this->log('User account ID ' . $objMember->id . ' (' . $objMember->email . ') has been activated', __METHOD__, TL_ACCESS);
 
-		MemberMessage::addSuccess($GLOBALS['TL_LANG']['MSC']['accountActivated']);
+		MemberMessage::addSuccess($this->accountActivatedMessage);
 
 		// Redirect to the jumpTo page
 		if (($objTarget = $this->objModel->getRelated('reg_jumpTo')) !== null)
 		{
 			$this->redirect($this->generateFrontendUrl($objTarget->row()));
 		}
-
-		$this->Template->message = MemberMessage::generate();
+		// redirect to current page without token parameter
+		else
+		{
+			$this->redirect($strReloadUrl);
+		}
 	}
 }

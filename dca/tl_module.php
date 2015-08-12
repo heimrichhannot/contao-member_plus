@@ -29,7 +29,7 @@ $dc['palettes']['loginregistration'] =
 	'{title_legend},name,headline,type;{config_legend},autologin,allowedMailDomains,showAllowedDomains;{register_legend},reg_groups,reg_allowLogin,reg_assignDir,reg_activate;{redirect_legend},jumpTo,redirectBack,redirectPermanent;{template_legend:hide},cols;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $dc['palettes']['registration_plus'] =
 	'{title_legend},name,headline,type;
-	{config_legend},formHybridDataContainer,formHybridPalette,formHybridEditable,formHybridAddEditableRequired,formHybridTemplate,formHybridAddDefaultValues;
+	{config_legend},formHybridDataContainer,formHybridPalette,formHybridEditable,formHybridAddEditableRequired,formHybridTemplate,formHybridAddDefaultValues,disableCaptcha;
 	{account_legend},reg_groups,reg_allowLogin;
 	{message_legend},formHybridSuccessMessage;
 	{email_legend:hide},reg_activate_plus,formHybridSendSubmissionViaEmail;
