@@ -38,8 +38,15 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 		}
 	}
 
-	protected function onSubmitCallback(\DataContainer $dc) {
+	protected function modifyVersion(\Versions $objVersion)
+	{
+		$objVersion->setUsername($this->objActiveRecord->email);
+		$objVersion->setEditUrl('contao/main.php?do=member&act=edit&id='. $this->objActiveRecord->id . '&rt=' . REQUEST_TOKEN);
+		return $objVersion;
+	}
 
+	protected function onSubmitCallback(\DataContainer $dc)
+	{
 		$objMember = \MemberModel::findByPk($dc->activeRecord->id);
 
 		$objMember->login = $this->objModule->reg_allowLogin;
@@ -55,23 +62,6 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 		// Disable account
 		$objMember->disable = 1;
 
-
-		if (in_array('newsletter', \ModuleLoader::getActive()))
-		{
-			// Make sure newsletter is an array
-			if (empty($objMember->newsletter))
-			{
-				if ($objMember->newsletter != '')
-				{
-					$objMember->newsletter = array($objMember->newsletter);
-				}
-				else
-				{
-					$objMember->newsletter = array();
-				}
-			}
-		}
-
 		$objMember->save();
 
 		if($this->objModule->reg_activate_plus)
@@ -79,7 +69,17 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 			$this->formHybridSendConfirmationViaEmail = true;
 		}
 
-//		$this->setReset(false); // debug
+		// HOOK: send insert ID and user data
+		if (isset($GLOBALS['TL_HOOKS']['createNewUser']) && is_array($GLOBALS['TL_HOOKS']['createNewUser']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['createNewUser'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($objMember->id, $objMember->row(), $this->objModule);
+			}
+		}
+
+//		$this->setReset(false); // debug - stay on current page
 	}
 
 	protected function prepareSubmissionData()
