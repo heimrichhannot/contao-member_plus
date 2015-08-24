@@ -38,6 +38,13 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 		}
 	}
 
+	protected function setDefaults()
+	{
+		parent::setDefaults();
+
+		$this->objActiveRecord->login = true;
+	}
+
 	protected function modifyVersion(\Versions $objVersion)
 	{
 		$objVersion->setUsername($this->objActiveRecord->email);
