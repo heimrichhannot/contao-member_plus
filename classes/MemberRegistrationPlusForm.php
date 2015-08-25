@@ -21,11 +21,6 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 		$this->strPalette = 'default';
 		$this->strMethod = FORMHYBRID_METHOD_POST;
 
-		if(($objTarget = \PageModel::findByPk($objModule->jumpTo)) !== null)
-		{
-			$this->strAction = \Controller::generateFrontendUrl($objTarget->row());
-		}
-
 		parent::__construct($objModule);
 	}
 
@@ -36,6 +31,12 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 		{
 			$this->addEditableField('captcha', $this->dca['fields']['captcha']);
 		}
+	}
+
+	protected function initialize() {
+		parent::initialize();
+
+		$this->objActiveRecord->username = $this->objActiveRecord->email;
 	}
 
 	protected function setDefaults()
@@ -86,6 +87,11 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 			}
 		}
 
+		if(($objTarget = \PageModel::findByPk($this->jumpTo)) !== null)
+		{
+			\Controller::redirect(\Controller::generateFrontendUrl($objTarget->row()));
+		}
+
 //		$this->setReset(false); // debug - stay on current page
 	}
 
@@ -131,3 +137,4 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 	protected function compile() {}
 
 }
+
