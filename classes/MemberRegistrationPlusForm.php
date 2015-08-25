@@ -87,12 +87,15 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 			}
 		}
 
-		if(($objTarget = \PageModel::findByPk($this->jumpTo)) !== null)
+//		$this->setReset(false); // debug - stay on current page
+	}
+
+	protected function afterSubmitCallback(\DataContainer $dc)
+	{
+		if(($objTarget = \PageModel::findByPk($this->objModule->jumpTo)) !== null)
 		{
 			\Controller::redirect(\Controller::generateFrontendUrl($objTarget->row()));
 		}
-
-//		$this->setReset(false); // debug - stay on current page
 	}
 
 	protected function prepareSubmissionData()
@@ -137,4 +140,5 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 	protected function compile() {}
 
 }
+
 
