@@ -22,7 +22,6 @@ array_insert(
 	array('mlAddCustomDummyImages', 'mlSkipFields', 'reg_activate_plus')
 ); // bug? mustn't be inserted after type selector
 
-
 $dc['palettes']['memberreader']      =
 	'{title_legend},name,headline,type;{config_legend},mlGroups,mlTemplate,mlLoadContent;{image_legend:hide},imgSize,mlDisableImages,mlDisableDummyImages,mlAddCustomDummyImages,mlSkipFields;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $dc['palettes']['loginregistration'] =
@@ -39,16 +38,22 @@ $dc['palettes']['registration_plus'] =
 $dc['palettes']['member_messages']      =
 	'{title_legend},name,headline,type;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
-
 /**
  * Subpalettes
  */
 $dc['subpalettes']['mlAddCustomDummyImages'] = 'mlDummyImageMale,mlDummyImageFemale';
 $dc['subpalettes']['mlSkipFields']           = 'mlFields';
 $dc['subpalettes']['reg_activate_plus']      =
-	'reg_jumpTo,formHybridConfirmationMailRecipientField,formHybridConfirmationMailSender,formHybridConfirmationMailSubject,formHybridConfirmationMailText,formHybridConfirmationMailTemplate,formHybridConfirmationMailAttachment';
+	'reg_jumpTo,formHybridConfirmationMailRecipientField,formHybridConfirmationAvisotaMessage,formHybridConfirmationMailSender,formHybridConfirmationMailSubject,formHybridConfirmationMailText,formHybridConfirmationMailTemplate,formHybridConfirmationMailAttachment';
 
+/**
+ * Callbacks
+ */
+$dc['config']['onload_callback'][] = array('tl_module_member_plus', 'modifyPalette');
 
+/**
+ * Fields
+ */
 $arrFields = array
 (
 	'mlGroups'               => array
@@ -220,5 +225,36 @@ class tl_module_member_plus extends \Backend
 	public function getMemberlistTemplates()
 	{
 		return $this->getTemplateGroup('memberlist_');
+	}
+
+	public function modifyPalette()
+	{
+		$objModule = \ModuleModel::findByPk(\Input::get('id'));
+		$arrDc = &$GLOBALS['TL_DCA']['tl_module'];
+
+		// submission -> already done in formhybrid
+
+		// confirmation
+		$arrFieldsToHide = array
+		(
+			'formHybridConfirmationMailSender',
+			'formHybridConfirmationMailSubject',
+			'formHybridConfirmationMailText',
+			'formHybridConfirmationMailTemplate',
+			'formHybridConfirmationMailAttachment'
+		);
+
+		if (in_array('avisota-core', \ModuleLoader::getActive()) && $objModule->reg_activate_plus && $objModule->formHybridConfirmationAvisotaMessage)
+		{
+			$arrDc['subpalettes']['reg_activate_plus'] = str_replace(
+				$arrFieldsToHide, array_map(function() {return '';}, $arrFieldsToHide),
+				$arrDc['subpalettes']['reg_activate_plus']
+			);
+
+			$arrDc['subpalettes']['reg_activate_plus'] = str_replace(
+				'formHybridConfirmationAvisotaMessage', 'formHybridConfirmationAvisotaMessage,formHybridConfirmationAvisotaSalutationGroup',
+				$arrDc['subpalettes']['reg_activate_plus']
+			);
+		}
 	}
 }

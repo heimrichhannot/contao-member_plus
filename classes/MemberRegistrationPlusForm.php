@@ -33,11 +33,12 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 		}
 	}
 
-	protected function initialize() {
-		parent::initialize();
-
-		$this->objActiveRecord->username = $this->objActiveRecord->email;
-	}
+//	protected function initialize() {
+//		parent::initialize();
+//
+//		$this->objActiveRecord->username = $this->objActiveRecord->email;
+//		$this->objActiveRecord->save();
+//	}
 
 	protected function setDefaults()
 	{
