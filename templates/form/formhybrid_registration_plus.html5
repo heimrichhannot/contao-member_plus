@@ -1,29 +1,31 @@
 <div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?>>
 
-	<form<?php if ($this->action): ?> action="<?php echo $this->action; ?>"<?php endif; ?>
-		id="<?php echo $this->formId; ?>"
-		method="<?php echo $this->method; ?>"
-		enctype="<?php echo $this->enctype; ?>"
-		<?php echo $this->attributes; ?>
-		<?php echo $this->novalidate; ?>
-		<?php if($this->formClass):?> class="<?php echo $this->formClass; ?>"<?php endif;?>>
-		<div class="formbody">
-			<?php if($this->message): ?>
-				<p class="alert alert-<?php echo $this->messageType; ?>" role="alert"><?php echo $this->message; ?></p>
-			<?php endif; ?>
-			<?php if(!$this->invalid): ?>
-				<?php if ($this->method == FORMHYBRID_METHOD_POST): ?>
-					<input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formId; ?>">
-					<input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
+	<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?>>
+		<script><?php echo \HeimrichHannot\FormHybrid\FormHelper::getLocaleString(); ?></script>
+		<form<?php if ($this->action): ?> action="<?php echo $this->action; ?>"<?php endif; ?>
+			id="<?php echo $this->formId; ?>"
+			method="<?php echo $this->method; ?>"
+			enctype="<?php echo $this->enctype; ?>"
+			<?php echo $this->attributes; ?>
+			<?php echo $this->novalidate; ?>
+			<?php if($this->formClass):?> class="<?php echo $this->formClass; ?>"<?php endif;?>>
+			<div class="formbody">
+				<?php if($this->message): ?>
+					<p class="alert alert-<?php echo $this->messageType; ?>" role="alert"><?php echo $this->message; ?></p>
 				<?php endif; ?>
-				<?php echo $this->hidden; ?>
-				<div class="field-wrapper">
-					<?php foreach($this->fields as $name => $objField): ?>
-						<?php echo $objField->parse(); ?>
-					<?php endforeach; ?>
-				</div>
-			<?php endif; ?>
-		</div>
+				<?php if(!$this->invalid): ?>
+					<?php if ($this->method == FORMHYBRID_METHOD_POST): ?>
+						<input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formId; ?>">
+						<input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
+					<?php endif; ?>
+					<?php echo $this->hidden; ?>
+					<div class="field-wrapper">
+						<?php foreach($this->fields as $name => $objField): ?>
+							<?php echo $objField->parse(); ?>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
+			</div>
 	</form>
 
 </div>

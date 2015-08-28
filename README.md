@@ -24,3 +24,27 @@ A collection of enhancements for contao members.
 - Tell user if token is invalid
 - You can now overwrite "accountActivatedMessage" in "activateAccount" Hook
 - Always redirect after activation or activation error to current page without token parameter in url (or reg_jumpTo page), and than display messages 
+
+
+## Hooks
+
+
+### modifyDCRegistrationPlusForm
+
+Modify the formhybrid Datacontainer array.
+
+```
+// config.php
+$GLOBALS['TL_HOOKS']['modifyDCRegistrationPlusForm'][] = array('MyClass', 'modifyDCRegistrationPlusFormHook');
+
+```
+
+```
+// MyClass.php
+
+public function modifyDCRegistrationPlusFormHook(&$arrDca, \Model $objModule)
+{
+	// manipulate the datacontainer and add fields, change labels and more
+	$arrDca['fields']['firstname']['eval']['placeholder'] = &$GLOBALS['TL_LANG']['tl_member']['myCustomFirstnamePlaceholder'];
+}
+```

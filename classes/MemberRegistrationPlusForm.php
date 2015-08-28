@@ -31,6 +31,16 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 		{
 			$this->addEditableField('captcha', $this->dca['fields']['captcha']);
 		}
+
+		// HOOK: send insert ID and user data
+		if (isset($GLOBALS['TL_HOOKS']['modifyDCRegistrationPlusForm']) && is_array($GLOBALS['TL_HOOKS']['modifyDCRegistrationPlusForm']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['modifyDCRegistrationPlusForm'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($this->dca, $this->objModule);
+			}
+		}
 	}
 
 //	protected function initialize() {
