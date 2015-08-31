@@ -70,7 +70,7 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 
 		$objMember->login = $this->objModule->reg_allowLogin;
 		$objMember->activation = md5(uniqid(mt_rand(), true));
-		$objMember->dateAdded = $this->objModel->tstamp;
+		$objMember->dateAdded = $dc->activeRecord->tstamp;
 
 		// Set default groups
 		if (empty($objMember->groups))
