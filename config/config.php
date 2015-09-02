@@ -30,6 +30,7 @@ $GLOBALS['FE_MOD']['user']['memberreader'] = '\HeimrichHannot\MemberPlus\ModuleM
 $GLOBALS['FE_MOD']['user']['loginregistration'] = '\HeimrichHannot\MemberPlus\ModuleLoginRegistration';
 $GLOBALS['FE_MOD']['user']['registration_plus'] = '\HeimrichHannot\MemberPlus\ModuleRegistrationPlus';
 $GLOBALS['FE_MOD']['user']['member_messages'] = '\HeimrichHannot\MemberPlus\ModuleMemberMessages';
+$GLOBALS['FE_MOD']['user']['lostPassword'] = '\HeimrichHannot\MemberPlus\ModulePassword';
 
 /**
  * Hooks

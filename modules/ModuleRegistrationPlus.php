@@ -128,4 +128,144 @@ class ModuleRegistrationPlus extends \ModuleRegistration
 			$this->redirect($strReloadUrl);
 		}
 	}
+
+	/**
+	 * Create a new user and redirect
+	 *
+	 * @param array $arrData
+	 */
+	protected function createNewUser($arrData)
+	{
+		$arrData['tstamp'] = time();
+		$arrData['login'] = $this->reg_allowLogin;
+		$arrData['activation'] = md5(uniqid(mt_rand(), true));
+		$arrData['dateAdded'] = $arrData['tstamp'];
+
+		// Set default groups
+		if (!array_key_exists('groups', $arrData))
+		{
+			$arrData['groups'] = $this->reg_groups;
+		}
+
+		// Disable account
+		$arrData['disable'] = 1;
+
+		// Send activation e-mail
+		if ($this->reg_activate)
+		{
+			// Prepare the simple token data
+			$arrTokenData = $arrData;
+			$arrTokenData['domain'] = \Idna::decode(\Environment::get('host'));
+			$arrTokenData['link'] = \Idna::decode(\Environment::get('base')) . \Environment::get('request') . ((\Config::get('disableAlias') || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $arrData['activation'];
+			$arrTokenData['channels'] = '';
+
+			if (in_array('newsletter', \ModuleLoader::getActive()))
+			{
+				// Make sure newsletter is an array
+				if (!is_array($arrData['newsletter']))
+				{
+					if ($arrData['newsletter'] != '')
+					{
+						$arrData['newsletter'] = array($arrData['newsletter']);
+					}
+					else
+					{
+						$arrData['newsletter'] = array();
+					}
+				}
+
+				// Replace the wildcard
+				if (!empty($arrData['newsletter']))
+				{
+					$objChannels = \NewsletterChannelModel::findByIds($arrData['newsletter']);
+
+					if ($objChannels !== null)
+					{
+						$arrTokenData['channels'] = implode("\n", $objChannels->fetchEach('title'));
+					}
+				}
+			}
+
+			// Backwards compatibility
+			$arrTokenData['channel'] = $arrTokenData['channels'];
+
+			$objEmail = new \Email();
+
+			$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
+			$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
+			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['emailSubject'], \Idna::decode(\Environment::get('host')));
+			$objEmail->text = \StringUtil::parseSimpleTokens($this->reg_text, $arrTokenData);
+			$objEmail->sendTo($arrData['email']);
+		}
+
+		// Make sure newsletter is an array
+		if (isset($arrData['newsletter']) && !is_array($arrData['newsletter']))
+		{
+			$arrData['newsletter'] = array($arrData['newsletter']);
+		}
+
+		// Create the user
+		$objNewUser = new \MemberModel();
+		$objNewUser->setRow($arrData);
+		$objNewUser->save();
+
+		// Assign home directory
+		if ($this->reg_assignDir)
+		{
+			$objHomeDir = \FilesModel::findByUuid($this->reg_homeDir);
+
+			if ($objHomeDir !== null)
+			{
+				$this->import('Files');
+				$strUserDir = standardize($arrData['username']) ?: 'user_' . $objNewUser->id;
+
+				// Add the user ID if the directory exists
+				while (is_dir(TL_ROOT . '/' . $objHomeDir->path . '/' . $strUserDir))
+				{
+					$strUserDir .= '_' . $objNewUser->id;
+				}
+
+				// Create the user folder
+				new \Folder($objHomeDir->path . '/' . $strUserDir);
+
+				$objUserDir = \FilesModel::findByPath($objHomeDir->path . '/' . $strUserDir);
+
+				// Save the folder ID
+				$objNewUser->assignDir = 1;
+				$objNewUser->homeDir = $objUserDir->uuid;
+				$objNewUser->save();
+			}
+		}
+
+		// HOOK: send insert ID and user data
+		if (isset($GLOBALS['TL_HOOKS']['createNewUser']) && is_array($GLOBALS['TL_HOOKS']['createNewUser']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['createNewUser'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($objNewUser->id, $arrData, $this);
+			}
+		}
+
+		// Create the initial version (see #7816)
+		$objVersions = new \Versions('tl_member', $objNewUser->id);
+		$objVersions->setUsername($objNewUser->username);
+		$objVersions->setUserId(0);
+		$objVersions->setEditUrl('contao/main.php?do=member&act=edit&id=%s&rt=1');
+		$objVersions->initialize();
+
+		// Inform admin if no activation link is sent
+		if (!$this->reg_activate)
+		{
+			$this->sendAdminNotification($objNewUser->id, $arrData);
+		}
+
+		// Check whether there is a jumpTo page
+		if (($objJumpTo = $this->objModel->getRelated('jumpTo')) !== null)
+		{
+			$this->jumpToOrReload($objJumpTo->row());
+		}
+
+		$this->reload();
+	}
 }

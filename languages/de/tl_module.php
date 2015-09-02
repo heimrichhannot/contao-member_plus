@@ -65,6 +65,15 @@ $GLOBALS['TL_LANG']['tl_module']['reg_activate_plus'][1] = '';
 $GLOBALS['TL_LANG']['tl_module']['redirectPermanent'][0] = 'Permanente Weiterleitung für eingeloggte Mitglieder';
 $GLOBALS['TL_LANG']['tl_module']['redirectPermanent'][1] = 'Sobald ein Mitglied angemeldet ist, wird dieses Seite nicht mehr angezeigt, sondern erfolgt eine permanente Weiterleitung zur Weiterleitungsseite <strong>(Achtung: Das Logout-Formular ist dann nicht mehr erreichbar!)</strong>.';
 
+$GLOBALS['TL_LANG']['tl_module']['changePasswordJumpTo'][0] = 'Passwort ändern-Seite';
+$GLOBALS['TL_LANG']['tl_module']['changePasswordJumpTo'][1] = 'Wählen Sie hier die Seite aus, zu der das Mitglied umgeleitet wird, nachdem es auf den Link zum Ändern des Passworts geklickt hat.';
+
+$GLOBALS['TL_LANG']['tl_module']['avisotaMessage'][0] = 'Nachricht';
+$GLOBALS['TL_LANG']['tl_module']['avisotaMessage'][1] = 'Wählen Sie hier eine Avisota-Nachricht für die "Passwort ändern"-E-Mail aus.';
+
+$GLOBALS['TL_LANG']['tl_module']['avisotaSalutationGroup'][0] = 'Anrede';
+$GLOBALS['TL_LANG']['tl_module']['avisotaSalutationGroup'][1] = 'Wählen Sie hier eine Avisota-Anrede aus.';
+
 /**
  * Legends
  */
