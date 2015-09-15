@@ -41,8 +41,6 @@ $dc['palettes']['registration_plus'] =
 $dc['palettes']['member_messages']      =
 	'{title_legend},name,headline,type;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
-$dc['palettes']['lostPassword'] = str_replace('reg_jumpTo', 'changePasswordJumpTo,reg_jumpTo,avisotaMessage', $dc['palettes']['lostPassword']);
-
 /**
  * Subpalettes
  */
@@ -214,55 +212,8 @@ $arrFields = array
 		'inputType' => 'checkbox',
 		'eval'      => array('submitOnChange' => true),
 		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'changePasswordJumpTo' => array
-	(
-		'label'                   => &$GLOBALS['TL_LANG']['tl_module']['changePasswordJumpTo'],
-		'exclude'                 => true,
-		'inputType'               => 'pageTree',
-		'foreignKey'              => 'tl_page.title',
-		'eval'                    => array('fieldType'=>'radio'),
-		'sql'                     => "int(10) unsigned NOT NULL default '0'",
-		'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
 	)
 );
-
-if (in_array('avisota-core', \ModuleLoader::getActive()))
-{
-	$arrFields['avisotaMessage'] = array
-	(
-		'exclude'          => true,
-		'label'            => &$GLOBALS['TL_LANG']['tl_module']['avisotaMessage'],
-		'inputType'        => 'select',
-		'options_callback' => \ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEventCallbackFactory::createCallback(
-			\Avisota\Contao\Message\Core\MessageEvents::CREATE_BOILERPLATE_MESSAGE_OPTIONS,
-			'Avisota\Contao\Core\Event\CreateOptionsEvent'
-		),
-		'eval'             => array(
-			'includeBlankOption' => true,
-			'tl_class'           => 'w50 clr',
-			'chosen'             => true,
-			'submitOnChange'     => true
-		),
-		'sql'              => "char(36) NOT NULL default ''"
-	);
-
-	$arrFields['avisotaSalutationGroup'] = array
-	(
-		'exclude'          => true,
-		'label'            => &$GLOBALS['TL_LANG']['tl_module']['avisotaSalutationGroup'],
-		'inputType'        => 'select',
-		'options_callback' => array('tl_form_hybrid_module', 'getSalutationGroupOptions'),
-		'eval'             => array(
-			'includeBlankOption' => true,
-			'tl_class'           => 'w50',
-			'chosen' => true
-		),
-		'sql' => "char(36) NOT NULL default ''"
-	);
-
-	$dc['fields']['reg_password']['eval']['tl_class'] = 'long clr';
-}
 
 $dc['fields'] = array_merge($dc['fields'], $arrFields);
 
@@ -307,13 +258,6 @@ class tl_module_member_plus extends \Backend
 				'formHybridConfirmationAvisotaMessage', 'formHybridConfirmationAvisotaMessage,formHybridConfirmationAvisotaSalutationGroup',
 				$arrDc['subpalettes']['reg_activate_plus']
 			);
-		}
-
-		// lost password
-		if ($objModule->avisotaMessage)
-		{
-			$arrDc['palettes']['lostPassword'] = str_replace('reg_password', '', $arrDc['palettes']['lostPassword']);
-			$arrDc['palettes']['lostPassword'] = str_replace('avisotaMessage', 'avisotaMessage,avisotaSalutationGroup', $arrDc['palettes']['lostPassword']);
 		}
 	}
 }

@@ -24,7 +24,6 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Modules
-	'HeimrichHannot\MemberPlus\ModulePassword'             => 'system/modules/member_plus/modules/ModulePassword.php',
 	'HeimrichHannot\MemberPlus\ModuleLoginRegistration'    => 'system/modules/member_plus/modules/ModuleLoginRegistration.php',
 	'HeimrichHannot\MemberPlus\ModuleRegistrationPlus'     => 'system/modules/member_plus/modules/ModuleRegistrationPlus.php',
 	'HeimrichHannot\MemberPlus\ModuleMemberMessages'       => 'system/modules/member_plus/modules/ModuleMemberMessages.php',
