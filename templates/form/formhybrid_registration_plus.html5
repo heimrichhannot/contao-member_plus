@@ -11,7 +11,7 @@
 			<?php if($this->formClass):?> class="<?php echo $this->formClass; ?>"<?php endif;?>>
 			<div class="formbody">
 				<?php if($this->message): ?>
-					<p class="alert alert-<?php echo $this->messageType; ?>" role="alert"><?php echo $this->message; ?></p>
+					<?= $this->message; ?>
 				<?php endif; ?>
 				<?php if(!$this->invalid): ?>
 					<?php if ($this->method == FORMHYBRID_METHOD_POST): ?>
