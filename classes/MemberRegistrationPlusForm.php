@@ -25,7 +25,7 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 	}
 
 
-	protected function modifyDC()
+	public function modifyDC()
 	{
 		if(!$this->objModule->disableCaptcha)
 		{
