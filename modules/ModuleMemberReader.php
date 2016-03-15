@@ -41,23 +41,15 @@ class ModuleMemberReader extends \Module
 			\Input::setGet('items', \Input::get('auto_item'));
 		}
 
-		// Do not index or cache the page if no news item has been specified
 		if (!\Input::get('items'))
 		{
-			global $objPage;
-			$objPage->noSearch = 1;
-			$objPage->cache = 0;
 			return '';
 		}
 
 		$this->mlGroups = deserialize($this->mlGroups);
 
-		// Do not index or cache the page if there are no archives
 		if (!is_array($this->mlGroups) || empty($this->mlGroups))
 		{
-			global $objPage;
-			$objPage->noSearch = 1;
-			$objPage->cache = 0;
 			return '';
 		}
 
