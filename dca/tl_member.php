@@ -11,7 +11,7 @@
 \Controller::loadLanguageFile('tl_content');
 \Controller::loadDataContainer('tl_content');
 
-$dc = &$GLOBALS['TL_DCA']['tl_member'];
+$arrDca = &$GLOBALS['TL_DCA']['tl_member'];
 
 /**
  * Add operations to tl_member
@@ -28,24 +28,26 @@ $GLOBALS['TL_DCA']['tl_member']['list']['operations']['content'] = array
  */
 
 // selector
-$dc['palettes']['__selector__'][] = 'addImage';
+$arrDca['palettes']['__selector__'][] = 'addImage';
 
 // title
-$dc['palettes']['default'] = '{title_legend},headline;' . $dc['palettes']['default'];
+$arrDca['palettes']['default'] = '{title_legend},headline;' . $arrDca['palettes']['default'];
 // alias - must be invoked after firstname & title, otherwise not available in save_callback
-$dc['palettes']['default'] = str_replace('lastname', 'lastname,alias', $dc['palettes']['default']);
+$arrDca['palettes']['default'] = str_replace('lastname', 'lastname,alias', $arrDca['palettes']['default']);
+// academicTitle
+$arrDca['palettes']['default'] = str_replace('firstname', 'academicTitle,firstname', $arrDca['palettes']['default']);
 // personal
-$dc['palettes']['default'] = str_replace('gender', 'gender,academicTitle,position', $dc['palettes']['default']);
+$arrDca['palettes']['default'] = str_replace('gender', 'gender,position', $arrDca['palettes']['default']);
 // address
-$dc['palettes']['default'] = str_replace('country', 'country,addressText', $dc['palettes']['default']);
+$arrDca['palettes']['default'] = str_replace('country', 'country,addressText', $arrDca['palettes']['default']);
 // image
-$dc['palettes']['default'] = str_replace('assignDir', 'assignDir;{image_legend},addImage;', $dc['palettes']['default']);
+$arrDca['palettes']['default'] = str_replace('assignDir', 'assignDir;{image_legend},addImage;', $arrDca['palettes']['default']);
 
 /**
  * Subpalettes
  */
 
-$dc['subpalettes']['addImage'] = 'singleSRC,alt,title,size,imagemargin,imageUrl,fullsize,caption,floating';
+$arrDca['subpalettes']['addImage'] = 'singleSRC,alt,title,size,imagemargin,imageUrl,fullsize,caption,floating';
 
 /**
  * Fields
@@ -114,100 +116,15 @@ $arrFields = array
 		'eval'      => array('submitOnChange' => true),
 		'sql'       => "char(1) NOT NULL default ''"
 	),
-	'singleSRC'     => array
-	(
-		'label'         => &$GLOBALS['TL_LANG']['tl_content']['singleSRC'],
-		'exclude'       => true,
-		'inputType'     => 'fileTree',
-		'eval'          => array('filesOnly' => true, 'fieldType' => 'radio', 'mandatory' => true, 'tl_class' => 'clr'),
-		'sql'           => "binary(16) NULL",
-		'load_callback' => array
-		(
-			array('tl_content', 'setSingleSrcFlags')
-		),
-		'save_callback' => array
-		(
-			array('tl_content', 'storeFileMetaInformation')
-		)
-	),
-	'alt'           => array
-	(
-		'label'     => &$GLOBALS['TL_LANG']['tl_content']['alt'],
-		'exclude'   => true,
-		'search'    => true,
-		'inputType' => 'text',
-		'eval'      => array('maxlength' => 255, 'tl_class' => 'w50'),
-		'sql'       => "varchar(255) NOT NULL default ''"
-	),
-	'title'         => array
-	(
-		'label'     => &$GLOBALS['TL_LANG']['tl_content']['title'],
-		'exclude'   => true,
-		'search'    => true,
-		'inputType' => 'text',
-		'eval'      => array('maxlength' => 255, 'tl_class' => 'w50'),
-		'sql'       => "varchar(255) NOT NULL default ''"
-	),
-	'size'          => array
-	(
-		'label'     => &$GLOBALS['TL_LANG']['tl_content']['size'],
-		'exclude'   => true,
-		'inputType' => 'imageSize',
-		'options'   => System::getImageSizes(),
-		'reference' => &$GLOBALS['TL_LANG']['MSC'],
-		'eval'      => array('rgxp' => 'natural', 'includeBlankOption' => true, 'nospace' => true, 'helpwizard' => true, 'tl_class' => 'w50'),
-		'sql'       => "varchar(64) NOT NULL default ''"
-	),
-	'imagemargin'   => array
-	(
-		'label'     => &$GLOBALS['TL_LANG']['tl_content']['imagemargin'],
-		'exclude'   => true,
-		'inputType' => 'trbl',
-		'options'   => $GLOBALS['TL_CSS_UNITS'],
-		'eval'      => array('includeBlankOption' => true, 'tl_class' => 'w50'),
-		'sql'       => "varchar(128) NOT NULL default ''"
-	),
-	'imageUrl'      => array
-	(
-		'label'     => &$GLOBALS['TL_LANG']['tl_content']['imageUrl'],
-		'exclude'   => true,
-		'search'    => true,
-		'inputType' => 'text',
-		'eval'      => array('rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 255, 'tl_class' => 'w50 wizard'),
-		'wizard'    => array
-		(
-			array('tl_content', 'pagePicker')
-		),
-		'sql'       => "varchar(255) NOT NULL default ''"
-	),
-	'fullsize'      => array
-	(
-		'label'     => &$GLOBALS['TL_LANG']['tl_content']['fullsize'],
-		'exclude'   => true,
-		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'w50 m12'),
-		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'caption'       => array
-	(
-		'label'     => &$GLOBALS['TL_LANG']['tl_content']['caption'],
-		'exclude'   => true,
-		'search'    => true,
-		'inputType' => 'text',
-		'eval'      => array('maxlength' => 255, 'allowHtml' => true, 'tl_class' => 'w50'),
-		'sql'       => "varchar(255) NOT NULL default ''"
-	),
-	'floating'      => array
-	(
-		'label'     => &$GLOBALS['TL_LANG']['tl_content']['floating'],
-		'default'   => 'above',
-		'exclude'   => true,
-		'inputType' => 'radioTable',
-		'options'   => array('above', 'left', 'right', 'below'),
-		'eval'      => array('cols' => 4, 'tl_class' => 'w50'),
-		'reference' => &$GLOBALS['TL_LANG']['MSC'],
-		'sql'       => "varchar(32) NOT NULL default ''"
-	),
+	'singleSRC'     => $GLOBALS['TL_DCA']['tl_content']['fields']['singleSRC'],
+	'alt'           => $GLOBALS['TL_DCA']['tl_content']['fields']['alt'],
+	'title'         => $GLOBALS['TL_DCA']['tl_content']['fields']['title'],
+	'size'          => $GLOBALS['TL_DCA']['tl_content']['fields']['size'],
+	'imagemargin'   => $GLOBALS['TL_DCA']['tl_content']['fields']['imagemargin'],
+	'imageUrl'      => $GLOBALS['TL_DCA']['tl_content']['fields']['imageUrl'],
+	'fullsize'      => $GLOBALS['TL_DCA']['tl_content']['fields']['fullsize'],
+	'caption'       => $GLOBALS['TL_DCA']['tl_content']['fields']['caption'],
+	'floating'      => $GLOBALS['TL_DCA']['tl_content']['fields']['floating'],
 	'captcha' => array
 	(
 		'label'     => &$GLOBALS['TL_LANG']['MSC']['securityQuestion'],
@@ -216,21 +133,22 @@ $arrFields = array
 	)
 );
 
-$dc['fields'] = array_merge($dc['fields'], $arrFields);
+$arrDca['fields'] = array_merge($arrDca['fields'], $arrFields);
 
-// change fields only in backend
+$arrDca['fields']['firstname']['eval']['tl_class'] = 'w50 clr';
+
 if (TL_MODE == 'BE') {
-	$dc['fields']['email']['eval']['mandatory'] = false;
+	$arrDca['fields']['email']['eval']['mandatory'] = false;
 }
 
 if(TL_MODE == 'FE')
 {
-	$dc['fields']['gender']['inputType'] = 'radio';
-	$dc['fields']['gender']['eval']['includeBlankOption'] = false;
+	$arrDca['fields']['gender']['inputType'] = 'radio';
+	$arrDca['fields']['gender']['eval']['includeBlankOption'] = false;
 }
 
 // increase activation field, otherwise MEMBER_ACTIVATION_ACTIVATED_FIELD_PREFIX will not fit in
-$dc['fields']['activation']['sql'] = "varchar(64) NOT NULL default ''";
+$arrDca['fields']['activation']['sql'] = "varchar(64) NOT NULL default ''";
 
 class tl_member_plus extends \Backend
 {
@@ -241,7 +159,7 @@ class tl_member_plus extends \Backend
 	 * @return string
 	 * @throws \Exception
 	 */
-	public function generateAlias($varValue, DataContainer $dc)
+	public function generateAlias($varValue, DataContainer $objDc)
 	{
 		$autoAlias = false;
 
@@ -249,12 +167,12 @@ class tl_member_plus extends \Backend
 		if ($varValue == '')
 		{
 			$autoAlias = true;
-            $arrTitle = \HeimrichHannot\MemberPlus\MemberPlus::getCombinedTitle($dc->activeRecord);
-			$varValue = standardize(String::restoreBasicEntities($arrTitle));
+            $arrTitle = \HeimrichHannot\MemberPlus\MemberPlus::getCombinedTitle($objDc->activeRecord);
+			$varValue = standardize(\StringUtil::restoreBasicEntities($arrTitle));
 		}
 
-        $objAlias = $this->Database->prepare("SELECT id FROM tl_member WHERE alias=? AND id!=?")
-            ->execute($varValue, $dc->activeRecord->id);
+        $objAlias = \Database::getInstance()->prepare("SELECT id FROM tl_member WHERE alias=? AND id!=?")
+            ->execute($varValue, $objDc->activeRecord->id);
 
         // Check whether the news alias exists
 		if ($objAlias->numRows > 1 && !$autoAlias)
@@ -265,7 +183,7 @@ class tl_member_plus extends \Backend
 		// Add ID to alias
 		if ($objAlias->numRows && $autoAlias)
 		{
-			$varValue .= '-' . $dc->id;
+			$varValue .= '-' . $objDc->id;
 		}
 
         return $varValue;
