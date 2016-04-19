@@ -35,7 +35,7 @@ $arrDca['palettes']['default'] = '{title_legend},headline;' . $arrDca['palettes'
 // alias - must be invoked after firstname & title, otherwise not available in save_callback
 $arrDca['palettes']['default'] = str_replace('lastname', 'lastname,alias', $arrDca['palettes']['default']);
 // academicTitle
-$arrDca['palettes']['default'] = str_replace('firstname', 'academicTitle,firstname', $arrDca['palettes']['default']);
+$arrDca['palettes']['default'] = str_replace('firstname', 'academicTitle,extendedTitle,firstname', $arrDca['palettes']['default']);
 // personal
 $arrDca['palettes']['default'] = str_replace('gender', 'gender,position', $arrDca['palettes']['default']);
 // address
@@ -81,6 +81,16 @@ $arrFields = array
 	'academicTitle' => array
 	(
 		'label'     => &$GLOBALS['TL_LANG']['tl_member']['academicTitle'],
+		'exclude'   => true,
+		'filter'    => true,
+		'sorting'   => true,
+		'inputType' => 'text',
+		'eval'      => array('feEditable' => true, 'feViewable' => true, 'feGroup' => 'personal', 'tl_class' => 'w50'),
+		'sql'       => "varchar(255) NOT NULL default ''"
+	),
+	'extendedTitle' => array
+	(
+		'label'     => &$GLOBALS['TL_LANG']['tl_member']['extendedTitle'],
 		'exclude'   => true,
 		'filter'    => true,
 		'sorting'   => true,
@@ -134,8 +144,6 @@ $arrFields = array
 );
 
 $arrDca['fields'] = array_merge($arrDca['fields'], $arrFields);
-
-$arrDca['fields']['firstname']['eval']['tl_class'] = 'w50 clr';
 
 if (TL_MODE == 'BE') {
 	$arrDca['fields']['email']['eval']['mandatory'] = false;

@@ -8,29 +8,26 @@
  * @license http://www.gnu.org/licences/lgpl-3.0.html LGPL
  */
 
+$arrLang = &$GLOBALS['TL_LANG']['tl_member'];
+
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_member']['headline'][0] = 'Überschrift';
-$GLOBALS['TL_LANG']['tl_member']['headline'][1] = 'Bitte geben Sie eine Überschrift an.';
-$GLOBALS['TL_LANG']['tl_member']['alias'][0] = 'Mitgliederalias';
-$GLOBALS['TL_LANG']['tl_member']['alias'][1] = 'Der Mitgliederalias ist eine eindeutige Referenz, die anstelle der numerischen Mitglieder-ID aufgerufen werden kann.';
-$GLOBALS['TL_LANG']['tl_member']['academicTitle'][0] = 'Akademischer Titel';
-$GLOBALS['TL_LANG']['tl_member']['academicTitle'][1] = 'Bitte geben Sie einen Titel an.';
-$GLOBALS['TL_LANG']['tl_member']['position'][0] = 'Position';
-$GLOBALS['TL_LANG']['tl_member']['position'][1] = 'Bitte geben Sie eine Position an.';
-$GLOBALS['TL_LANG']['tl_member']['addressText'][0] = 'Adresszusatz';
-$GLOBALS['TL_LANG']['tl_member']['addressText'][1] = 'Bitte geben Sie einen Adresszusatz an.';
-$GLOBALS['TL_LANG']['tl_member']['addImage'][0] = 'Ein Bild hinzufügen';
-$GLOBALS['TL_LANG']['tl_member']['addImage'][1] = 'Dem Mitglied ein Bild hinzufügen.';
+$arrLang['headline'] = array('Überschrift', 'Bitte geben Sie eine Überschrift ein.');
+$arrLang['alias'] = array('Mitgliederalias', 'Der Mitgliederalias ist eine eindeutige Referenz, die anstelle der numerischen Mitglieder-ID aufgerufen werden kann.');
+$arrLang['academicTitle'] = array('Akademischer Titel', 'Bitte geben Sie einen Titel ein.');
+$arrLang['extendedTitle'] = array('Erweiterter Titel', 'Bitte geben Sie einen erweiterten Titel ein (z. B. "Abgeordneter").');
+$arrLang['position'] = array('Position', 'Bitte geben Sie eine Position ein.');
+$arrLang['addressText'] = array('Adresszusatz', 'Bitte geben Sie einen Adresszusatz ein.');
+$arrLang['addImage'] = array('Ein Bild hinzufügen', 'Dem Mitglied ein Bild hinzufügen.');
 
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_member']['title_legend'] = 'Titel';
-$GLOBALS['TL_LANG']['tl_member']['image_legend'] = 'Benutzerbild';
+$arrLang['title_legend'] = 'Titel';
+$arrLang['image_legend'] = 'Benutzerbild';
 
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_member']['content'] = array('Inhalt verwalten', 'Verwalten des Inhaltes der Mitglieder ID %s');
+$arrLang['content'] = array('Inhalt verwalten', 'Verwalten des Inhaltes der Mitglieder ID %s');
