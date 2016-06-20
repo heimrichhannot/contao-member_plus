@@ -86,6 +86,7 @@ class ModuleLoginRegistration extends \ModuleRegistration
 						$this->reload();
 					}
                     // overwrite the username
+					$username = strtolower($username);
                     $_POST['username'] = $username;
                     \Input::setPost('username', $username);
 
