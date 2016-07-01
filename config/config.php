@@ -42,3 +42,9 @@ $GLOBALS['TL_HOOKS']['activateAccount'][] = array('\HeimrichHannot\MemberPlus\Ho
  * Constants
  */
 define('MEMBER_ACTIVATION_ACTIVATED_FIELD_PREFIX', 'ACTIVATED:');
+
+/**
+ * Notifications
+ */
+$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['contao']['core_form']['email_text'][] = 'activation';
+$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['contao']['core_form']['email_html'][] = 'activation';

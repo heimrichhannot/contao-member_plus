@@ -14,8 +14,6 @@ $dc = &$GLOBALS['TL_DCA']['tl_module'];
 /**
  * Palettes
  */
-
-// selector
 array_insert(
 	$dc['palettes']['__selector__'],
 	0,
@@ -33,10 +31,11 @@ $dc['palettes']['registration_plus'] =
 	{config_legend},formHybridDataContainer,formHybridPalette,formHybridEditable,formHybridAddEditableRequired,formHybridTemplate,formHybridCustomSubTemplates,formHybridAsync,formHybridCssClass,formHybridAddDefaultValues,disableCaptcha,newsletters;
 	{account_legend},reg_groups,reg_allowLogin;
 	{message_legend},formHybridSuccessMessage;
-	{email_legend:hide},reg_activate_plus,formHybridSendSubmissionViaEmail;
+	{email_legend:hide},formHybridSendConfirmationAsNotification,reg_activate_plus,formHybridSendSubmissionAsNotification,formHybridSendSubmissionViaEmail;
 	{template_legend:hide},customTpl;{redirect_legend},jumpTo,
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests';
+
 
 $dc['palettes']['member_messages']      =
 	'{title_legend},name,headline,type;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
@@ -210,7 +209,7 @@ $arrFields = array
 		'label'     => &$GLOBALS['TL_LANG']['tl_module']['reg_activate'],
 		'exclude'   => true,
 		'inputType' => 'checkbox',
-		'eval'      => array('submitOnChange' => true),
+		'eval'      => array('submitOnChange' => true, 'tl_class' => 'w50 clr'),
 		'sql'       => "char(1) NOT NULL default ''"
 	)
 );

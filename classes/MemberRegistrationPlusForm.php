@@ -57,7 +57,7 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 		$this->objActiveRecord->login = true;
 	}
 
-	protected function modifyVersion(\Versions $objVersion)
+	protected function modifyVersion($objVersion)
 	{
 		$objVersion->setUsername($this->objActiveRecord->email);
 		$objVersion->setEditUrl('contao/main.php?do=member&act=edit&id='. $this->objActiveRecord->id . '&rt=' . REQUEST_TOKEN);
