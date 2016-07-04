@@ -31,7 +31,7 @@ $dc['palettes']['registration_plus'] =
 	{config_legend},formHybridDataContainer,formHybridPalette,formHybridEditable,formHybridAddEditableRequired,formHybridTemplate,formHybridCustomSubTemplates,formHybridAsync,formHybridCssClass,formHybridAddDefaultValues,disableCaptcha,newsletters;
 	{account_legend},reg_groups,reg_allowLogin;
 	{message_legend},formHybridSuccessMessage;
-	{email_legend:hide},formHybridSendConfirmationAsNotification,reg_activate_plus,formHybridSendSubmissionAsNotification,formHybridSendSubmissionViaEmail;
+	{email_legend:hide},reg_jumpTo,formHybridSendConfirmationAsNotification,reg_activate_plus,formHybridSendSubmissionAsNotification,formHybridSendSubmissionViaEmail;
 	{template_legend:hide},customTpl;{redirect_legend},jumpTo,
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests';
@@ -46,7 +46,7 @@ $dc['palettes']['member_messages']      =
 $dc['subpalettes']['mlAddCustomDummyImages'] = 'mlDummyImageMale,mlDummyImageFemale';
 $dc['subpalettes']['mlSkipFields']           = 'mlFields';
 $dc['subpalettes']['reg_activate_plus']      =
-	'reg_jumpTo,formHybridConfirmationMailRecipientField,formHybridConfirmationAvisotaMessage,formHybridConfirmationMailSender,formHybridConfirmationMailSubject,formHybridConfirmationMailText,formHybridConfirmationMailTemplate,formHybridConfirmationMailAttachment';
+	'formHybridConfirmationMailRecipientField,formHybridConfirmationAvisotaMessage,formHybridConfirmationMailSender,formHybridConfirmationMailSubject,formHybridConfirmationMailText,formHybridConfirmationMailTemplate,formHybridConfirmationMailAttachment';
 
 /**
  * Callbacks

@@ -115,8 +115,6 @@ class ModuleRegistrationPlus extends \ModuleRegistration
 		// Log activity
 		$this->log('User account ID ' . $objMember->id . ' (' . $objMember->email . ') has been activated', __METHOD__, TL_ACCESS);
 
-		MemberMessage::addSuccess($this->accountActivatedMessage);
-
 		// Redirect to the jumpTo page
 		if (($objTarget = $this->objModel->getRelated('reg_jumpTo')) !== null)
 		{
@@ -125,6 +123,7 @@ class ModuleRegistrationPlus extends \ModuleRegistration
 		// redirect to current page without token parameter
 		else
 		{
+			MemberMessage::addSuccess($this->accountActivatedMessage);
 			$this->redirect($strReloadUrl);
 		}
 	}
