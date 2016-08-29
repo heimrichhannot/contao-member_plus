@@ -3,8 +3,9 @@
  * Contao Open Source CMS
  *
  * Copyright (c) 2015 Heimrich & Hannot GmbH
+ *
  * @package member_plus
- * @author Oliver Janke <o.janke@heimrich-hannot.de>
+ * @author  Oliver Janke <o.janke@heimrich-hannot.de>
  * @license http://www.gnu.org/licences/lgpl-3.0.html LGPL
  */
 
@@ -16,27 +17,24 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 {
 	protected $strTemplate = 'formhybrid_registration_plus';
 
-	public function __construct($objModule)
+	public function __construct($objModule, $intId = 0)
 	{
 		$this->strPalette = 'default';
-		$this->strMethod = FORMHYBRID_METHOD_POST;
+		$this->strMethod  = FORMHYBRID_METHOD_POST;
 
-		parent::__construct($objModule);
+		parent::__construct($objModule, $intId);
 	}
 
 
 	public function modifyDC()
 	{
-		if(!$this->objModule->disableCaptcha)
-		{
+		if (!$this->objModule->disableCaptcha) {
 			$this->addEditableField('captcha', $this->dca['fields']['captcha']);
 		}
 
 		// HOOK: send insert ID and user data
-		if (isset($GLOBALS['TL_HOOKS']['modifyDCRegistrationPlusForm']) && is_array($GLOBALS['TL_HOOKS']['modifyDCRegistrationPlusForm']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['modifyDCRegistrationPlusForm'] as $callback)
-			{
+		if (isset($GLOBALS['TL_HOOKS']['modifyDCRegistrationPlusForm']) && is_array($GLOBALS['TL_HOOKS']['modifyDCRegistrationPlusForm'])) {
+			foreach ($GLOBALS['TL_HOOKS']['modifyDCRegistrationPlusForm'] as $callback) {
 				$this->import($callback[0]);
 				$this->$callback[0]->$callback[1]($this->dca, $this->objModule);
 			}
@@ -60,7 +58,8 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 	protected function modifyVersion($objVersion)
 	{
 		$objVersion->setUsername($this->objActiveRecord->email);
-		$objVersion->setEditUrl('contao/main.php?do=member&act=edit&id='. $this->objActiveRecord->id . '&rt=' . REQUEST_TOKEN);
+		$objVersion->setEditUrl('contao/main.php?do=member&act=edit&id=' . $this->objActiveRecord->id . '&rt=' . REQUEST_TOKEN);
+
 		return $objVersion;
 	}
 
@@ -68,13 +67,12 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 	{
 		$objMember = \MemberModel::findByPk($dc->activeRecord->id);
 
-		$objMember->login = $this->objModule->reg_allowLogin;
+		$objMember->login      = $this->objModule->reg_allowLogin;
 		$objMember->activation = md5(uniqid(mt_rand(), true));
-		$objMember->dateAdded = $dc->activeRecord->tstamp;
+		$objMember->dateAdded  = $dc->activeRecord->tstamp;
 
 		// Set default groups
-		if (empty($objMember->groups))
-		{
+		if (empty($objMember->groups)) {
 			$objMember->groups = $this->objModule->reg_groups;
 		}
 
@@ -83,16 +81,13 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 
 		$objMember->save();
 
-		if($this->objModule->reg_activate_plus)
-		{
+		if ($this->objModule->reg_activate_plus) {
 			$this->formHybridSendConfirmationViaEmail = true;
 		}
 
 		// HOOK: send insert ID and user data
-		if (isset($GLOBALS['TL_HOOKS']['createNewUser']) && is_array($GLOBALS['TL_HOOKS']['createNewUser']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['createNewUser'] as $callback)
-			{
+		if (isset($GLOBALS['TL_HOOKS']['createNewUser']) && is_array($GLOBALS['TL_HOOKS']['createNewUser'])) {
+			foreach ($GLOBALS['TL_HOOKS']['createNewUser'] as $callback) {
 				$this->import($callback[0]);
 				$this->$callback[0]->$callback[1]($objMember->id, $objMember->row(), $this->objModule);
 			}
@@ -103,8 +98,7 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 
 	protected function afterSubmitCallback(\DataContainer $dc)
 	{
-		if(($objTarget = \PageModel::findByPk($this->objModule->jumpTo)) !== null)
-		{
+		if (($objTarget = \PageModel::findByPk($this->objModule->jumpTo)) !== null) {
 			\Controller::redirect(\Controller::generateFrontendUrl($objTarget->row()));
 		}
 	}
@@ -113,18 +107,22 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 	{
 		$arrSubmissionData = parent::prepareSubmissionData();
 
-		$arrSubmissionData['domain'] = \Idna::decode(\Environment::get('host'));
-		$arrSubmissionData['activation'] = \Idna::decode(\Environment::get('base')) . \Environment::get('request') . ((\Config::get('disableAlias') || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $this->activeRecord->activation;
+		$arrSubmissionData['domain']     = \Idna::decode(\Environment::get('host'));
+		$arrSubmissionData['activation'] = \Idna::decode(\Environment::get('base')) . \Environment::get('request') . ((\Config::get('disableAlias')
+																													   || strpos(
+																															  \Environment::get(
+																																  'request'
+																															  ),
+																															  '?'
+																														  ) !== false) ? '&' : '?')
+										   . 'token=' . $this->activeRecord->activation;
 
-		if (in_array('newsletter', \ModuleLoader::getActive()))
-		{
+		if (in_array('newsletter', \ModuleLoader::getActive())) {
 			// Replace the wildcard
-			if (!empty($this->objModel->newsletter))
-			{
+			if (!empty($this->objModel->newsletter)) {
 				$objChannels = \NewsletterChannelModel::findByIds($this->activeRecord->newsletter);
 
-				if ($objChannels !== null)
-				{
+				if ($objChannels !== null) {
 					$arrSubmissionData['channels'] = implode("\n", $objChannels->fetchEach('title'));
 				}
 			}
@@ -140,15 +138,16 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 
 	public function getEditableFields()
 	{
-		if($this->getFields())
-		{
+		if ($this->getFields()) {
 			return $this->arrEditable;
 		}
 
 		return array();
 	}
 
-	protected function compile() {}
+	protected function compile()
+	{
+	}
 
 }
 

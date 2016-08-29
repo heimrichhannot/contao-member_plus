@@ -12,6 +12,9 @@
 namespace HeimrichHannot\MemberPlus;
 
 
+use HeimrichHannot\FormHybrid\FormHelper;
+use HeimrichHannot\FormHybrid\FormSession;
+
 class ModuleRegistrationPlus extends \ModuleRegistration
 {
 	protected $strTemplate = 'mod_registration_plus';
@@ -31,7 +34,18 @@ class ModuleRegistrationPlus extends \ModuleRegistration
 			return $objTemplate->parse();
 		}
 
-		$this->objForm = new MemberRegistrationPlusForm($this->objModel);
+		$strFormId = FormHelper::getFormId($this->formHybridDataContainer, $this->id);
+
+		// get id from FormSession
+		if ($_POST)
+		{
+			$intId = FormSession::getSubmissionId($strFormId);
+		}
+
+		$this->objForm = new MemberRegistrationPlusForm($this->objModel, $intId ?: 0);
+
+
+
 		$this->editable = $this->objForm->getEditableFields();
 
 		// Return if there are no editable fields
@@ -57,6 +71,7 @@ class ModuleRegistrationPlus extends \ModuleRegistration
 		}
 
 		$this->Template->form = $this->objForm->generate();
+
 	}
 
 
@@ -67,7 +82,7 @@ class ModuleRegistrationPlus extends \ModuleRegistration
 	{
 		$hasError = false;
 		$strReloadUrl = preg_replace('/(&|\?)token=[^&]*/', '', \Environment::get('request')); // remove token from url
-		
+
 		$objMember = \MemberModel::findByActivation(MEMBER_ACTIVATION_ACTIVATED_FIELD_PREFIX . \Input::get('token'));
 
 		// member with this token already activated

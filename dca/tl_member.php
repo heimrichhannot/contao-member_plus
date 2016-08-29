@@ -176,6 +176,7 @@ class tl_member_plus extends \Backend
 		{
 			$autoAlias = true;
             $arrTitle = \HeimrichHannot\MemberPlus\MemberPlus::getCombinedTitle($objDc->activeRecord);
+
 			$varValue = standardize(\StringUtil::restoreBasicEntities($arrTitle));
 		}
 
