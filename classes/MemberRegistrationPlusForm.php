@@ -65,6 +65,14 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 
 	protected function onSubmitCallback(\DataContainer $dc)
 	{
+		// HOOK: send insert ID and user data
+		if (isset($GLOBALS['TL_HOOKS']['preRegistration']) && is_array($GLOBALS['TL_HOOKS']['preRegistration'])) {
+		    foreach ($GLOBALS['TL_HOOKS']['preRegistration'] as $callback) {
+		        $this->import($callback[0]);
+		        $this->$callback[0]->$callback[1]($dc->activeRecord->id, $dc->activeRecord, $this->objModule);
+		    }
+		}
+
 		$objMember = \MemberModel::findByPk($dc->activeRecord->id);
 
 		$objMember->login      = $this->objModule->reg_allowLogin;
