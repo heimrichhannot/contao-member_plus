@@ -36,7 +36,6 @@ ClassLoader::addClasses(array
 	'HeimrichHannot\MemberPlus\MemberPlusMemberModel'       => 'system/modules/member_plus/models/MemberPlusMemberModel.php',
 
 	// Classes
-	'HeimrichHannot\MemberPlus\MemberPlusProtectedHomeDirs' => 'system/modules/member_plus/classes/MemberPlusProtectedHomeDirs.php',
 	'HeimrichHannot\MemberPlus\MemberMessage'               => 'system/modules/member_plus/classes/MemberMessage.php',
 	'HeimrichHannot\MemberPlus\Hooks'                       => 'system/modules/member_plus/classes/Hooks.php',
 	'HeimrichHannot\MemberPlus\MemberPlus'                  => 'system/modules/member_plus/classes/MemberPlus.php',
