@@ -177,7 +177,7 @@ class tl_member_plus extends \Backend
 			$autoAlias = true;
             $arrTitle = \HeimrichHannot\MemberPlus\MemberPlus::getCombinedTitle($objDc->activeRecord);
 
-			$varValue = standardize(\StringUtil::restoreBasicEntities($arrTitle));
+			$varValue = standardize(class_exists('Contao\StringUtil') ? \StringUtil::restoreBasicEntities($arrTitle) : \String::restoreBasicEntities($arrTitle));
 		}
 
         $objAlias = \Database::getInstance()->prepare("SELECT id FROM tl_member WHERE alias=? AND id!=?")
