@@ -19,6 +19,7 @@ $arrLang['academicTitle'] = array('Akademischer Titel', 'Bitte geben Sie einen T
 $arrLang['extendedTitle'] = array('Erweiterter Titel', 'Bitte geben Sie einen erweiterten Titel ein (z. B. "Abgeordneter").');
 $arrLang['position'] = array('Position', 'Bitte geben Sie eine Position ein.');
 $arrLang['addressText'] = array('Adresszusatz', 'Bitte geben Sie einen Adresszusatz ein.');
+$arrLang['street2'] = array('Weitere Adressangaben', 'Bitte geben Sie hier weitere Angaben zur Adresse ein.');
 $arrLang['addImage'] = array('Ein Bild hinzufügen', 'Dem Mitglied ein Bild hinzufügen.');
 
 /**

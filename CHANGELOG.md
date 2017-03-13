@@ -1,5 +1,10 @@
-# Change Log
+# Changelog
 All notable changes to this project will be documented in this file.
+
+## [2.0.28] - 2017-03-13
+
+### Added
+- street2 field
 
 ## [2.0.27] - 2016-02-09
 
