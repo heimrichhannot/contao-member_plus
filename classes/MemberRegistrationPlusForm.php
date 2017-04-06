@@ -36,7 +36,7 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 		if (isset($GLOBALS['TL_HOOKS']['modifyDCRegistrationPlusForm']) && is_array($GLOBALS['TL_HOOKS']['modifyDCRegistrationPlusForm'])) {
 			foreach ($GLOBALS['TL_HOOKS']['modifyDCRegistrationPlusForm'] as $callback) {
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($this->dca, $this->objModule);
+				$this->{$callback[0]}->{$callback[1]}($this->dca, $this->objModule);
 			}
 		}
 	}
@@ -69,7 +69,7 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 		if (isset($GLOBALS['TL_HOOKS']['preRegistration']) && is_array($GLOBALS['TL_HOOKS']['preRegistration'])) {
 		    foreach ($GLOBALS['TL_HOOKS']['preRegistration'] as $callback) {
 		        $this->import($callback[0]);
-		        $this->$callback[0]->$callback[1]($dc->activeRecord->id, $dc->activeRecord, $this->objModule);
+		        $this->{$callback[0]}->{$callback[1]}($dc->activeRecord->id, $dc->activeRecord, $this->objModule);
 		    }
 		}
 
@@ -97,7 +97,7 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 		if (isset($GLOBALS['TL_HOOKS']['createNewUser']) && is_array($GLOBALS['TL_HOOKS']['createNewUser'])) {
 			foreach ($GLOBALS['TL_HOOKS']['createNewUser'] as $callback) {
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($objMember->id, $objMember->row(), $this->objModule);
+				$this->{$callback[0]}->{$callback[1]}($objMember->id, $objMember->row(), $this->objModule);
 			}
 		}
 

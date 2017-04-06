@@ -120,7 +120,7 @@ class MemberPlus extends \Frontend
             // Encode e-mail addresses
             if (substr($this->mlUrl, 0, 7) == 'mailto:')
             {
-                $strUrl = \String::encodeEmail($this->mlUrl);
+                $strUrl = \StringUtil::encodeEmail($this->mlUrl);
             }
 
             // Ampersand URIs
@@ -302,7 +302,7 @@ class MemberPlus extends \Frontend
             case 'external':
                 if (substr($objItem->url, 0, 7) == 'mailto:')
                 {
-                    self::$arrUrlCache[$strCacheKey] = \String::encodeEmail($objItem->mlUrl);
+                    self::$arrUrlCache[$strCacheKey] = \StringUtil::encodeEmail($objItem->mlUrl);
                 }
                 else
                 {

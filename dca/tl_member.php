@@ -194,7 +194,7 @@ class tl_member_plus extends \Backend
             $arrTitle  = \HeimrichHannot\MemberPlus\MemberPlus::getCombinedTitle($objDc->activeRecord);
 
             $varValue = standardize(
-                class_exists('Contao\StringUtil') ? \StringUtil::restoreBasicEntities($arrTitle) : \String::restoreBasicEntities($arrTitle)
+                class_exists('Contao\StringUtil') ? \StringUtil::restoreBasicEntities($arrTitle) : \StringUtil::restoreBasicEntities($arrTitle)
             );
         }
 
