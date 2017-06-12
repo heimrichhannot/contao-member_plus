@@ -67,7 +67,7 @@ $arrFields = array
 		'filter'           => true,
 		'inputType'        => 'radio',
 		'options_callback' => array('tl_content_member_plus', 'getSourceOptions'),
-		'reference'        => &$GLOBALS['TL_LANG']['tl_content'],
+		'reference'        => &$GLOBALS['TL_LANG']['tl_content']['memberPlusReference'],
 		'eval'             => array('submitOnChange' => true, 'helpwizard' => true),
 		'sql'              => "varchar(32) NOT NULL default ''"
 	),

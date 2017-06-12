@@ -1,8 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.0.31] - 2017-06-12
+
+### Fixed
+
+- contao 4 bug in tl_content
+
 ## [2.0.30] - 2017-04-12
-- created new tag
+
+### Added
+
+- new tag
 
 ## [2.0.29] - 2017-04-06
 
