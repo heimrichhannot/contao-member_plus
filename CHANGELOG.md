@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.0.32] - 2017-08-01
+
+### Added
+
+- MemberPlusMemberModel::getContent() and MemberPlusMemberModel::getParsedContent()
+
 ## [2.0.31] - 2017-06-12
 
 ### Fixed

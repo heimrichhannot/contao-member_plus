@@ -193,4 +193,24 @@ class MemberPlusMemberModel extends \MemberModel
 
         return true;
     }
+
+    public static function getContent($intMember)
+    {
+        return \ContentModel::findBy(['tl_content.pid=?', 'tl_content.ptable=?'], [$intMember, 'tl_member']);
+    }
+
+    public static function getParsedContent($intMember)
+    {
+        if (($objContent = static::getContent($intMember)) === null)
+            return null;
+
+        $strContent = '';
+
+        while ($objContent->next())
+        {
+            $strContent .= \Controller::getContentElement($objContent->id);
+        }
+
+        return $strContent;
+    }
 }
