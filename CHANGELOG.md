@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.0.33] - 2017-08-02
+
+### Added
+
+- tl_member -> xingProfile and linkedinProfile
+
 ## [2.0.32] - 2017-08-01
 
 ### Added

@@ -21,6 +21,8 @@ $arrLang['position'] = array('Position', 'Bitte geben Sie eine Position ein.');
 $arrLang['addressText'] = array('Adresszusatz', 'Bitte geben Sie einen Adresszusatz ein.');
 $arrLang['street2'] = array('Weitere Adressangaben', 'Bitte geben Sie hier weitere Angaben zur Adresse ein.');
 $arrLang['addImage'] = array('Ein Bild hinzufügen', 'Dem Mitglied ein Bild hinzufügen.');
+$arrLang['linkedinProfile'] = array('Linkedin-Profil', 'Geben Sie hier die URL zum Profil ein.');
+$arrLang['xingProfile'] = array('XING-Profil', 'Geben Sie hier die URL zum Profil ein.');
 
 /**
  * Legends

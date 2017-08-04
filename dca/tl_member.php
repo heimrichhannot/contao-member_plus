@@ -43,6 +43,8 @@ $arrDca['palettes']['default'] = str_replace('country', 'country,addressText', $
 $arrDca['palettes']['default'] = str_replace('street,', 'street,street2,', $arrDca['palettes']['default']);
 // image
 $arrDca['palettes']['default'] = str_replace('assignDir', 'assignDir;{image_legend},addImage;', $arrDca['palettes']['default']);
+// contact
+$arrDca['palettes']['default'] = str_replace('website', 'website,xingProfile,linkedinProfile', $arrDca['palettes']['default']);
 
 /**
  * Subpalettes
@@ -153,7 +155,25 @@ $arrFields = [
         'label'     => &$GLOBALS['TL_LANG']['MSC']['securityQuestion'],
         'exclude'   => true,
         'inputType' => 'captcha',
-    ]
+    ],
+    'linkedinProfile' => [
+        'label'                   => &$GLOBALS['TL_LANG']['tl_member']['linkedinProfile'],
+        'exclude'                 => true,
+        'search'                  => true,
+        'inputType'               => 'text',
+        'save_callback'           => [['HeimrichHannot\Haste\Dca\General', 'checkUrl']],
+        'eval'                    => ['rgxp' => 'url', 'maxlength' => 255, 'tl_class' => 'w50'],
+        'sql'                     => "varchar(255) NOT NULL default ''"
+    ],
+    'xingProfile' => [
+        'label'                   => &$GLOBALS['TL_LANG']['tl_member']['xingProfile'],
+        'exclude'                 => true,
+        'search'                  => true,
+        'save_callback'           => [['HeimrichHannot\Haste\Dca\General', 'checkUrl']],
+        'inputType'               => 'text',
+        'eval'                    => ['rgxp' => 'url', 'maxlength' => 255, 'tl_class' => 'w50'],
+        'sql'                     => "varchar(255) NOT NULL default ''"
+    ],
 ];
 
 $arrDca['fields'] = array_merge($arrDca['fields'], $arrFields);
