@@ -11,6 +11,8 @@
 namespace HeimrichHannot\MemberPlus;
 
 
+use HeimrichHannot\Request\Request;
+
 class Hooks extends \System
 {
 	public function generateBreadcrumbHook($arrItems, $objModule)

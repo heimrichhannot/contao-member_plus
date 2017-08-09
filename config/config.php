@@ -22,12 +22,14 @@ $GLOBALS['TL_CTE']['includes']['memberlist'] = '\HeimrichHannot\MemberPlus\Conte
  * Models
  */
 $GLOBALS['TL_MODELS']['tl_registration_plus'] = '\HeimrichHannot\MemberPlus\MemberRegistrationPlusForm';
+$GLOBALS['TL_MODELS']['tl_login_registration_plus'] = '\HeimrichHannot\MemberPlus\MemberLoginRegistrationPlusForm';
 
 /**
  * Front end modules
  */
 $GLOBALS['FE_MOD']['user']['memberreader'] = '\HeimrichHannot\MemberPlus\ModuleMemberReader';
 $GLOBALS['FE_MOD']['user']['loginregistration'] = '\HeimrichHannot\MemberPlus\ModuleLoginRegistration';
+$GLOBALS['FE_MOD']['user']['login_registration_plus'] = '\HeimrichHannot\MemberPlus\ModuleLoginRegistrationPlus';
 $GLOBALS['FE_MOD']['user']['registration_plus'] = '\HeimrichHannot\MemberPlus\ModuleRegistrationPlus';
 $GLOBALS['FE_MOD']['user']['member_messages'] = '\HeimrichHannot\MemberPlus\ModuleMemberMessages';
 

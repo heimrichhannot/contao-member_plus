@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.0.34] - 20017-08-08
+
+### Added
+
+- login_registration_plus -> login and registration in one form with formhybrid
+
 ## [2.0.33] - 2017-08-02
 
 ### Added

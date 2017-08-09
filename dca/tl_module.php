@@ -26,6 +26,16 @@ $dc['palettes']['memberreader']      =
 $dc['palettes']['loginregistration'] =
 	'{title_legend},name,headline,type;{config_legend},autologin,allowedMailDomains,showAllowedDomains;{register_legend},reg_groups,reg_allowLogin,reg_assignDir,reg_activate;{redirect_legend},jumpTo,redirectBack,redirectPermanent;{template_legend:hide},cols;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
+$dc['palettes']['login_registration_plus'] =
+	'{title_legend},name,headline,type;
+	{config_legend},formHybridDataContainer,formHybridPalette,formHybridEditable,formHybridAddEditableRequired,formHybridTemplate,formHybridCustomSubTemplates,formHybridCssClass,formHybridAddDefaultValues,disableCaptcha,bypassPasswordConfirm,newsletters;
+	{account_legend},reg_groups,reg_allowLogin;
+	{email_legend:hide},reg_jumpTo,formHybridSendConfirmationAsNotification,formHybridSendSubmissionAsNotification,formHybridSendSubmissionViaEmail;
+	{template_legend:hide},customTpl;{redirect_legend},jumpTo, redirectLogin;
+	{protected_legend:hide},protected;
+	{expert_legend:hide},guests';
+
+
 $dc['palettes']['registration_plus'] =
 	'{title_legend},name,headline,type;
 	{config_legend},formHybridDataContainer,formHybridPalette,formHybridEditable,formHybridAddEditableRequired,formHybridTemplate,formHybridCustomSubTemplates,formHybridAsync,formHybridCssClass,formHybridAddDefaultValues,disableCaptcha,newsletters;
@@ -47,7 +57,6 @@ $dc['subpalettes']['mlAddCustomDummyImages'] = 'mlDummyImageMale,mlDummyImageFem
 $dc['subpalettes']['mlSkipFields']           = 'mlFields';
 $dc['subpalettes']['reg_activate_plus']      =
 	'formHybridConfirmationMailRecipientField,formHybridConfirmationAvisotaMessage,formHybridConfirmationMailSender,formHybridConfirmationMailSubject,formHybridConfirmationMailText,formHybridConfirmationMailTemplate,formHybridConfirmationMailAttachment';
-
 /**
  * Callbacks
  */
@@ -211,7 +220,25 @@ $arrFields = array
 		'inputType' => 'checkbox',
 		'eval'      => array('submitOnChange' => true, 'tl_class' => 'w50 clr'),
 		'sql'       => "char(1) NOT NULL default ''"
-	)
+	),
+	'redirectLogin'	=> array
+	(
+		'label'                   => &$GLOBALS['TL_LANG']['tl_module']['redirectLogin'],
+		'exclude'                 => true,
+		'inputType'               => 'pageTree',
+		'foreignKey'              => 'tl_page.title',
+		'eval'                    => array('fieldType'=>'radio', 'tl_class' => 'w50 clr'),
+		'sql'                     => "int(10) unsigned NOT NULL default '0'",
+		'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
+	),
+	'bypassPasswordConfirm'	=> array
+	(
+		'label'     => &$GLOBALS['TL_LANG']['tl_module']['bypassPasswordConfirm'],
+		'exclude'   => true,
+		'inputType' => 'checkbox',
+		'eval'      => array('tl_class' => 'w50 clr'),
+		'sql'       => "char(1) NOT NULL default ''"
+	),
 );
 
 $dc['fields'] = array_merge($dc['fields'], $arrFields);

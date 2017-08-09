@@ -15,4 +15,4 @@ $GLOBALS['TL_LANG']['FMD']['memberreader'] = array('Mitgliederleser', 'Zeigt Det
 $GLOBALS['TL_LANG']['FMD']['loginregistration'] = array('Login & Registrierung', 'Zeigt ein Loginformular an, dass einen Login per E-Mail ermöglicht und bei nicht vorhandenen Mitglied eine Registrierung einleitet.');
 $GLOBALS['TL_LANG']['FMD']['registration_plus'] = array('Registrierung Plus', 'Anpassbares Registrierungsformular mit FormHybrid.');
 $GLOBALS['TL_LANG']['FMD']['member_messages'] = array('Mitgliedermeldungen', 'Gibt sitzungsbasierende Meldungen aus.');
-
+$GLOBALS['TL_LANG']['FMD']['login_registration_plus'] = array('Login & Registrierung Plus', 'Zeigt ein Loginformular an, dass einen Login per E-Mail ermöglicht und bei nicht vorhandenen Mitglied eine Registrierung einleitet mit FormHybrid.');
