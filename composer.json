@@ -21,7 +21,7 @@
         "contao/core-bundle": "^3.5.1 || ~4.1",
         "contao-community-alliance/composer-plugin": "~2.4 || ~3.0",
         "heimrichhannot/contao-formhybrid": ">=2.0,<3.0.0-dev",
-        "heimrichhannot/contao-bootstrapper": ">=1.14.13,<2.0.0-dev",
+        "heimrichhannot/contao-bootstrapper": ">=1.14.13,<2.0.0-dev"
     },
     "autoload": {
         "classmap": [""]

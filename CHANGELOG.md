@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.0.35] - 20017-08-15
+
+### Fixed
+
+- typo in composer.json
+
 ## [2.0.34] - 20017-08-08
 
 ### Added
