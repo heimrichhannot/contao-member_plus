@@ -51,3 +51,8 @@ define('MEMBER_ACTIVATION_ACTIVATED_FIELD_PREFIX', 'ACTIVATED:');
  */
 $GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['contao']['core_form']['email_text'][] = 'activation';
 $GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['contao']['core_form']['email_html'][] = 'activation';
+
+/**
+ * Front end form fields
+ */
+$GLOBALS['TL_FFL']['passwordNoConfirm'] = 'HeimrichHannot\FormPasswordNoConfirm';

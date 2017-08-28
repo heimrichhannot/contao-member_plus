@@ -46,7 +46,7 @@ class MemberLoginRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
 		
 		// use noConfirm widget when set
 		if ($this->objModule->bypassPasswordConfirm) {
-			$this->dca['fields']['password']['inputType'] = 'password_noConfirm';
+			$this->dca['fields']['password']['inputType'] = 'passwordNoConfirm';
 		}
 		
 		$this->dca['fields']['email']['eval']['unique'] = false;
