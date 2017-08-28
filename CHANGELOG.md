@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.0.36] - 20017-08-28
+
+### Fixed
+
+- #3 (Cannot declare class tl_content_member_plus, because the name is already in use)
+
 ## [2.0.35] - 20017-08-28
 
 ### Changed
