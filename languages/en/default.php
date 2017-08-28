@@ -11,4 +11,5 @@
 /**
  * Login form
  */
-$GLOBALS['TL_LANG']['MSC']['autologin'] = 'Stay signed in'; // "Remember me" is not clear enough. (e.g. (remember password forever on the machine? remember the email...)
+$GLOBALS['TL_LANG']['MSC']['autologin'] =
+	'Stay signed in'; // "Remember me" is not clear enough. (e.g. (remember password forever on the machine? remember the email...)

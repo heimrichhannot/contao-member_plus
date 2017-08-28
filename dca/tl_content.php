@@ -19,7 +19,7 @@ $dc = &$GLOBALS['TL_DCA']['tl_content'];
 array_insert(
 	$dc['palettes']['__selector__'],
 	0,
-	array('mlSource', 'mlAddCustomDummyImages', 'mlSkipFields')
+	['mlSource', 'mlAddCustomDummyImages', 'mlSkipFields']
 ); // bug? mustn't be inserted after type selector
 
 
@@ -38,151 +38,134 @@ $dc['subpalettes']['mlSource_external']       = 'mlUrl,mlTarget';
 $dc['subpalettes']['mlAddCustomDummyImages']  = 'mlDummyImageMale,mlDummyImageFemale';
 $dc['subpalettes']['mlSkipFields']            = 'mlFields';
 
-$arrFields = array
-(
-	'mlGroups'               => array
-	(
+$arrFields = [
+	'mlGroups'               => [
 		'label'      => &$GLOBALS['TL_LANG']['tl_content']['mlGroups'],
 		'exclude'    => true,
 		'inputType'  => 'checkboxWizard',
 		'foreignKey' => 'tl_member_group.name',
-		'eval'       => array('mandatory' => true, 'multiple' => true, 'submitOnChange' => true),
+		'eval'       => ['mandatory' => true, 'multiple' => true, 'submitOnChange' => true],
 		'sql'        => "blob NULL",
-		'relation'   => array('type' => 'hasMany', 'load' => 'lazy')
-	),
-	'mlSort'                 => array
-	(
+		'relation'   => ['type' => 'hasMany', 'load' => 'lazy']
+	],
+	'mlSort'                 => [
 		'label'            => &$GLOBALS['TL_LANG']['tl_content']['mlSort'],
 		'exclude'          => true,
 		'inputType'        => 'checkboxWizard',
-		'options_callback' => array('tl_content_member_plus', 'getMembers'),
-		'eval'             => array('multiple' => true),
+		'options_callback' => ['tl_content_member_plus', 'getMembers'],
+		'eval'             => ['multiple' => true],
 		'sql'              => "blob NULL",
-	),
-	'mlSource'               => array
-	(
+	],
+	'mlSource'               => [
 		'label'            => &$GLOBALS['TL_LANG']['tl_content']['mlSource'],
 		'default'          => 'default',
 		'exclude'          => true,
 		'filter'           => true,
 		'inputType'        => 'radio',
-		'options_callback' => array('tl_content_member_plus', 'getSourceOptions'),
+		'options_callback' => ['tl_content_member_plus', 'getSourceOptions'],
 		'reference'        => &$GLOBALS['TL_LANG']['tl_content']['memberPlusReference'],
-		'eval'             => array('submitOnChange' => true, 'helpwizard' => true),
+		'eval'             => ['submitOnChange' => true, 'helpwizard' => true],
 		'sql'              => "varchar(32) NOT NULL default ''"
-	),
-	'mlTemplate'             => array
-	(
+	],
+	'mlTemplate'             => [
 		'label'            => &$GLOBALS['TL_LANG']['tl_content']['mlTemplate'],
 		'default'          => 'memberlist_default',
 		'exclude'          => true,
 		'inputType'        => 'select',
-		'options_callback' => array('tl_content_member_plus', 'getMemberlistTemplates'),
-		'eval'             => array('tl_class' => 'w50'),
+		'options_callback' => ['tl_content_member_plus', 'getMemberlistTemplates'],
+		'eval'             => ['tl_class' => 'w50'],
 		'sql'              => "varchar(64) NOT NULL default ''"
-	),
-	'mlJumpTo'               => array
-	(
+	],
+	'mlJumpTo'               => [
 		'label'      => &$GLOBALS['TL_LANG']['tl_content']['mlJumpTo'],
 		'exclude'    => true,
 		'inputType'  => 'pageTree',
 		'foreignKey' => 'tl_page.title',
-		'eval'       => array('fieldType' => 'radio'),
+		'eval'       => ['fieldType' => 'radio'],
 		'sql'        => "int(10) unsigned NOT NULL default '0'",
-		'relation'   => array('type' => 'hasOne', 'load' => 'eager')
-	),
-	'mlArticleId'            => array
-	(
+		'relation'   => ['type' => 'hasOne', 'load' => 'eager']
+	],
+	'mlArticleId'            => [
 		'label'            => &$GLOBALS['TL_LANG']['tl_content']['mlArticleId'],
 		'exclude'          => true,
 		'inputType'        => 'select',
-		'options_callback' => array('tl_content_member_plus', 'getArticleAlias'),
-		'eval'             => array('chosen' => true, 'mandatory' => true),
+		'options_callback' => ['tl_content_member_plus', 'getArticleAlias'],
+		'eval'             => ['chosen' => true, 'mandatory' => true],
 		'sql'              => "int(10) unsigned NOT NULL default '0'"
-	),
-	'mlUrl'                  => array
-	(
+	],
+	'mlUrl'                  => [
 		'label'     => &$GLOBALS['TL_LANG']['MSC']['mlUrl'],
 		'exclude'   => true,
 		'search'    => true,
 		'inputType' => 'text',
-		'eval'      => array('mandatory' => true, 'decodeEntities' => true, 'maxlength' => 255, 'tl_class' => 'w50'),
+		'eval'      => ['mandatory' => true, 'decodeEntities' => true, 'maxlength' => 255, 'tl_class' => 'w50'],
 		'sql'       => "varchar(255) NOT NULL default ''"
-	),
-	'mlTarget'               => array
-	(
+	],
+	'mlTarget'               => [
 		'label'     => &$GLOBALS['TL_LANG']['MSC']['mlTarget'],
 		'exclude'   => true,
 		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'w50 m12'),
+		'eval'      => ['tl_class' => 'w50 m12'],
 		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'mlLoadContent'          => array
-	(
+	],
+	'mlLoadContent'          => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_content']['mlLoadContent'],
 		'exclude'   => true,
 		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'w50 m12'),
+		'eval'      => ['tl_class' => 'w50 m12'],
 		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'mlDisableImages'        => array
-	(
+	],
+	'mlDisableImages'        => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_content']['mlDisableImages'],
 		'exclude'   => true,
 		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'w50 m12'),
+		'eval'      => ['tl_class' => 'w50 m12'],
 		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'mlDisableDummyImages'   => array
-	(
+	],
+	'mlDisableDummyImages'   => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_content']['mlDisableDummyImages'],
 		'exclude'   => true,
 		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'w50 m12'),
+		'eval'      => ['tl_class' => 'w50 m12'],
 		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'mlAddCustomDummyImages' => array
-	(
+	],
+	'mlAddCustomDummyImages' => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_content']['mlAddCustomDummyImages'],
 		'exclude'   => true,
 		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'w50 m12', 'submitOnChange' => true),
+		'eval'      => ['tl_class' => 'w50 m12', 'submitOnChange' => true],
 		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'mlDummyImageMale'       => array
-	(
+	],
+	'mlDummyImageMale'       => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_content']['mlDummyImageMale'],
 		'exclude'   => true,
 		'inputType' => 'fileTree',
-		'eval'      => array('filesOnly' => true, 'fieldType' => 'radio', 'tl_class' => 'clr w50'),
+		'eval'      => ['filesOnly' => true, 'fieldType' => 'radio', 'tl_class' => 'clr w50'],
 		'sql'       => "binary(16) NULL"
-	),
-	'mlDummyImageFemale'     => array
-	(
+	],
+	'mlDummyImageFemale'     => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_content']['mlDummyImageFemale'],
 		'exclude'   => true,
 		'inputType' => 'fileTree',
-		'eval'      => array('filesOnly' => true, 'fieldType' => 'radio', 'tl_class' => 'w50'),
+		'eval'      => ['filesOnly' => true, 'fieldType' => 'radio', 'tl_class' => 'w50'],
 		'sql'       => "binary(16) NULL"
-	),
-	'mlSkipFields'           => array
-	(
+	],
+	'mlSkipFields'           => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_content']['mlSkipFields'],
 		'exclude'   => true,
 		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'w50', 'submitOnChange' => true),
+		'eval'      => ['tl_class' => 'w50', 'submitOnChange' => true],
 		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'mlFields'               => array
-	(
+	],
+	'mlFields'               => [
 		'label'            => &$GLOBALS['TL_LANG']['tl_content']['mlFields'],
 		'exclude'          => true,
 		'inputType'        => 'checkbox',
-		'options_callback' => array('tl_content_member_plus', 'getViewableMemberFields'),
-		'eval'             => array('multiple' => true, 'tl_class' => 'clr',),
+		'options_callback' => ['tl_content_member_plus', 'getViewableMemberFields'],
+		'eval'             => ['multiple' => true, 'tl_class' => 'clr',],
 		'sql'              => "blob NULL",
-	),
-);
+	],
+];
 
 $dc['fields'] = array_merge($dc['fields'], $arrFields);
 
@@ -191,7 +174,7 @@ $dc['fields'] = array_merge($dc['fields'], $arrFields);
  */
 if (Input::get('do') == 'member') {
 	$GLOBALS['TL_DCA']['tl_content']['config']['ptable']                = 'tl_member';
-	$GLOBALS['TL_DCA']['tl_content']['list']['sorting']['headerFields'] = array('firstname', 'lastname', 'username', 'email');
+	$GLOBALS['TL_DCA']['tl_content']['list']['sorting']['headerFields'] = ['firstname', 'lastname', 'username', 'email'];
 }
 
 
@@ -205,7 +188,7 @@ class tl_content_member_plus extends \Backend
 		parent::__construct();
 		$this->import('BackendUser', 'User');
 	}
-
+	
 	/**
 	 * Get all articles and return them as array
 	 *
@@ -215,19 +198,19 @@ class tl_content_member_plus extends \Backend
 	 */
 	public function getArticleAlias(DataContainer $dc)
 	{
-		$arrPids  = array();
-		$arrAlias = array();
-
+		$arrPids  = [];
+		$arrAlias = [];
+		
 		if (!$this->User->isAdmin) {
 			foreach ($this->User->pagemounts as $id) {
 				$arrPids[] = $id;
 				$arrPids   = array_merge($arrPids, $this->Database->getChildRecords($id, 'tl_page'));
 			}
-
+			
 			if (empty($arrPids)) {
 				return $arrAlias;
 			}
-
+			
 			$objAlias = $this->Database->prepare(
 				"SELECT a.id, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid WHERE a.pid IN(" . implode(
 					',',
@@ -241,20 +224,20 @@ class tl_content_member_plus extends \Backend
 			)
 				->execute($dc->id);
 		}
-
+		
 		if ($objAlias->numRows) {
 			System::loadLanguageFile('tl_article');
-
+			
 			while ($objAlias->next()) {
 				$arrAlias[$objAlias->parent][$objAlias->id] =
 					$objAlias->title . ' (' . ($GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn] ?: $objAlias->inColumn) . ', ID '
 					. $objAlias->id . ')';
 			}
 		}
-
+		
 		return $arrAlias;
 	}
-
+	
 	/**
 	 * Add the source options depending on the allowed fields (see #5498)
 	 *
@@ -265,36 +248,36 @@ class tl_content_member_plus extends \Backend
 	public function getSourceOptions(DataContainer $dc)
 	{
 		if ($this->User->isAdmin) {
-			return array('default', 'internal', 'article_reader', 'article', 'external');
+			return ['default', 'internal', 'article_reader', 'article', 'external'];
 		}
-
-		$arrOptions = array('default');
-
+		
+		$arrOptions = ['default'];
+		
 		// Add the "internal" option
 		if ($this->User->hasAccess('tl_content::mlJumpTo', 'alexf')) {
 			$arrOptions[] = 'internal';
 		}
-
+		
 		// Add the "article" option
 		if ($this->User->hasAccess('tl_content::mlArticleId', 'alexf')) {
 			$arrOptions[] = 'article';
 			$arrOptions[] = 'article_reader';
 		}
-
+		
 		// Add the "external" option
 		if ($this->User->hasAccess('tl_content::mlUrl', 'alexf') && $this->User->hasAccess('tl_content::mlTarget', 'alexf')) {
 			$arrOptions[] = 'external';
 		}
-
+		
 		// Add the option currently set
 		if ($dc->activeRecord && $dc->activeRecord->mlSource != '') {
 			$arrOptions[] = $dc->activeRecord->mlSource;
 			$arrOptions   = array_unique($arrOptions);
 		}
-
+		
 		return $arrOptions;
 	}
-
+	
 	/**
 	 * get array of members by group
 	 *
@@ -304,33 +287,33 @@ class tl_content_member_plus extends \Backend
 	 */
 	public function getMembers(DataContainer $dc)
 	{
-		$arrOptions = array();
-
+		$arrOptions = [];
+		
 		$arrGroups = deserialize($dc->activeRecord->mlGroups);
-
+		
 		if (!is_array($arrGroups) || empty($arrGroups)) {
 			return $arrOptions;
 		}
-
+		
 		$objMembers = \HeimrichHannot\MemberPlus\MemberPlusMemberModel::findActiveByGroups($arrGroups);
-
+		
 		if ($objMembers === null) {
 			return $arrOptions;
 		}
-
+		
 		while ($objMembers->next()) {
-			$arrTitle = array($objMembers->academicTitle, $objMembers->firstname, $objMembers->lastname);
-
+			$arrTitle = [$objMembers->academicTitle, $objMembers->firstname, $objMembers->lastname];
+			
 			if (empty($arrTitle)) {
 				continue;
 			}
-
+			
 			$arrOptions[$objMembers->id] = implode(' ', $arrTitle);
 		}
-
+		
 		return $arrOptions;
 	}
-
+	
 	/**
 	 * Return all news templates as array
 	 *
@@ -340,8 +323,8 @@ class tl_content_member_plus extends \Backend
 	{
 		return $this->getTemplateGroup('memberlist_');
 	}
-
-
+	
+	
 	/**
 	 * Return all feViewable fields as array
 	 *
@@ -353,22 +336,27 @@ class tl_content_member_plus extends \Backend
 	{
 		\Controller::loadDataContainer('tl_member');
 		\Controller::loadLanguageFile('tl_member');
-
-		$arrOptions = array();
-
+		
+		$arrOptions = [];
+		
 		$arrFields = $GLOBALS['TL_DCA']['tl_member']['fields'];
-
-		if(!is_array($arrFields) || empty($arrFields)) return $arrOptions;
-
-		foreach($arrFields as $strName => $arrData)
-		{
-			if(!isset($arrData['inputType'])) continue;
-
-			if(!$arrData['eval']['feViewable']) continue;
-
+		
+		if (!is_array($arrFields) || empty($arrFields)) {
+			return $arrOptions;
+		}
+		
+		foreach ($arrFields as $strName => $arrData) {
+			if (!isset($arrData['inputType'])) {
+				continue;
+			}
+			
+			if (!$arrData['eval']['feViewable']) {
+				continue;
+			}
+			
 			$arrOptions[$strName] = $arrData['label'][0];
 		}
-
+		
 		return $arrOptions;
 	}
 }

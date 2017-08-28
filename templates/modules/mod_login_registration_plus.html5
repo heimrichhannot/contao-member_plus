@@ -2,7 +2,7 @@
 
 <?php $this->block('content'); ?>
 
-<?php if($this->message): ?>
+<?php if ($this->message): ?>
 	<?php echo $this->message; ?>
 <?php endif; ?>
 

@@ -1,51 +1,51 @@
-
 <!-- indexer::stop -->
 <div class="<?php echo $this->class; ?> one_column tableless login block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
-
+	
 	<?php if ($this->headline): ?>
-	<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+    <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
 <form<?php if ($this->action): ?> action="<?php echo $this->action; ?>"<?php endif; ?> id="tl_login" method="post">
-	<div class="formbody">
+    <div class="formbody">
 		<?php if ($this->message): ?>
-			<p class="alert alert-<?php echo $this->messageType; ?>"><?php echo $this->message; ?></p>
+            <p class="alert alert-<?php echo $this->messageType; ?>"><?php echo $this->message; ?></p>
 		<?php endif; ?>
-		<input type="hidden" name="FORM_SUBMIT" value="tl_login">
-		<input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
-		<div class="<?php echo (($this->domainCheck && $this->showAllowedDomains) ? 'input-group' : 'form-group'); ?>">
-			<label class="sr-only" for="username"><?php echo $this->username; ?></label>
-			<input type="text" name="username" id="username" class="form-control" value="<?php echo $this->value; ?>" placeholder="<?php echo $this->username; ?>">
-			<?php if($this->domainCheck && $this->showAllowedDomains): ?>
-				<?php if(count($this->domainList) == 1): ?>
-					<span class="input-group-addon">
+        <input type="hidden" name="FORM_SUBMIT" value="tl_login">
+        <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
+        <div class="<?php echo(($this->domainCheck && $this->showAllowedDomains) ? 'input-group' : 'form-group'); ?>">
+            <label class="sr-only" for="username"><?php echo $this->username; ?></label>
+            <input type="text" name="username" id="username" class="form-control" value="<?php echo $this->value; ?>"
+                   placeholder="<?php echo $this->username; ?>">
+			<?php if ($this->domainCheck && $this->showAllowedDomains): ?>
+				<?php if (count($this->domainList) == 1): ?>
+                    <span class="input-group-addon">
 						<input type="hidden" name="domain" value="<?php echo key($this->domainList); ?>">
 						<strong><?php echo reset($this->domainList); ?></strong>
 					</span>
 				<?php else: ?>
-					<select name="domain" class="input-group-addon form-control">
-						<?php foreach($this->domainList as $id => $name): ?>
-							<option value="<?php echo $id; ?>"><?php echo $name; ?></option>
+                    <select name="domain" class="input-group-addon form-control">
+						<?php foreach ($this->domainList as $id => $name): ?>
+                            <option value="<?php echo $id; ?>"><?php echo $name; ?></option>
 						<?php endforeach; ?>
-					</select>
+                    </select>
 				<?php endif; ?>
 			<?php endif; ?>
-		</div>
-		<div class="form-group">
-			<label class="sr-only" for="password"><?php echo $this->username; ?></label>
-			<input type="password" name="password" id="password" class="form-control password" value="" placeholder="<?php echo $this->password; ?>">
-		</div>
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="password"><?php echo $this->username; ?></label>
+            <input type="password" name="password" id="password" class="form-control password" value="" placeholder="<?php echo $this->password; ?>">
+        </div>
 		<?php if ($this->autologin): ?>
-			<div class="checkbox">
-				<label>
-					<input type="checkbox" name="autologin" id="autologin" value="1" class="checkbox"> <?php echo $this->autoLabel; ?>
-				</label>
-			</div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="autologin" id="autologin" value="1" class="checkbox"> <?php echo $this->autoLabel; ?>
+                </label>
+            </div>
 		<?php endif; ?>
-		<div class="submit_container">
-			<button type="submit" class="btn btn-primary"><?php echo $this->slabel; ?></button>
-		</div>
-	</div>
+        <div class="submit_container">
+            <button type="submit" class="btn btn-primary"><?php echo $this->slabel; ?></button>
+        </div>
+    </div>
 </form>
 
 </div>

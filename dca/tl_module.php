@@ -17,10 +17,10 @@ $dc = &$GLOBALS['TL_DCA']['tl_module'];
 array_insert(
 	$dc['palettes']['__selector__'],
 	0,
-	array('mlAddCustomDummyImages', 'mlSkipFields', 'reg_activate_plus')
+	['mlAddCustomDummyImages', 'mlSkipFields', 'reg_activate_plus']
 ); // bug? mustn't be inserted after type selector
 
-$dc['palettes']['memberreader']      =
+$dc['palettes']['memberreader'] =
 	'{title_legend},name,headline,type;{config_legend},mlGroups,mlTemplate,mlLoadContent;{image_legend:hide},imgSize,mlDisableImages,mlDisableDummyImages,mlAddCustomDummyImages,mlSkipFields;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 $dc['palettes']['loginregistration'] =
@@ -47,7 +47,7 @@ $dc['palettes']['registration_plus'] =
 	{expert_legend:hide},guests';
 
 
-$dc['palettes']['member_messages']      =
+$dc['palettes']['member_messages'] =
 	'{title_legend},name,headline,type;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 /**
@@ -60,192 +60,171 @@ $dc['subpalettes']['reg_activate_plus']      =
 /**
  * Callbacks
  */
-$dc['config']['onload_callback'][] = array('tl_module_member_plus', 'modifyPalette');
+$dc['config']['onload_callback'][] = ['tl_module_member_plus', 'modifyPalette'];
 
 /**
  * Fields
  */
-$arrFields = array
-(
-	'mlGroups'               => array
-	(
+$arrFields = [
+	'mlGroups'               => [
 		'label'      => &$GLOBALS['TL_LANG']['tl_module']['mlGroups'],
 		'exclude'    => true,
 		'inputType'  => 'checkboxWizard',
 		'foreignKey' => 'tl_member_group.name',
-		'eval'       => array('mandatory' => true, 'multiple' => true),
+		'eval'       => ['mandatory' => true, 'multiple' => true],
 		'sql'        => "blob NULL",
-		'relation'   => array('type' => 'hasMany', 'load' => 'lazy')
-	),
-	'mlTemplate'             => array
-	(
+		'relation'   => ['type' => 'hasMany', 'load' => 'lazy']
+	],
+	'mlTemplate'             => [
 		'label'            => &$GLOBALS['TL_LANG']['tl_module']['mlTemplate'],
 		'default'          => 'memberlist_full',
 		'exclude'          => true,
 		'inputType'        => 'select',
-		'options_callback' => array('tl_module_member_plus', 'getMemberlistTemplates'),
-		'eval'             => array('tl_class' => 'w50'),
+		'options_callback' => ['tl_module_member_plus', 'getMemberlistTemplates'],
+		'eval'             => ['tl_class' => 'w50'],
 		'sql'              => "varchar(64) NOT NULL default ''"
-	),
-	'mlImgSize'              => array
-	(
+	],
+	'mlImgSize'              => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_module']['mlImgSize'],
 		'exclude'   => true,
 		'inputType' => 'imageSize',
 		'options'   => System::getImageSizes(),
 		'reference' => &$GLOBALS['TL_LANG']['MSC'],
-		'eval'      => array('rgxp' => 'natural', 'includeBlankOption' => true, 'nospace' => true, 'helpwizard' => true, 'tl_class' => 'w50'),
+		'eval'      => ['rgxp' => 'natural', 'includeBlankOption' => true, 'nospace' => true, 'helpwizard' => true, 'tl_class' => 'w50'],
 		'sql'       => "varchar(64) NOT NULL default ''"
-	),
-	'mlLoadContent'          => array
-	(
+	],
+	'mlLoadContent'          => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_module']['mlLoadContent'],
 		'exclude'   => true,
 		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'w50 m12'),
+		'eval'      => ['tl_class' => 'w50 m12'],
 		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'mlDisableImages'        => array
-	(
+	],
+	'mlDisableImages'        => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_module']['mlDisableImages'],
 		'exclude'   => true,
 		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'w50 m12'),
+		'eval'      => ['tl_class' => 'w50 m12'],
 		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'mlDisableDummyImages'   => array
-	(
+	],
+	'mlDisableDummyImages'   => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_module']['mlDisableDummyImages'],
 		'exclude'   => true,
 		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'w50 m12'),
+		'eval'      => ['tl_class' => 'w50 m12'],
 		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'mlAddCustomDummyImages' => array
-	(
+	],
+	'mlAddCustomDummyImages' => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_module']['mlAddCustomDummyImages'],
 		'exclude'   => true,
 		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'w50 m12', 'submitOnChange' => true),
+		'eval'      => ['tl_class' => 'w50 m12', 'submitOnChange' => true],
 		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'mlDummyImageMale'       => array
-	(
+	],
+	'mlDummyImageMale'       => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_module']['mlDummyImageMale'],
 		'exclude'   => true,
 		'inputType' => 'fileTree',
-		'eval'      => array('filesOnly' => true, 'fieldType' => 'radio', 'tl_class' => 'clr w50'),
+		'eval'      => ['filesOnly' => true, 'fieldType' => 'radio', 'tl_class' => 'clr w50'],
 		'sql'       => "binary(16) NULL"
-	),
-	'mlDummyImageFemale'     => array
-	(
+	],
+	'mlDummyImageFemale'     => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_module']['mlDummyImageFemale'],
 		'exclude'   => true,
 		'inputType' => 'fileTree',
-		'eval'      => array('filesOnly' => true, 'fieldType' => 'radio', 'tl_class' => 'w50'),
+		'eval'      => ['filesOnly' => true, 'fieldType' => 'radio', 'tl_class' => 'w50'],
 		'sql'       => "binary(16) NULL"
-	),
-	'mlSkipFields'           => array
-	(
+	],
+	'mlSkipFields'           => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_content']['mlSkipFields'],
 		'exclude'   => true,
 		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'w50', 'submitOnChange' => true),
+		'eval'      => ['tl_class' => 'w50', 'submitOnChange' => true],
 		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'mlFields'               => array
-	(
+	],
+	'mlFields'               => [
 		'label'            => &$GLOBALS['TL_LANG']['tl_content']['mlFields'],
 		'exclude'          => true,
 		'inputType'        => 'checkbox',
-		'options_callback' => array('tl_content_member_plus', 'getViewableMemberFields'),
-		'eval'             => array('multiple' => true, 'tl_class' => 'clr',),
+		'options_callback' => ['tl_content_member_plus', 'getViewableMemberFields'],
+		'eval'             => ['multiple' => true, 'tl_class' => 'clr',],
 		'sql'              => "blob NULL",
-	),
-	'allowedMailDomains'     => array
-	(
+	],
+	'allowedMailDomains'     => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_module']['allowedMailDomains'],
 		'exclude'   => true,
 		'inputType' => 'multiColumnWizard',
-		'eval'      => array(
-			'columnFields' => array(
-				'domain' => array
-				(
+		'eval'      => [
+			'columnFields' => [
+				'domain' => [
 					'label'     => &$GLOBALS['TL_LANG']['tl_module']['allowedMailDomains']['domain'],
 					'exclude'   => true,
 					'inputType' => 'text',
-					'eval'      => array('style' => 'width: 600px'),
-				),
-				'hide'   => array
-				(
+					'eval'      => ['style' => 'width: 600px'],
+				],
+				'hide'   => [
 					'label'     => &$GLOBALS['TL_LANG']['tl_module']['allowedMailDomains']['hide'],
 					'exclude'   => true,
 					'inputType' => 'checkbox',
-					'eval'      => array('style' => 'width: 100px;'),
-				)
-			)
-		),
+					'eval'      => ['style' => 'width: 100px;'],
+				]
+			]
+		],
 		'sql'       => "blob NULL"
-	),
-	'showAllowedDomains'     => array
-	(
+	],
+	'showAllowedDomains'     => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_module']['showAllowedDomains'],
 		'exclude'   => true,
 		'default'   => true,
 		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'long'),
+		'eval'      => ['tl_class' => 'long'],
 		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'reg_activate_login'     => array
-	(
+	],
+	'reg_activate_login'     => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_module']['reg_activate_login'],
 		'exclude'   => true,
 		'default'   => true,
 		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'long'),
+		'eval'      => ['tl_class' => 'long'],
 		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'redirectPermanent'      => array
-	(
+	],
+	'redirectPermanent'      => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_module']['redirectPermanent'],
 		'exclude'   => true,
 		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'long'),
+		'eval'      => ['tl_class' => 'long'],
 		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'reg_activate_plus'      => array
-	(
+	],
+	'reg_activate_plus'      => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_module']['reg_activate'],
 		'exclude'   => true,
 		'inputType' => 'checkbox',
-		'eval'      => array('submitOnChange' => true, 'tl_class' => 'w50 clr'),
+		'eval'      => ['submitOnChange' => true, 'tl_class' => 'w50 clr'],
 		'sql'       => "char(1) NOT NULL default ''"
-	),
-	'redirectLogin'	=> array
-	(
-		'label'                   => &$GLOBALS['TL_LANG']['tl_module']['redirectLogin'],
-		'exclude'                 => true,
-		'inputType'               => 'pageTree',
-		'foreignKey'              => 'tl_page.title',
-		'eval'                    => array('fieldType'=>'radio', 'tl_class' => 'w50 clr'),
-		'sql'                     => "int(10) unsigned NOT NULL default '0'",
-		'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
-	),
-	'bypassPasswordConfirm'	=> array
-	(
+	],
+	'redirectLogin'          => [
+		'label'      => &$GLOBALS['TL_LANG']['tl_module']['redirectLogin'],
+		'exclude'    => true,
+		'inputType'  => 'pageTree',
+		'foreignKey' => 'tl_page.title',
+		'eval'       => ['fieldType' => 'radio', 'tl_class' => 'w50 clr'],
+		'sql'        => "int(10) unsigned NOT NULL default '0'",
+		'relation'   => ['type' => 'hasOne', 'load' => 'lazy']
+	],
+	'bypassPasswordConfirm'  => [
 		'label'     => &$GLOBALS['TL_LANG']['tl_module']['bypassPasswordConfirm'],
 		'exclude'   => true,
 		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'w50 clr'),
+		'eval'      => ['tl_class' => 'w50 clr'],
 		'sql'       => "char(1) NOT NULL default ''"
-	),
-);
+	],
+];
 
 $dc['fields'] = array_merge($dc['fields'], $arrFields);
 
 class tl_module_member_plus extends \Backend
 {
-
+	
 	/**
 	 * Return all news templates as array
 	 *
@@ -255,33 +234,40 @@ class tl_module_member_plus extends \Backend
 	{
 		return $this->getTemplateGroup('memberlist_');
 	}
-
+	
 	public function modifyPalette()
 	{
 		$objModule = \ModuleModel::findByPk(\Input::get('id'));
-		$arrDc = &$GLOBALS['TL_DCA']['tl_module'];
-
+		$arrDc     = &$GLOBALS['TL_DCA']['tl_module'];
+		
 		// submission -> already done in formhybrid
-
+		
 		// confirmation
-		$arrFieldsToHide = array
-		(
+		$arrFieldsToHide = [
 			'formHybridConfirmationMailSender',
 			'formHybridConfirmationMailSubject',
 			'formHybridConfirmationMailText',
 			'formHybridConfirmationMailTemplate',
 			'formHybridConfirmationMailAttachment'
-		);
-
-		if (in_array('avisota-core', \ModuleLoader::getActive()) && $objModule->reg_activate_plus && $objModule->formHybridConfirmationAvisotaMessage)
-		{
+		];
+		
+		if (in_array('avisota-core', \ModuleLoader::getActive()) && $objModule->reg_activate_plus
+			&& $objModule->formHybridConfirmationAvisotaMessage
+		) {
 			$arrDc['subpalettes']['reg_activate_plus'] = str_replace(
-				$arrFieldsToHide, array_map(function() {return '';}, $arrFieldsToHide),
+				$arrFieldsToHide,
+				array_map(
+					function () {
+						return '';
+					},
+					$arrFieldsToHide
+				),
 				$arrDc['subpalettes']['reg_activate_plus']
 			);
-
+			
 			$arrDc['subpalettes']['reg_activate_plus'] = str_replace(
-				'formHybridConfirmationAvisotaMessage', 'formHybridConfirmationAvisotaMessage,formHybridConfirmationAvisotaSalutationGroup',
+				'formHybridConfirmationAvisotaMessage',
+				'formHybridConfirmationAvisotaMessage,formHybridConfirmationAvisotaSalutationGroup',
 				$arrDc['subpalettes']['reg_activate_plus']
 			);
 		}

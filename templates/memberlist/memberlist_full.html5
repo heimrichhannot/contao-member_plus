@@ -1,63 +1,66 @@
 <div class="memberlist_full">
-	<div class="inner">
-		<?php if($this->titleCombined): ?>
-			<h1><?php echo $this->titleCombined; ?></h1>
+    <div class="inner">
+		<?php if ($this->titleCombined): ?>
+            <h1><?php echo $this->titleCombined; ?></h1>
 		<?php endif; ?>
-		<?php if($this->headline): ?>
-			<h2><?php echo $this->headline; ?></h2>
+		<?php if ($this->headline): ?>
+            <h2><?php echo $this->headline; ?></h2>
 		<?php endif; ?>
-		<div class="content">
+        <div class="content">
 			<?php if ($this->addImage): ?>
-				<figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?php echo $this->margin; ?>"<?php endif; ?>>
-
+                <figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?php echo $this->margin; ?>"<?php endif; ?>>
+					
 					<?php if ($this->href): ?>
-					<a href="<?php echo $this->href; ?>"<?php echo $this->attributes; ?> title="<?php echo $this->alt; ?>">
+                    <a href="<?php echo $this->href; ?>"<?php echo $this->attributes; ?> title="<?php echo $this->alt; ?>">
 						<?php endif; ?>
-
+						
 						<?php $this->insert('picture_default', $this->picture); ?>
-
+						
 						<?php if ($this->href): ?>
-					</a>
+                    </a>
 				<?php endif; ?>
-
+					
 					<?php if ($this->caption): ?>
-						<figcaption class="caption" style="width:<?php echo $this->arrSize[0]; ?>px"><?php echo $this->caption; ?></figcaption>
+                        <figcaption class="caption" style="width:<?php echo $this->arrSize[0]; ?>px"><?php echo $this->caption; ?></figcaption>
 					<?php endif; ?>
 
-				</figure>
+                </figure>
 			<?php endif; ?>
 
-			<address>
-				<?php if($this->position): ?>
-					<span class="position"><?php echo $this->position; ?></span><br />
+            <address>
+				<?php if ($this->position): ?>
+                    <span class="position"><?php echo $this->position; ?></span><br/>
 				<?php endif; ?>
-				<?php if($this->street): ?>
-					<span class="street"><?php echo $this->street; ?></span><br />
+				<?php if ($this->street): ?>
+                    <span class="street"><?php echo $this->street; ?></span><br/>
 				<?php endif; ?>
-				<?php if($this->locationCombined): ?>
-					<span class="location"><?php echo $this->locationCombined; ?></span><br />
+				<?php if ($this->locationCombined): ?>
+                    <span class="location"><?php echo $this->locationCombined; ?></span><br/>
 				<?php endif; ?>
-				<?php if($this->addressText): ?>
-					<span class="address-add"><?php echo strip_tags($this->addressText, '<br>'); ?></span><br />
+				<?php if ($this->addressText): ?>
+                    <span class="address-add"><?php echo strip_tags($this->addressText, '<br>'); ?></span><br/>
 				<?php endif; ?>
-                <?php if($this->phone): ?>
-                    <i class="fa fa-phone" title="<?php echo $GLOBALS['TL_LANG']['MSC']['phoneTitle']; ?>"></i>&nbsp;<?php echo $this->phone; ?><br />
-                <?php endif; ?>
-                <?php if($this->fax): ?>
-                    <i class="fa fa-fax" title="<?php echo $GLOBALS['TL_LANG']['MSC']['faxTitle']; ?>"></i>&nbsp;<?php echo $this->fax; ?><br />
-                <?php endif; ?>
-				<?php if($this->email): ?>
-                    <i class="fa fa-envelope" title="<?php echo $GLOBALS['TL_LANG']['MSC']['emailTitle']; ?>"></i>&nbsp;{{email::<?php echo $this->email; ?>}}<br />
+				<?php if ($this->phone): ?>
+                    <i class="fa fa-phone" title="<?php echo $GLOBALS['TL_LANG']['MSC']['phoneTitle']; ?>"></i>&nbsp;<?php echo $this->phone; ?><br/>
 				<?php endif; ?>
-				<?php if($this->websiteLink): ?>
-                    <i class="fa fa-globe" title="<?php echo $GLOBALS['TL_LANG']['MSC']['websiteTitle']; ?>"></i>&nbsp;<span class="website"><a title="<?php echo $this->websiteTitle; ?>" href="<?php echo $this->websiteLink; ?>" target="_blank"><?php echo $this->website; ?></a></span>
+				<?php if ($this->fax): ?>
+                    <i class="fa fa-fax" title="<?php echo $GLOBALS['TL_LANG']['MSC']['faxTitle']; ?>"></i>&nbsp;<?php echo $this->fax; ?><br/>
 				<?php endif; ?>
-			</address>
-		</div>
-		<?php if($this->text): ?>
-			<div class="text">
+				<?php if ($this->email): ?>
+                    <i class="fa fa-envelope"
+                       title="<?php echo $GLOBALS['TL_LANG']['MSC']['emailTitle']; ?>"></i>&nbsp;{{email::<?php echo $this->email; ?>}}<br/>
+				<?php endif; ?>
+				<?php if ($this->websiteLink): ?>
+                    <i class="fa fa-globe" title="<?php echo $GLOBALS['TL_LANG']['MSC']['websiteTitle']; ?>"></i>&nbsp;<span class="website"><a
+                                title="<?php echo $this->websiteTitle; ?>" href="<?php echo $this->websiteLink; ?>"
+                                target="_blank"><?php echo $this->website; ?></a></span>
+				<?php endif; ?>
+            </address>
+        </div>
+		<?php if ($this->text): ?>
+            <div class="text">
 				<?php echo $this->text; ?>
-			</div>
+            </div>
 		<?php endif; ?>
-	</div>
+    </div>
 </div>

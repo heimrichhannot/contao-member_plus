@@ -3,8 +3,9 @@
  * Contao Open Source CMS
  *
  * Copyright (c) 2015 Heimrich & Hannot GmbH
+ *
  * @package member_plus
- * @author Rico Kaltofen <r.kaltofen@heimrich-hannot.de>
+ * @author  Rico Kaltofen <r.kaltofen@heimrich-hannot.de>
  * @license http://www.gnu.org/licences/lgpl-3.0.html LGPL
  */
 
@@ -39,7 +40,8 @@ $arrLang['mlTarget'][0] = 'In neuem Fenster öffnen';
 $arrLang['mlTarget'][1] = 'Den Link in einem neuen Browserfenster öffnen.';
 
 $arrLang['mlLoadContent'][0] = 'Mitglieder-Inhaltselemente laden/anzeigen';
-$arrLang['mlLoadContent'][1] = 'Hier können Sie auswählen, ob die Inhaltselemente zu einem Mitglied geladen werden sollen. In eine Listendarstellung empfiehlt es sich aus Performancegründen darauf zu verzichten.';
+$arrLang['mlLoadContent'][1] =
+	'Hier können Sie auswählen, ob die Inhaltselemente zu einem Mitglied geladen werden sollen. In eine Listendarstellung empfiehlt es sich aus Performancegründen darauf zu verzichten.';
 
 $arrLang['mlDisableImages'][0] = 'Mitgliederbilder deaktivieren';
 $arrLang['mlDisableImages'][1] = 'Deaktivieren Sie die Anzeige von Mitgliederbildern (Platzhalterbilder werden ebenfalls ausgeblendet).';
@@ -72,8 +74,8 @@ $arrLang['ml_config_legend'] = 'Memberlisten-Einstellungen';
  * References
  * $arrLang['tl_content']['article'] leads to Xliff-Error
  */
-$arrLang['memberPlusReference']['default'] = 'Keine Weiterleitung';
-$arrLang['memberPlusReference']['internal'] = 'Seite';
-$arrLang['memberPlusReference']['article'] = 'Artikel';
+$arrLang['memberPlusReference']['default']        = 'Keine Weiterleitung';
+$arrLang['memberPlusReference']['internal']       = 'Seite';
+$arrLang['memberPlusReference']['article']        = 'Artikel';
 $arrLang['memberPlusReference']['article_reader'] = 'Artikel mit Mitgliederleser';
-$arrLang['memberPlusReference']['external'] = 'Externe URL';
+$arrLang['memberPlusReference']['external']       = 'Externe URL';
