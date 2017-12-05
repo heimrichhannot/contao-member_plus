@@ -53,7 +53,7 @@ $arrDca['palettes']['default'] = str_replace('language', 'language,foreignLangua
  * Subpalettes
  */
 
-$arrDca['subpalettes']['addImage'] = 'singleSRC,alt,title,size,imagemargin,imageUrl,fullsize,caption,floating';
+$arrDca['subpalettes']['addImage'] = 'singleSRC,alt,' . $titleField . ',size,imagemargin,imageUrl,fullsize,caption,floating';
 
 /**
  * Fields

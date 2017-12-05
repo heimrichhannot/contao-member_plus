@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.1.1] - 20017-10-24
+
+### Fixed
+- contao 4 compatibility (`tl_member.title` -> `tl_member.imageTitle`)
+
 ## [2.1.0] - 20017-10-24
 
 ### Fixed
