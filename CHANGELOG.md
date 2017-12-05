@@ -1,6 +1,25 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 20017-10-24
+
+### Fixed
+- contao 4 compatibility (`tl_member.title` -> `tl_member.imageTitle`)
+
+### Changed
+- dropped orphan dependency `heimrichhannot/contao-bootstrapper`
+- dropped requirement for `heimrichhannot/contao-formhybrid` and make usage optional (added composer `suggest` note)
+
+### Added
+- field `nobilityTitle` to `tl_member`
+- field `academicDegree` to `tl_member`
+- field `jobTitles` to `tl_member`
+- field `facebookProfile` to `tl_member`
+- field `twitterProfile` to `tl_member`
+- field `googlePlusProfile` to `tl_member`
+- field `foreignLanguages` to `tl_member`
+- field `additionalAddresses` to `tl_member` and provide multiple addresses within `tl_member_address` table
+
 ## [2.0.36] - 20017-08-28
 
 ### Fixed

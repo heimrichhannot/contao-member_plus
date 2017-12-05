@@ -12,24 +12,27 @@ A collection of enhancements for contao members.
 ### Login after Activation
 - added reg_activate_login checkbox for Registration Module, that enables automatic login after account activation
 
-### Registration & Login with one Module
+### Registration & Login with one Module (requires `heimrichhannot/contao-formhybrid`)
 - domain whitelist
 - optionally: show allowed domains in login form, or hide them but still check against them
 - optionally: hide allowed domains list in frontend, but still check against them
 - optionally: permanent redirect to jumpTo page after user was logged
 
-### Better Activation
+### Better Activation (requires `heimrichhannot/contao-formhybrid`)
 - Registration will leave used activation keys in database and add a "ACTIVATED:" prefix before
 - Tell the user if his token has already been used
 - Tell user if token is invalid
 - You can now overwrite "accountActivatedMessage" in "activateAccount" Hook
 - Always redirect after activation or activation error to current page without token parameter in url (or reg_jumpTo page), and than display messages 
 
+## Fields
+
+
 
 ## Hooks
 
 
-### modifyDCRegistrationPlusForm
+### modifyDCRegistrationPlusForm (requires `heimrichhannot/contao-formhybrid`)
 
 Modify the formhybrid Datacontainer array.
 

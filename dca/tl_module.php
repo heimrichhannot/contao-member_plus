@@ -251,8 +251,7 @@ class tl_module_member_plus extends \Backend
             'formHybridConfirmationMailAttachment'
         ];
 
-        if (in_array('avisota-core', \ModuleLoader::getActive()) && $objModule->reg_activate_plus
-            && $objModule->formHybridConfirmationAvisotaMessage
+        if (in_array('avisota-core', \ModuleLoader::getActive()) && in_array('formhybrid', \ModuleLoader::getActive()) && $objModule->reg_activate_plus && $objModule->formHybridConfirmationAvisotaMessage
         ) {
             $arrDc['subpalettes']['reg_activate_plus'] = str_replace(
                 $arrFieldsToHide,
