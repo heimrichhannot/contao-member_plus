@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.1.2] - 20017-12-19
+
+### Fixed
+- `MemberRegistrationPlusForm` did not provide `$arrDca` within `parent::setDefaults()` callback 
+
 ## [2.1.1] - 20017-10-24
 
 ### Fixed
