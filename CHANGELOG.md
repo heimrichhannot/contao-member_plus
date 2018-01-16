@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.1.3] - 2018-01-16
+
+### Added
+- MemberAddressModel
+
 ## [2.1.2] - 20017-12-19
 
 ### Fixed
