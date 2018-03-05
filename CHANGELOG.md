@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.1.4] - 2018-03-05
+
+### Changed
+- renamed `tl_member` operation `content` to `editContent` for css purposes
+
 ## [2.1.3] - 2018-01-16
 
 ### Added

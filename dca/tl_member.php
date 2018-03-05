@@ -19,7 +19,7 @@ $titleField = version_compare(VERSION, '4.4', '<') ? 'title' : 'imageTitle';
 /**
  * Add operations to tl_member
  */
-$GLOBALS['TL_DCA']['tl_member']['list']['operations']['content'] = [
+$GLOBALS['TL_DCA']['tl_member']['list']['operations']['editContent'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_member']['content'],
     'href'  => 'table=tl_content',
     'icon'  => 'article.gif'
