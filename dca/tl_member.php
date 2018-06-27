@@ -252,6 +252,7 @@ $arrDca['fields']['additionalAddresses'] = [
     'foreignKey'   => 'tl_member_address.id',
     'relation'     => ['type' => 'hasMany', 'load' => 'eager'],
     'sql'          => "blob NULL",
+    'eval'         => ['tl_class' => 'clr'],
     'fieldpalette' => [
         'config'   => [
             'hidePublished' => false,

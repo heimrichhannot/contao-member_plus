@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.1.5] - 2018-05-27
+
+### Fixed
+- added `clr` to `additionalAddresses`
+
 ## [2.1.4] - 2018-03-05
 
 ### Changed
