@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.2.0] - 2018-07-02
+
+### Changed
+- `combinedTitle` now contains `nobilityTitle` between `firstname` and `lastname`
+
 ## [2.1.5] - 2018-05-27
 
 ### Fixed

@@ -223,7 +223,7 @@ class MemberPlus extends \Frontend
 	
 	public static function getCombinedTitle($objMember, $arrSkipFields = [])
 	{
-		$arrTitle = ['academicTitle' => $objMember->academicTitle, 'firstname' => $objMember->firstname, 'lastname' => $objMember->lastname];
+		$arrTitle = ['academicTitle' => $objMember->academicTitle, 'firstname' => $objMember->firstname, 'nobilityTitle' => $objMember->nobilityTitle,'lastname' => $objMember->lastname];
 		
 		if (is_array($arrSkipFields) && !empty($arrSkipFields)) {
 			foreach ($arrSkipFields as $strName) {
@@ -359,3 +359,4 @@ class MemberPlus extends \Frontend
 		return $this->objModel;
 	}
 }
+

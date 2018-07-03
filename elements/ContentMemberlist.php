@@ -105,7 +105,7 @@ class ContentMemberlist extends \ContentElement
 			}
 		}
 		
-		$arrTitle            = [$objMember->academicTitle, $objMember->firstname, $objMember->lastname];
+		$arrTitle            = [$objMember->academicTitle, $objMember->firstname, $objMember->nobilityTitle, $objMember->lastname];
 		$objT->titleCombined = empty($arrTitle) ? '' : implode(' ', $arrTitle);
 		
 		$arrLocation            = [$objMember->postal, $objMember->city];
