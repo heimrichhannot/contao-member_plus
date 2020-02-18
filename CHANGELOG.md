@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.2.1] - 2020-02-18
+- fixed an possible install error 
+
 ## [2.2.0] - 2018-07-02
 
 ### Changed

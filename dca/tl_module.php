@@ -88,7 +88,9 @@ $arrFields = [
         'label'     => &$GLOBALS['TL_LANG']['tl_module']['mlImgSize'],
         'exclude'   => true,
         'inputType' => 'imageSize',
-        'options'   => System::getImageSizes(),
+        'options_callback'        => function() {
+            return \Contao\System::getContainer()->get('contao.image.image_sizes')->getAllOptions();
+        },
         'reference' => &$GLOBALS['TL_LANG']['MSC'],
         'eval'      => ['rgxp' => 'natural', 'includeBlankOption' => true, 'nospace' => true, 'helpwizard' => true, 'tl_class' => 'w50'],
         'sql'       => "varchar(64) NOT NULL default ''"
