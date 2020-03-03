@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.2.2] - 2020-03-03
+- added custom submit label
+
 ## [2.2.1] - 2020-02-18
 - fixed an possible install error 
 

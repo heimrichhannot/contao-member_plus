@@ -38,7 +38,7 @@ $dc['palettes']['login_registration_plus'] =
 
 $dc['palettes']['registration_plus'] =
     '{title_legend},name,headline,type;
-	{config_legend},formHybridDataContainer,formHybridPalette,formHybridEditable,formHybridAddEditableRequired,formHybridTemplate,formHybridCustomSubTemplates,formHybridAsync,formHybridCssClass,formHybridAddDefaultValues,disableCaptcha,newsletters;
+	{config_legend},formHybridDataContainer,formHybridPalette,formHybridEditable,formHybridAddEditableRequired,formHybridTemplate,formHybridCustomSubTemplates,formHybridAsync,formHybridCssClass,formHybridAddDefaultValues,disableCaptcha,newsletters,formHybridCustomSubmit;
 	{account_legend},reg_groups,reg_allowLogin;
 	{message_legend},formHybridSuccessMessage;
 	{email_legend:hide},reg_jumpTo,formHybridSendConfirmationAsNotification,reg_activate_plus,formHybridSendSubmissionAsNotification,formHybridSendSubmissionViaEmail;
