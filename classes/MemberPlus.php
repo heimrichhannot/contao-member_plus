@@ -54,12 +54,8 @@ class MemberPlus extends \Frontend
 	{
 		global $objPage;
 		
-		try {
-			\Controller::getTemplate($this->mlTemplate);
-		} catch (\Exception $e) {
-			$this->mlTemplate = 'memberlist_default';
-		}
-		
+        $this->mlTemplate = $this->mlTemplate ?: 'memberlist_default';
+
 		$objT = new \FrontendTemplate($this->mlTemplate);
 		$objT->setData($objMember->row());
 		

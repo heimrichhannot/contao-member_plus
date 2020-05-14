@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.2.3] - 2020-05-14
+- fixed performance issue (`getTemplate()`)
+
 ## [2.2.2] - 2020-03-03
 - added custom submit label
 
