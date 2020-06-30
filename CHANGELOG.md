@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.2.3] - 2020-06-30
+- fixed contao 4.9 bug
+
 ## [2.2.3] - 2020-05-14
 - fixed performance issue (`getTemplate()`)
 

@@ -9,8 +9,8 @@
  * @license http://www.gnu.org/licences/lgpl-3.0.html LGPL
  */
 
-\Controller::loadLanguageFile('tl_content');
-\Controller::loadDataContainer('tl_content');
+\Contao\Controller::loadLanguageFile('tl_content');
+\Contao\Controller::loadDataContainer('tl_content');
 
 $arrDca = &$GLOBALS['TL_DCA']['tl_member'];
 
@@ -178,7 +178,6 @@ $arrFields = [
     $titleField     => $GLOBALS['TL_DCA']['tl_content']['fields'][$titleField],
     'size'          => $GLOBALS['TL_DCA']['tl_content']['fields']['size'],
     'imagemargin'   => $GLOBALS['TL_DCA']['tl_content']['fields']['imagemargin'],
-    'imageUrl'      => $GLOBALS['TL_DCA']['tl_content']['fields']['imageUrl'],
     'fullsize'      => $GLOBALS['TL_DCA']['tl_content']['fields']['fullsize'],
     'caption'       => $GLOBALS['TL_DCA']['tl_content']['fields']['caption'],
     'floating'      => $GLOBALS['TL_DCA']['tl_content']['fields']['floating'],
@@ -242,6 +241,10 @@ $arrFields = [
         'sql'       => "blob NULL"
     ],
 ];
+
+if (isset($GLOBALS['TL_DCA']['tl_content']['fields']['imageUrl'])) {
+    $arrFields['imageUrl'] = $GLOBALS['TL_DCA']['tl_content']['fields']['imageUrl'];
+}
 
 $arrDca['fields'] = array_merge($arrDca['fields'], $arrFields);
 
