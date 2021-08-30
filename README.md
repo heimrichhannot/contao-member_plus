@@ -1,3 +1,5 @@
+> This bundle is abandoned and not actively maintained anymore. Please use [https://github.com/heimrichhannot/contao-member-bundle](https://github.com/heimrichhannot/contao-member-bundle).
+
 # Member Plus
 
 A collection of enhancements for contao members.
