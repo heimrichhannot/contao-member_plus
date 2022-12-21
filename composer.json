@@ -26,7 +26,7 @@
     "contao/core-bundle": "^3.5.1 || ~4.1",
     "contao-community-alliance/composer-plugin": "~2.4 || ~3.0",
     "heimrichhannot/contao-tagsinput": "^2.1",
-    "heimrichhannot/contao-fieldpalette": "^1.4.5"
+    "heimrichhannot/contao-fieldpalette-bundle": "^0.6"
   },
   "autoload": {
     "classmap": [
