@@ -12,6 +12,9 @@
 namespace HeimrichHannot\MemberPlus;
 
 
+use Contao\FrontendTemplate;
+use Contao\StringUtil;
+
 class ContentMemberlist extends \ContentElement
 {
 	
@@ -41,7 +44,7 @@ class ContentMemberlist extends \ContentElement
 	 */
 	public function generate()
 	{
-		$this->mlSort = deserialize($this->mlSort);
+		$this->mlSort = StringUtil::deserialize($this->mlSort);
 		
 		return parent::generate();
 	}
@@ -67,22 +70,23 @@ class ContentMemberlist extends \ContentElement
 		
 		$this->Template->members = $arrMembers;
 	}
-	
+
+    /** @deprecated  */
 	protected function parseMember($objMember)
 	{
 		global $objPage;
-		
-		$objT = new \FrontendTemplate('memberlist_default');
+
+		$objT = new FrontendTemplate('memberlist_default');
 		$objT->setData($objMember->row());
-		
+
 		$strUrl = $this->generateMemberUrl($objMember);
-		
+
 		$objT->addImage = false;
-		
+
 		// Add an image
 		if ($objMember->addImage && $objMember->singleSRC != '') {
 			$objModel = \FilesModel::findByUuid($objMember->singleSRC);
-			
+
 			if ($objModel === null) {
 				if (!\Validator::isUuid($objMember->singleSRC)) {
 					$objMember->text = '<p class="error">' . $GLOBALS['TL_LANG']['ERR']['version2format'] . '</p>';
@@ -90,35 +94,35 @@ class ContentMemberlist extends \ContentElement
 			} elseif (is_file(TL_ROOT . '/' . $objModel->path)) {
 				// Do not override the field now that we have a model registry (see #6303)
 				$arrMember = $objMember->row();
-				
+
 				// Override the default image size
 				if ($this->size != '') {
 					$size = deserialize($this->size);
-					
+
 					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2])) {
 						$arrMember['size'] = $this->size;
 					}
 				}
-				
+
 				$arrMember['singleSRC'] = $objModel->path;
 				\Controller::addImageToTemplate($objT, $arrMember);
 			}
 		}
-		
+
 		$arrTitle            = [$objMember->academicTitle, $objMember->firstname, $objMember->nobilityTitle, $objMember->lastname];
 		$objT->titleCombined = empty($arrTitle) ? '' : implode(' ', $arrTitle);
-		
+
 		$arrLocation            = [$objMember->postal, $objMember->city];
 		$objT->locationCombined = empty($arrLocation) ? '' : implode(' ', $arrLocation);
-		
+
 		$objT->websiteLink  = $objMember->website;
 		$objT->websiteTitle = $GLOBALS['TL_LANG']['MSC']['memberlist']['websiteTitle'];
-		
+
 		// Add http:// to the website
 		if (($objMember->website != '') && !preg_match('@^(https?://|ftp://|mailto:|#)@i', $objMember->website)) {
 			$objT->websiteLink = 'http://' . $objMember->website;
 		}
-		
+
 		if ($this->mlSource == 'external') {
 			// Encode e-mail addresses
 			if (substr($this->mlUrl, 0, 7) == 'mailto:') {
@@ -128,15 +132,15 @@ class ContentMemberlist extends \ContentElement
 				$strUrl = ampersand($this->mlUrl);
 			}
 		}
-		
+
 		$objT->link       = $strUrl;
 		$objT->linkTarget =
 			($this->mlTarget ? (($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"') : '');
 		$objT->linkTitle  = specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['openMember'], $objT->titleCombined));
-		
+
 		return $objT->parse();
 	}
-	
+
 	
 	/**
 	 * Generate a URL and return it as string
@@ -145,6 +149,8 @@ class ContentMemberlist extends \ContentElement
 	 * @param boolean
 	 *
 	 * @return string
+     *
+     * @deprecated
 	 */
 	protected function generateMemberUrl($objItem)
 	{

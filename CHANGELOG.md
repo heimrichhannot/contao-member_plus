@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.4.0] - 2024-04-25
+- Changed: raised some dependencies
+- Fixed: dummy image path
+- Fixed: some code issues
+
 ## [2.3.0] - 2022-03-23
 - Added: php 8 support
 - Fixed: license

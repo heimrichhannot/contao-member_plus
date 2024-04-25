@@ -13,11 +13,12 @@
 namespace HeimrichHannot\MemberPlus;
 
 
+use Contao\ModuleRegistration;
 use HeimrichHannot\FormHybrid\FormHelper;
 use HeimrichHannot\FormHybrid\FormSession;
 use HeimrichHannot\Request\Request;
 
-class ModuleLoginRegistrationPlus extends \ModuleRegistration
+class ModuleLoginRegistrationPlus extends ModuleRegistration
 {
 	protected $strTemplate = 'mod_login_registration_plus';
 	
@@ -83,7 +84,7 @@ class ModuleLoginRegistrationPlus extends \ModuleRegistration
 		// Show logout form
 		if (FE_USER_LOGGED_IN) {
 			$this->import('FrontendUser', 'User');
-			$this->strTemplate = ($this->cols > 1) ? 'mod_logout_2cl' : 'mod_logout_1cl';
+			$this->strTemplate = 'mod_login';
 			
 			$this->Template = new \FrontendTemplate($this->strTemplate);
 			$this->Template->setData($this->arrData);

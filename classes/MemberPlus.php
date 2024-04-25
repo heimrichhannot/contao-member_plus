@@ -11,6 +11,11 @@
 
 namespace HeimrichHannot\MemberPlus;
 
+use Contao\Controller;
+use Contao\ModuleModel;
+use Contao\StringUtil;
+use Contao\System;
+
 class MemberPlus extends \Frontend
 {
 	/**
@@ -197,21 +202,21 @@ class MemberPlus extends \Frontend
 					// Do not override the field now that we have a model registry (see #6303)
 					$arrMember = $objMember->row();
 					
-					if ($this->objModel instanceof \ModuleModel) {
+					if ($this->objModel instanceof ModuleModel) {
 						$this->size = $this->mlImgSize != '' ? $this->mlImgSize : $this->imgSize; // tl_module = imgSize, tl_content = size
 					}
 					
 					// Override the default image size
 					if ($this->size != '') {
-						$size = deserialize($this->size);
+						$size = StringUtil::deserialize($this->size);
 						
 						if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2])) {
 							$arrMember['size'] = $this->size;
 						}
 					}
 					
-					$arrMember['singleSRC'] = $strDummyImage;
-					\Controller::addImageToTemplate($objTemplate, $arrMember);
+					$arrMember['singleSRC'] = TL_ROOT.'/'.ltrim($strDummyImage, '/');
+                    Controller::addImageToTemplate($objTemplate, $arrMember);
 				}
 			}
 		}
