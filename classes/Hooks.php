@@ -40,8 +40,7 @@ class Hooks extends \System
 	public function getPageIdFromUrlHook($arrFragments)
 	{
 		// source = article_reader -> unset unused GET parameters and store them in custom Get Variable, for ModuleMemberReader
-		if ($arrFragments[1] == 'auto_item' && $arrFragments[2] == 'articles') {
-			// article alias = 3rd & member alias = 4th item
+        if (isset($arrFragments[1], $arrFragments[2]) && $arrFragments[1] == 'auto_item' && $arrFragments[2] == 'articles') {			// article alias = 3rd & member alias = 4th item
 			if (isset($arrFragments[3]) && isset($arrFragments[4])) {
 				unset($arrFragments[1]); // unset auto_item
 				

@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.4.1] - 2024-12-11
+- Fixed: php8 warning
+
 ## [2.4.0] - 2024-04-25
 - Changed: raised some dependencies
 - Fixed: dummy image path
